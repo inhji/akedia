@@ -68,8 +68,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :akedia, Akedia.Repo,
-  username: "root",
-  password: "",
+  username: "akedia",
+  password: "akedia",
   database: "akedia_dev",
   hostname: "localhost",
   pool_size: 10
