@@ -1,0 +1,11 @@
+/* This file is for your main application css. */
+
+/*@import "./phoenix.css";*/
+/* @import "./bulma.css"; */
+@import "./bulma/bulma.sass";
+
+.notification:empty { display: none; }
+
+footer {
+  text-align: center;
+}

@@ -23,6 +23,7 @@ defmodule AkediaWeb do
 
       import Plug.Conn
       import AkediaWeb.Gettext
+      import AkediaWeb.Helpers.Auth, only: [check_auth: 2]
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end
@@ -41,6 +42,7 @@ defmodule AkediaWeb do
 
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
+      import AkediaWeb.Helpers.Auth, only: [signed_in?: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end

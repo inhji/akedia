@@ -1,5 +1,6 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
+  import AkediaWeb.Helpers.Auth, only: [assign_user: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -7,6 +8,7 @@ defmodule AkediaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :assign_user
   end
 
   pipeline :api do
@@ -18,6 +20,13 @@ defmodule AkediaWeb.Router do
 
     get "/", PageController, :index
     resources "/posts", PostController
+    resources "/users", UserController, only: [:create, :new, :show, :edit, :update]
+
+    scope "/auth" do
+      get "/login", SessionController, :new
+      post "/login", SessionController, :create
+      delete "/logout", SessionController, :delete
+    end
   end
 
   # Other scopes may use custom stacks.

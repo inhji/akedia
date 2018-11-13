@@ -4,6 +4,8 @@ defmodule AkediaWeb.PostController do
   alias Akedia.Posts
   alias Akedia.Posts.Post
 
+  plug :check_auth when action in [:new, :create, :edit, :update, :delete]
+
   def index(conn, _params) do
     posts = Posts.list_posts()
     render(conn, "index.html", posts: posts)

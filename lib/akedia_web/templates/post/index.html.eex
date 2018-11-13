@@ -1,26 +1,10 @@
-<h1>Listing Posts</h1>
+<h1>Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for post <- @posts do %>
-    <tr>
-      <td><%= post.content %></td>
-
-      <td>
-        <%= link "Show", to: Routes.post_path(@conn, :show, post) %>
-        <%= link "Edit", to: Routes.post_path(@conn, :edit, post) %>
-        <%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
+  <article class="post">
+    <p><%= post.content %></p>
+    <p class="meta">
+      <%= link post.inserted_at, to: Routes.post_path(@conn, :show, post) %>
+    </p>
+  </article>
 <% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>

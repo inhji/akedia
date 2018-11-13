@@ -1,13 +1,13 @@
-<h1>Show Post</h1>
-
-<ul>
-
-  <li>
-    <strong>Content:</strong>
+<article class="post">
+  <p>
     <%= @post.content %>
-  </li>
+  </p>
+</article>
 
-</ul>
-
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<%= if signed_in?(@conn) do %>
+  <span>
+    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+    |
+    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+  </span>
+<% end %>

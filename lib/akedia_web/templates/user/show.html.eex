@@ -1,0 +1,17 @@
+<ul>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+
+  <li>
+    <strong>Encrypted password:</strong>
+    <%= @user.encrypted_password %>
+  </li>
+
+</ul>
+
+<%= link "New Post", to: Routes.post_path(@conn, :new) %>
+
+<%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %>

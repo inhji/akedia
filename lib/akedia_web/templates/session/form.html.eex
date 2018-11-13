@@ -1,0 +1,20 @@
+<%= form_for @conn, Routes.session_path(@conn, :new), [as: :session] , fn f -> %>
+
+  <div class="field">
+    <%= label f, :username, class: "label" %>
+    <div class="control">
+      <%= text_input f, :username, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= label f, :password, class: "label" %>
+    <div class="control">
+      <%= password_input f, :password, class: "input" %>
+    </div>
+  </div>
+
+  <div>
+    <%= submit "Login", class: "button is-primary" %>
+  </div>
+<% end %>
