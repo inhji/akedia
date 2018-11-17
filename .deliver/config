@@ -1,0 +1,18 @@
+APP="akedia"
+
+BUILD_HOST="inhji.de"
+BUILD_USER="root"
+BUILD_AT="/root/akedia/build"
+
+PRODUCTION_HOSTS="inhji.de"
+PRODUCTION_USER="root"
+DELIVER_TO="/root/akedia/release"
+
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/root/akedia/config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
