@@ -1,16 +1,37 @@
 <%= render_layout "app.html", assigns do %>
-  <div class="columns">
-    <div class="column is-one-fifth">
-      <img src="<%= Exgravatar.gravatar_url "johnnie@posteo.de", secure: false, s: 256 %>" alt="">
-
-      <div class="columns">
-        <div class="column"><i class="fab fa-bandcamp"></i></div>
-        <div class="column">lol</div>
-        <div class="column">lel</div>
+  <aside id="sidebar">
+    <div class="columns">
+      <div class="column is-one-fifth">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-1by1">
+              <img src="<%= Exgravatar.gravatar_url "johnnie@posteo.de", secure: false, s: 256 %>" alt="">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="columns social">
+              <div class="column">
+                <a href="https://bandcamp.com/inhji" class="has-text-dark">
+                  <i class="fab fa-2x fa-bandcamp"></i>
+                </a>
+              </div>
+              <div class="column">
+                <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
+                  <i class="fab fa-2x fa-steam"></i>
+                </a>
+              </div>
+              <div class="column">
+                <a href="https://chaos.social/@inhji" class="has-text-dark">
+                  <i class="fab fa-2x fa-mastodon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-four-fifths">
+        <%= render @view_module, @view_template, assigns %>
       </div>
     </div>
-    <div class="column is-four-fifths">
-      <%= render @view_module, @view_template, assigns %>
-    </div>
-  </div>
+  </aside>
 <% end %>
