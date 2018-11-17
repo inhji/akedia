@@ -1,17 +1,15 @@
-<ul>
-
-  <li>
-    <strong>Username:</strong>
+<div class="columns">
+  <column>
+    <strong>Username</strong>
+  </column>
+  <column>
     <%= @user.username %>
-  </li>
+  </column>
+</div>
 
-  <li>
-    <strong>Encrypted password:</strong>
-    <%= @user.encrypted_password %>
-  </li>
-
-</ul>
-
-<%= link "New Post", to: Routes.post_path(@conn, :new) %>
+<div class="columns">
+  <column><strong>Password</strong></column>
+  <column><%= elem(String.split_at(@user.encrypted_password, 20), 0)  %>..</column>
+</div>
 
 <%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %>

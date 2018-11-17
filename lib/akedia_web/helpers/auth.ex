@@ -16,18 +16,6 @@ defmodule AkediaWeb.Helpers.Auth do
     else
       conn
     end
-
-    # if user_id = get_session(conn, :user_id) do
-    #   current_user = Akedia.Accounts.get_user!(user_id)
-    #
-    #   conn
-    #   |> assign(:current_user, current_user)
-    # else
-    #   conn
-    #   |> put_flash(:error, "You need to be signed in to do that")
-    #   |> redirect(to: AkediaWeb.Router.Helpers.page_path(conn, :index))
-    #   |> halt()
-    # end
   end
 
   def assign_user(conn, _args) do
@@ -40,5 +28,4 @@ defmodule AkediaWeb.Helpers.Auth do
       conn
     end
   end
-
 end

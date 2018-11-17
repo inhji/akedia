@@ -43,7 +43,7 @@ defmodule AkediaWeb do
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Auth, only: [signed_in?: 1]
-      import AkediaWeb.Helpers.Time, only: [from_now: 1]
+      import AkediaWeb.Helpers.Time, only: [from_now: 1, iso_date: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end

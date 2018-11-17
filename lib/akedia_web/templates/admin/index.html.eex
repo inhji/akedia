@@ -1,0 +1,14 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Was geht, <%= @current_user.username %>?
+      </h1>
+      <h2 class="subtitle">
+        Mein Bruh.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<p class="has-text-grey">TODO: Add a nice dashboard that actually shows some infos.</p>

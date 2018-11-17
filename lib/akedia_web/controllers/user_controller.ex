@@ -5,6 +5,7 @@ defmodule AkediaWeb.UserController do
   alias Akedia.Accounts.User
 
   plug :check_auth when action in [:show, :edit, :update]
+  plug :put_layout, :admin when action in [:show, :edit, :update]
 
   def new(conn, _params) do
     if Accounts.list_users() do
@@ -14,7 +15,7 @@ defmodule AkediaWeb.UserController do
     else
       changeset = Accounts.change_user(%User{})
       render(conn, "new.html", changeset: changeset)
-    end    
+    end
   end
 
   def create(conn, %{"user" => user_params}) do

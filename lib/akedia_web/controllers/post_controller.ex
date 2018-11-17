@@ -5,6 +5,7 @@ defmodule AkediaWeb.PostController do
   alias Akedia.Posts.Post
 
   plug :check_auth when action in [:new, :create, :edit, :update, :delete]
+  plug :put_layout, :admin when action in [:new, :create, :edit, :update, :delete]
 
   def index(conn, _params) do
     posts = Posts.list_posts()

@@ -4,8 +4,13 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>Technos &amp; Psyche</title>
+
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
+    <link rel="me" href="https://github.com/inhji" />
+    <link rel="me" href="mailto:inhji@posteo.de" />
   </head>
   <body>
     <div id="wrapper" class="container">
@@ -16,15 +21,23 @@
               <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Bulma: a modern CSS framework based on Flexbox" width="28" height="28">
             </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
             </a>
           </div>
-          <div class="navbar-menu">
+          <div class="navbar-menu" id="mainNav">
             <div class="navbar-start">
               <%= link "Posts", to: Routes.post_path(@conn, :index), class: "navbar-item" %>
+            </div>
+
+            <div class="navbar-end">
+              <%= if signed_in?(@conn) do %>
+                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-background-danger has-text-white" %>
+              <% else %>
+                <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
+              <% end %>
             </div>
           </div>
         </nav>
@@ -34,16 +47,14 @@
         <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
         <div class="content-wrapper">
-          <%= render @view_module, @view_template, assigns %>
+          <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
         </div>
       </main>
       <footer class="footer">
-        <%= if signed_in?(@conn) do %>
-        <%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete, class: "button is-danger" %>
-        <%= link "Profile", to: Routes.user_path(@conn, :show, @current_user), class: "button is-primary" %>
-        <% end %>
         <div class="content has-text-centered">
-          No fucks given.
+          <div class="h-card">
+            &copy; 2018 <a href="/" class="u-url p-name">Inhji Y.</a>
+          </div>
         </div>
       </footer>
     </div>

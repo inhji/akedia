@@ -17,7 +17,7 @@ defmodule AkediaWeb.SessionController do
         conn
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "A good day to you, Sir #{user.username}! o\/")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.admin_path(conn, :index))
 
       {:error, _} ->
         conn
