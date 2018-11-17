@@ -51,7 +51,8 @@ defmodule Akedia.MixProject do
       {:arc, "~> 0.11.0"},
       {:arc_ecto, github: "tarzan/arc_ecto"},
       {:webmentions, "~> 0.3.4"},
-      {:distillery, "~> 2.0"}
+      {:distillery, "~> 2.0"},
+      {:edeliver, "~> 1.6"}
     ]
   end
 

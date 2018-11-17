@@ -43,3 +43,5 @@ npm-debug.log
 
 /uploads
 !/uploads/.gitkeep
+
+.deliver/releases/
