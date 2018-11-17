@@ -8,7 +8,7 @@ defmodule AkediaWeb.UserController do
   plug :put_layout, :admin when action in [:show, :edit, :update]
 
   def new(conn, _params) do
-    if Accounts.list_users() do
+    if Accounts.count_users() > 0 do
       conn
       |> put_flash(:error, "Sry, u can't register :/")
       |> redirect(to: Routes.page_path(conn, :index))

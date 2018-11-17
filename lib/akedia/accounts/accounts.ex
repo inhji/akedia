@@ -9,6 +9,19 @@ defmodule Akedia.Accounts do
   alias Akedia.Accounts.User
 
   @doc """
+  Counts the number of users
+
+  ## Examples
+
+      iex> count_users()
+      6
+
+  """
+  def count_users do
+    Repo.aggregate(User, :count, :id)
+  end
+
+  @doc """
   Returns a user by its username
 
   ## Examples
@@ -23,6 +36,7 @@ defmodule Akedia.Accounts do
   def get_by_username(username) when is_nil(username) do
     nil
   end
+
   def get_by_username(username) do
     Repo.get_by(User, username: username)
   end
