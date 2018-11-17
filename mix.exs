@@ -47,7 +47,9 @@ defmodule Akedia.MixProject do
       {:bcrypt_elixir, "~> 1.1"},
       {:timex, "~> 3.4"},
       {:earmark, "~> 1.3"},
-      {:exgravatar, "~> 2.0"}
+      {:exgravatar, "~> 2.0"},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, github: "tarzan/arc_ecto"}
     ]
   end
 

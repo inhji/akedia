@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-image">
             <figure class="image is-1by1">
-              <img src="<%= Exgravatar.gravatar_url "johnnie@posteo.de", secure: false, s: 256 %>" alt="">
+              <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" alt="">
             </figure>
           </div>
           <div class="card-content">

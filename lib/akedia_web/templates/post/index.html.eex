@@ -1,7 +1,5 @@
 <section class="posts">
   <%= for post <- @posts do %>
-    <div class="box">
-      <%= render "post.html", Map.put(assigns, :post, post) %>
-    </div>
+    <%= render "post.html", Map.put(assigns, :post, post) %>
   <% end %>
 </section>

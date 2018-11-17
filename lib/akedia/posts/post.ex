@@ -1,10 +1,12 @@
 defmodule Akedia.Posts.Post do
   use Ecto.Schema
+  use Arc.Ecto.Schema
   import Ecto.Changeset
 
   schema "posts" do
     field :content, :string
     field :content_html, :string
+    field :image, Akedia.Posts.PostImage.Type
 
     timestamps()
   end
@@ -13,6 +15,7 @@ defmodule Akedia.Posts.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [:content, :content_html])
+    |> cast_attachments(attrs, [:image])
     |> validate_required([:content])
     |> maybe_render_markdown
   end

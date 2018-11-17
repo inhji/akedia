@@ -1,7 +1,4 @@
-<div class="box">
-  <%= render "post.html", Map.put(assigns, :post, @post) %>
-</div>
-
+<%= render "post.html", Map.put(assigns, :post, @post) %>
 
 <%= if signed_in?(@conn) do %>
   <span>

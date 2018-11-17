@@ -8,6 +8,7 @@ $widescreen-enabled: false
 @import "bulma/bulma"
 @import "fontawesome/fontawesome"
 @import "fontawesome/brands"
+@import "fontawesome/solid"
 
 .notification:empty
   display: none
@@ -24,7 +25,9 @@ aside#sidebar
       text-align: center
 
 article.post
-  .post-content
+  margin-bottom: 2rem
+
+  .content
     line-height: 1.7rem
 
   header
@@ -34,6 +37,3 @@ article.post
       color: $grey
     .username
       margin-right: 0.3rem
-
-  footer
-    margin-top: 0.5rem

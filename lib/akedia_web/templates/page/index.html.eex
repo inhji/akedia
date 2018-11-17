@@ -1,9 +1,5 @@
-<h1 class="heading">Letzte Posts:</h1>
-
 <section class="posts">
   <%= for post <- @posts do %>
-    <div class="box">
-      <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-    </div>
+    <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
   <% end %>
 </section>
