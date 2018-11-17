@@ -1,7 +1,6 @@
 defmodule Akedia.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Akedia.Accounts.User
   alias Comeonin.Bcrypt
 
   schema "users" do

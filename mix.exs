@@ -44,7 +44,8 @@ defmodule Akedia.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},
-      {:bcrypt_elixir, "~> 1.1"}
+      {:bcrypt_elixir, "~> 1.1"},
+      {:timex, "~> 3.4"}
     ]
   end
 

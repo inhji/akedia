@@ -1,8 +1,7 @@
-<article class="post">
-  <p>
-    <%= @post.content %>
-  </p>
-</article>
+<div class="box">
+  <%= render "post.html", Map.put(assigns, :post, @post) %>
+</div>
+
 
 <%= if signed_in?(@conn) do %>
   <span>

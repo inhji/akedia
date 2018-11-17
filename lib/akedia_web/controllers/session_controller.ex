@@ -2,7 +2,6 @@ defmodule AkediaWeb.SessionController do
   use AkediaWeb, :controller
 
   alias Akedia.Accounts
-  alias Akedia.Accounts.User
 
   plug :check_auth when action in [:delete]
 
@@ -19,6 +18,7 @@ defmodule AkediaWeb.SessionController do
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "A good day to you, Sir #{user.username}! o\/")
         |> redirect(to: Routes.page_path(conn, :index))
+
       {:error, _} ->
         conn
         |> put_flash(:error, "Something is terribly wrong with your username/password")

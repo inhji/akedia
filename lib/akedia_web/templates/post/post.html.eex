@@ -1,0 +1,13 @@
+<article class="post">
+  <header>
+    <strong class="username">
+      <span class="at">@</span><span>inhji</span>
+    </strong>
+    <small class="permalink">
+      <%= link from_now(@post.inserted_at), to: Routes.post_path(@conn, :show, @post.id)  %>
+    </small>
+  </header>
+  <p class="post-content">
+    <%= @post.content %>
+  </p>
+</article>

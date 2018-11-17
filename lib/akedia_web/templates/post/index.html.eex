@@ -1,10 +1,7 @@
-<h1>Posts</h1>
-
-<%= for post <- @posts do %>
-  <article class="post">
-    <p><%= post.content %></p>
-    <p class="meta">
-      <%= link post.inserted_at, to: Routes.post_path(@conn, :show, post) %>
-    </p>
-  </article>
-<% end %>
+<section class="posts">
+  <%= for post <- @posts do %>
+    <div class="box">
+      <%= render "post.html", Map.put(assigns, :post, post) %>
+    </div>
+  <% end %>
+</section>

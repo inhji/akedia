@@ -1,0 +1,32 @@
+/* This file is for your main application css. */
+
+@import "./bulma/sass/utilities/_all"
+
+$fullhd-enabled: false
+$widescreen-enabled: false
+
+@import "./bulma/bulma.sass"
+
+.notification:empty
+  display: none
+
+.content-wrapper
+  margin: 15px 0 30px 0
+
+footer.footer
+  text-align: center
+
+article.post
+  .post-content
+    line-height: 1.7rem
+
+  header
+    margin-bottom: 0.5rem
+
+    .permalink
+      color: $grey
+    .username
+      margin-right: 0.3rem
+
+  footer
+    margin-top: 0.5rem
