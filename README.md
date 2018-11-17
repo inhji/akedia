@@ -6,7 +6,14 @@
 
 ## Deployment
 
+* `build_essential` must be installed on the target system
+
 build a release:
+
+```
+mix edeliver build release
+```
+
 
 ```
 MIX_ENV=prod mix do phx.digest, release --env=prod
