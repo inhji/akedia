@@ -7,7 +7,7 @@
       <%= link from_now(@post.inserted_at), to: Routes.post_path(@conn, :show, @post.id)  %>
     </small>
   </header>
-  <p class="post-content">
-    <%= @post.content %>
-  </p>
+  <div class="content">
+    <%= raw(@post.content_html) %>
+  </div>
 </article>

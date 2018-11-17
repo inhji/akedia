@@ -45,7 +45,8 @@ defmodule Akedia.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},
       {:bcrypt_elixir, "~> 1.1"},
-      {:timex, "~> 3.4"}
+      {:timex, "~> 3.4"},
+      {:earmark, "~> 1.3"}
     ]
   end
 
