@@ -1,1 +1,9 @@
-<p>Hallo, ich bin Jonathan.</p>
+<h1 class="heading">Letzte Posts:</h1>
+
+<section class="posts">
+  <%= for post <- @posts do %>
+    <div class="box">
+      <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+    </div>
+  <% end %>
+</section>

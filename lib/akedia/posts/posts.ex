@@ -18,7 +18,8 @@ defmodule Akedia.Posts do
 
   """
   def list_posts do
-    Repo.all(Post)
+    query = from p in Post, order_by: [desc: :inserted_at]
+    Repo.all(query)
   end
 
   @doc """

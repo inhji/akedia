@@ -8,7 +8,7 @@
   <div class="field">
     <%= label f, :content, class: "label" %>
     <div class="control">
-      <%= textarea f, :content, placeholder: "compose an epic.", class: "textarea" %>
+      <%= textarea f, :content, placeholder: "compose an epic.", class: "textarea", rows: 10 %>
     </div>
     <%= error_tag f, :content %>
   </div>

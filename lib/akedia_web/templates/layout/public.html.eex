@@ -1,0 +1,16 @@
+<%= render_layout "app.html", assigns do %>
+  <div class="columns">
+    <div class="column is-one-fifth">
+      <img src="<%= Exgravatar.gravatar_url "johnnie@posteo.de", secure: false, s: 256 %>" alt="">
+
+      <div class="columns">
+        <div class="column"><i class="fab fa-bandcamp"></i></div>
+        <div class="column">lol</div>
+        <div class="column">lel</div>
+      </div>
+    </div>
+    <div class="column is-four-fifths">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+  </div>
+<% end %>

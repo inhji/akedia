@@ -5,8 +5,7 @@
 
 <%= if signed_in?(@conn) do %>
   <span>
-    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-    |
-    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>
+    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post), class: "button is-primary" %>
+    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
   </span>
 <% end %>

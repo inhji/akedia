@@ -6,6 +6,7 @@ defmodule Akedia.Accounts.User do
   schema "users" do
     field :encrypted_password, :string
     field :username, :string
+    field :email, :string
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule Akedia.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :encrypted_password])
+    |> cast(attrs, [:username, :encrypted_password, :email])
     |> validate_required([:username, :encrypted_password])
     |> unique_constraint(:username)
     |> update_change(:encrypted_password, &Bcrypt.hashpwsalt/1)

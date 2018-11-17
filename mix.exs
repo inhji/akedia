@@ -46,7 +46,8 @@ defmodule Akedia.MixProject do
       {:comeonin, "~> 4.1"},
       {:bcrypt_elixir, "~> 1.1"},
       {:timex, "~> 3.4"},
-      {:earmark, "~> 1.3"}
+      {:earmark, "~> 1.3"},
+      {:exgravatar, "~> 2.0"}
     ]
   end
 
