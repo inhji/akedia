@@ -19,6 +19,7 @@ defmodule AkediaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/feed", FeedController, :index
 
     resources "/posts", PostController
     resources "/users", UserController, only: [:create, :new, :show, :edit, :update]
