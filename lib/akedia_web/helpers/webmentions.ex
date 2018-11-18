@@ -5,8 +5,8 @@ defmodule AkediaWeb.Helpers.Webmentions do
         {:ok, list} ->
           list
 
-        _ ->
-          []
+        {:error, reason} ->
+          [reason]
       end
 
     "#{type} #{action} successfully. Webmentions sent to these endpoints:\n" <>
