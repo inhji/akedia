@@ -8,12 +8,14 @@
   <% end %>
   <div class="card-content">
     <header>
-      <strong class="username">
-        <span class="at">@</span><span class="h-card p-author">inhji</span>
+      <strong class="username h-card">
+        <span class="at">@</span>
+        <a href="<%= Routes.page_path(@conn, :index) %>" class="p-author">inhji</a>
+        <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" style="display: none;">
       </strong>
       <small class="permalink">
         <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-          <%= link from_now(@post.inserted_at), to: Routes.post_path(@conn, :show, @post.id), class: "u-url u-uid"  %>
+          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url u-uid"  %>
         </time>
       </small>
     </header>

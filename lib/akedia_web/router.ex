@@ -39,6 +39,6 @@ defmodule AkediaWeb.Router do
   scope "/api", AkediaWeb do
     pipe_through :api
 
-    resources "/webmention", MentionController, only: [:create]
+    post "/webmention", MentionController, :create
   end
 end

@@ -21,7 +21,7 @@
     <link rel="me" href="mailto:inhji@posteo.de" />
     <link rel="me" href="/" />
   </head>
-  <body class="h-card">
+  <body>
     <div id="wrapper" class="container">
       <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -59,9 +59,9 @@
           <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
         </div>
       </main>
-      <footer class="footer">
+      <footer class="footer h-card">
         <div class="content has-text-centered">
-          &copy; 2018 <a href="/" class="u-url u-uid p-name">Inhji</a>
+          &copy; 2018 <a href="<%= Routes.page_path(@conn, :index) %>" class="u-url u-uid p-name">Inhji</a>
         </div>
       </footer>
     </div>
