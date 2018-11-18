@@ -9,7 +9,7 @@
   <div class="card-content">
     <header>
       <strong class="username">
-        <span class="at">@</span><span class="p-author">inhji</span>
+        <span class="at">@</span><span class="h-card p-author">inhji</span>
       </strong>
       <small class="permalink">
         <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">

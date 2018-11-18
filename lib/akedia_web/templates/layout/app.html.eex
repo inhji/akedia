@@ -11,14 +11,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
     <link rel="me" href="https://github.com/inhji" />
     <link rel="me" href="mailto:inhji@posteo.de" />
+    <link rel="me" href="/" />
   </head>
-  <body>
+  <body class="h-card">
     <div id="wrapper" class="container">
       <header>
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="<%= Routes.page_path(@conn, :index) %>">
-              <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Bulma: a modern CSS framework based on Flexbox" width="28" height="28">
+              <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Inhji.de" width="28" height="28">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
@@ -52,9 +53,7 @@
       </main>
       <footer class="footer">
         <div class="content has-text-centered">
-          <div class="h-card">
-            &copy; 2018 <a href="/" class="u-url p-name">Inhji</a>
-          </div>
+          &copy; 2018 <a href="/" class="u-url u-uid p-name">Inhji</a>
         </div>
       </footer>
     </div>
