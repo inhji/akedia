@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :akedia, AkediaWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "localhost", port: System.get_env("PORT")],
+  url: [host: "inhji.de", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   root: ".",
