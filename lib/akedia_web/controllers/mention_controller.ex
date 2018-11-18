@@ -4,7 +4,6 @@ defmodule AkediaWeb.MentionController do
   alias Akedia.Mentions
   alias Akedia.Mentions.Mention
   alias Akedia.Posts
-  alias AkediaWeb.Helpers.Webmentions
 
   def create(conn, params) do
     case is_valid_mention(conn, params) do
@@ -55,14 +54,15 @@ defmodule AkediaWeb.MentionController do
 
       is_new = old_mention.id == nil
 
-      {:ok, mention} =
+      {:ok, _mention} =
         if is_new do
           Mentions.create_mention(attributes)
         else
           Mentions.update_mention(old_mention, attributes)
         end
 
-      conn |> send_resp(201, "Accepted")
+      conn
+      |> send_resp(201, "Accepted")
     end
   end
 
@@ -169,13 +169,21 @@ defmodule AkediaWeb.MentionController do
 
   defp get_values_from_html(url, html) do
     doc = Floki.parse(html)
-    author = Floki.find(doc, "meta[name=author]") |> Floki.attribute("content") |> List.first()
+
+    author =
+      Floki.find(doc, "meta[name=author]")
+      |> Floki.attribute("content")
+      |> List.first()
 
     excerpt =
-      Floki.find(doc, "meta[name=description]") |> Floki.attribute("content") |> List.first()
+      Floki.find(doc, "meta[name=description]")
+      |> Floki.attribute("content")
+      |> List.first()
 
     title =
-      Floki.find(doc, "meta[property='og:title']") |> Floki.attribute("content") |> List.first()
+      Floki.find(doc, "meta[property='og:title']")
+      |> Floki.attribute("content")
+      |> List.first()
 
     author_url =
       Floki.find(doc, "meta[property='og:article:author']")
@@ -183,7 +191,9 @@ defmodule AkediaWeb.MentionController do
       |> List.first()
 
     author_avatar =
-      Floki.find(doc, "meta[property='og:image']") |> Floki.attribute("content") |> List.first()
+      Floki.find(doc, "meta[property='og:image']")
+      |> Floki.attribute("content")
+      |> List.first()
 
     %{
       "author" => author,
