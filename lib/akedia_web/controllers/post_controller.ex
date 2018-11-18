@@ -3,6 +3,7 @@ defmodule AkediaWeb.PostController do
 
   alias Akedia.Posts
   alias Akedia.Posts.Post
+  alias AkediaWeb.Helpers.Webmentions
 
   plug :check_auth when action in [:new, :create, :edit, :update, :delete]
   plug :put_layout, :admin when action in [:new, :create, :edit, :update, :delete]
@@ -21,7 +22,10 @@ defmodule AkediaWeb.PostController do
     case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
-        |> put_flash(:info, "Post created successfully.")
+        |> put_flash(
+          :info,
+          Webmentions.send_webmentions(Routes.post_url(conn, :show, post), "Post", "created")
+        )
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
