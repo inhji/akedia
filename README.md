@@ -12,12 +12,7 @@ build a release:
 
 ```
 mix edeliver build release
-mix edeliver deploy release to production
-mix edeliver start production
+mix edeliver deploy release to production --version=0.1.4
+mix edeliver restart production
 mix edeliver migrate production
-```
-
-
-```
-MIX_ENV=prod mix do phx.digest, release --env=prod
 ```

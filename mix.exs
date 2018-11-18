@@ -55,7 +55,8 @@ defmodule Akedia.MixProject do
       {:edeliver, "~> 1.6"},
       {:atomex, "~> 0.3.0"},
       {:microformats2, "~> 0.2.0"},
-      {:floki, "~> 0.20.4"}
+      {:floki, "~> 0.20.4"},
+      {:httpotion, "~> 3.1"}
     ]
   end
 
