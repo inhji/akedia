@@ -50,7 +50,10 @@ defmodule AkediaWeb.PostController do
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
         conn
-        |> put_flash(:info, "Post updated successfully.")
+        |> put_flash(
+          :info,
+          Webmentions.send_webmentions(Routes.post_url(conn, :show, post), "Post", "created")
+        )
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
