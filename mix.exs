@@ -54,7 +54,8 @@ defmodule Akedia.MixProject do
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
       {:atomex, "~> 0.3.0"},
-      {:microformats2, "~> 0.2.0"}
+      {:microformats2, "~> 0.2.0"},
+      {:floki, "~> 0.20.4"}
     ]
   end
 
