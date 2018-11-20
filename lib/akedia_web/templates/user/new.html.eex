@@ -1,1 +1,3 @@
+<h1 class="heading">Register</h1>
+
 <%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :create)) %>
