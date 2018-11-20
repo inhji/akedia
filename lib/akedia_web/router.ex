@@ -1,6 +1,5 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import AkediaWeb.Helpers.Auth, only: [assign_user: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,7 +7,7 @@ defmodule AkediaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug :assign_user
+    plug AkediaWeb.Plugs.AssignUser
   end
 
   pipeline :api do

@@ -4,18 +4,13 @@ defmodule AkediaWeb.UserController do
   alias Akedia.Accounts
   alias Akedia.Accounts.User
 
+  plug :can_register? when action in [:new, :create]
   plug :check_auth when action in [:show, :edit, :update]
   plug :put_layout, :admin when action in [:show, :edit, :update]
 
   def new(conn, _params) do
-    if Accounts.count_users() > 0 do
-      conn
-      |> put_flash(:error, "Sry, u can't register :/")
-      |> redirect(to: Routes.page_path(conn, :index))
-    else
-      changeset = Accounts.change_user(%User{})
-      render(conn, "new.html", changeset: changeset)
-    end
+    changeset = Accounts.change_user(%User{})
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do

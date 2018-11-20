@@ -23,7 +23,8 @@ defmodule AkediaWeb do
 
       import Plug.Conn
       import AkediaWeb.Gettext
-      import AkediaWeb.Helpers.Auth, only: [check_auth: 2]
+      import AkediaWeb.Helpers.Auth, only: [check_auth: 2, can_register?: 2]
+
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end
