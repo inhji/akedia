@@ -49,7 +49,7 @@ defmodule Akedia.MixProject do
       {:earmark, "~> 1.3"},
       {:exgravatar, "~> 2.0"},
       {:arc, "~> 0.11.0"},
-      {:arc_ecto, github: "tarzan/arc_ecto"},
+      {:arc_ecto, "~> 0.11.1"},
       {:webmentions, "~> 0.3.4"},
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},

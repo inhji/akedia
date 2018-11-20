@@ -2,7 +2,7 @@
 
 ## Remarks
 
-* Uses an unpublished version of arc_ecto that works with ecto ~3.0
+* Needs Imagemagick installed on the host: `apt install imagemagick`
 
 ## Deployment
 
