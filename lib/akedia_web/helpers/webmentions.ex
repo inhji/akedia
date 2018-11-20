@@ -6,7 +6,8 @@ defmodule AkediaWeb.Helpers.Webmentions do
           Webmentions.results_as_text(list)
 
       {:error, reason} ->
-        "#{type} #{action} failed! Reason: \n" <> reason
+        IO.inspect(reason)
+        "#{type} #{action} failed!"
     end
   end
 end
