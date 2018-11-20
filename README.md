@@ -12,7 +12,7 @@ build a release:
 
 ```
 mix edeliver build release
-mix edeliver deploy release to production --version=0.1.4
+mix edeliver deploy release to production --version=x.x.x
 mix edeliver restart production
 mix edeliver migrate production
 ```
