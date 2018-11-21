@@ -1,12 +1,10 @@
 # Akedia
 
-## Remarks
-
-* Needs Imagemagick installed on the host: `apt install imagemagick`
-
 ## Deployment
 
-* `build_essential` must be installed on the target system
+* Dependencies on the target system:
+  * `build_essential`
+  * `imagemagick`
 
 build a release:
 
