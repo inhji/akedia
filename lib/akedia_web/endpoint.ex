@@ -15,12 +15,10 @@ defmodule AkediaWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
-  plug(
-    Plug.Static,
+  plug Plug.Static,
     at: "/uploads",
-    from: Path.expand("./uploads"),
+    from: {:akedia, "uploads"},
     gzip: false
-  )
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
