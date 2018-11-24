@@ -6,6 +6,15 @@
   * `build_essential`
   * `imagemagick`
 
+Nginx needs to be configured to alias requests to `/upload` to the uploads dir:
+
+```
+location /uploads {
+    alias <APP_DIR>/release/akedia/uploads;
+}
+```
+
+
 build a release:
 
 ```
