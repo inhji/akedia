@@ -9,9 +9,8 @@
   <div class="card-content">
     <header>
       <strong class="username h-card">
-        <span class="at">@</span>
-        <a href="<%= Routes.page_path(@conn, :index) %>" class="p-author u-url">inhji</a>
-        <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" style="display: none;">
+        <span class="at">@</span><a href="<%= Routes.page_path(@conn, :index) %>" class="p-author p-name u-url">inhji</a>
+        <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;">
       </strong>
       <small class="permalink">
         <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
