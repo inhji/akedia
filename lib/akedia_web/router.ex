@@ -34,10 +34,9 @@ defmodule AkediaWeb.Router do
     end
   end
 
-  # Other scopes may use custom stacks.
-  scope "/api", AkediaWeb do
-    pipe_through :api
-
-    post "/webmention", MentionController, :create
-  end
+  # scope "/webmention", AkediaWeb do
+  #   pipe_through :api
+  #
+  #   post "/hook", MentionController, :hook
+  # end
 end

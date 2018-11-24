@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta property="og:title" content="Technos &amp; Psyche - Inhji.de">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/images/avatar.jpg">
+    <meta property="og:image" content="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
 
     <title>Technos &amp; Psyche</title>
 
@@ -15,19 +15,35 @@
 
     <link rel="alternate" type="application/atom+xml" href="/feed" />
 
-    <link rel="webmention" href="/api/webmention" />
+    <link rel="webmention" href="https://webmention.io/inhji.de/webmention" />
+    <link rel="pingback" href="https://webmention.io/inhji.de/xmlrpc" />
+
+    <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+    <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
 
     <link rel="me" href="https://github.com/inhji" />
     <link rel="me" href="mailto:inhji@posteo.de" />
-    <link rel="me" href="/" />
+    <link rel="me" href="<%= Routes.page_url(@conn, :index) %>" />
   </head>
   <body>
     <div id="wrapper" class="container">
       <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="hero is-dark is-bold">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title">
+                Technos &amp; Psyche
+              </h1>
+              <h2 class="subtitle">
+                Who cares about a subtitle?
+              </h2>
+            </div>
+          </div>
+        </div>
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
-            <a class="navbar-item" href="<%= Routes.page_path(@conn, :index) %>">
-              <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Inhji.de" width="28" height="28">
+            <a class="navbar-item" href="<%= Routes.page_url(@conn, :index) %>">
+              <img src="<%= Routes.static_path(@conn, "/images/logo-inv.png") %>" alt="Inhji.de" width="28" height="28">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
@@ -43,7 +59,7 @@
 
             <div class="navbar-end">
               <%= if signed_in?(@conn) do %>
-                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-background-danger has-text-white" %>
+                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-background-danger has-text-black" %>
               <% else %>
                 <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
               <% end %>
