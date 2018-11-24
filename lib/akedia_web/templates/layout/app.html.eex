@@ -61,8 +61,9 @@
       </main>
       <footer class="footer h-card">
         <div class="content has-text-centered">
-          &copy; 2018 <a href="<%= Routes.page_path(@conn, :index) %>" class="u-url u-uid p-name">Inhji</a>
+          &copy; 2018 <a href="<%= Routes.page_path(@conn, :index) %>" class="p-name">inhji</a>
         </div>
+        <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" style="display: none;" alt="Inhji" />
       </footer>
     </div>
 
