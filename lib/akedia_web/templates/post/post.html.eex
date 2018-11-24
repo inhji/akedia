@@ -8,10 +8,7 @@
   <% end %>
   <div class="card-content">
     <header>
-      <strong class="username">
-        <span class="at">@</span>
-        <a rel="author" class="p-author h-card" href="<%= Routes.page_path(@conn, :index) %>">inhji</a>
-      </strong>
+      <strong class="username">@inhji</strong>
       <small class="permalink">
         <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
           <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url"  %>
