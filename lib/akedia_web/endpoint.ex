@@ -17,7 +17,7 @@ defmodule AkediaWeb.Endpoint do
 
   plug Plug.Static,
     at: "/uploads",
-    from: {:akedia, "uploads"},
+    from: Path.expand("./uploads"),
     gzip: false
 
   # Code reloading can be explicitly enabled under the
