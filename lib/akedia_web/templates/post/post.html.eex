@@ -9,11 +9,11 @@
   <div class="card-content">
     <header>
       <strong class="username">
-        <span>@</span><a href="<%= Routes.page_url(@conn, :index) %>" class="u-author" rel="author">inhji</a>
+        <a href="<%= Routes.page_url(@conn, :index) %>" class="u-author" rel="author">Jonathan Jenne</a>
       </strong>
       <small class="permalink">
         <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url"  %>
+          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
         </time>
       </small>
     </header>
