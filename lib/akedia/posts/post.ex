@@ -9,6 +9,8 @@ defmodule Akedia.Posts.Post do
     field :excerpt, :string
     field :image, Akedia.Posts.PostImage.Type
 
+    has_many :mentions, Akedia.Mentions.Mention
+
     timestamps()
   end
 

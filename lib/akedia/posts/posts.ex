@@ -7,6 +7,7 @@ defmodule Akedia.Posts do
   alias Akedia.Repo
 
   alias Akedia.Posts.Post
+  alias Akedia.Mentions.Mention
 
   @doc """
   Returns the list of posts.
@@ -18,7 +19,7 @@ defmodule Akedia.Posts do
 
   """
   def list_posts do
-    query = from p in Post, order_by: [desc: :inserted_at]
+    query = from p in Post, order_by: [desc: :inserted_at], preload: [:mentions]
     Repo.all(query)
   end
 
@@ -36,7 +37,11 @@ defmodule Akedia.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Post
+    |> Repo.get!(id)
+    |> Repo.preload(:mentions)
+  end
 
   @doc """
   Creates a post.

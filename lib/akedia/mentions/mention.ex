@@ -3,7 +3,7 @@ defmodule Akedia.Mentions.Mention do
   import Ecto.Changeset
 
   schema "mentions" do
-    belongs_to(:post, Akedia.Posts.Post)
+    belongs_to :post, Akedia.Posts.Post
 
     field :source_url, :string, null: false
     field :target_url, :string, null: false
@@ -13,6 +13,7 @@ defmodule Akedia.Mentions.Mention do
     field :title, :string
     field :excerpt, :string
     field :mention_type, :string, null: false
+    field :mention_value, :string
 
     timestamps()
   end
@@ -28,7 +29,9 @@ defmodule Akedia.Mentions.Mention do
       :author,
       :author_url,
       :author_avatar,
-      :mention_type
+      :mention_type,
+      :mention_value,
+      :post_id
     ])
     |> validate_required([
       :source_url,
