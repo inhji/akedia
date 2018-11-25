@@ -1,5 +1,37 @@
-<section class="posts">
-  <%= for post <- @posts do %>
-    <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-  <% end %>
-</section>
+<div class="columns">
+  <div class="column is-one-fifth">
+    <aside class="card" id="sidebar">
+      <div class="card-image">
+        <figure class="image is-1by1">
+          <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" alt="">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="columns is-mobile social">
+          <div class="column">
+            <a href="https://bandcamp.com/inhji" class="has-text-dark">
+              <i class="fab fa-2x fa-bandcamp"></i>
+            </a>
+          </div>
+          <div class="column">
+            <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
+              <i class="fab fa-2x fa-steam"></i>
+            </a>
+          </div>
+          <div class="column">
+            <a href="https://chaos.social/@inhji" class="has-text-dark">
+              <i class="fab fa-2x fa-mastodon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <div class="column is-four-fifths">
+    <section class="posts">
+      <%= for post <- @posts do %>
+        <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+      <% end %>
+    </section>
+  </div>
+</div>
