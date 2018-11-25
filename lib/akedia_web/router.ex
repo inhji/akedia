@@ -18,6 +18,8 @@ defmodule AkediaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/now", PageController, :now
+
     get "/feed", FeedController, :index
 
     resources "/posts", PostController

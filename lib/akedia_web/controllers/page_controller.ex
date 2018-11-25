@@ -6,4 +6,8 @@ defmodule AkediaWeb.PageController do
 
     render(conn, "index.html", posts: posts)
   end
+
+  def now(conn, _params) do
+    render(conn, "now.html")
+  end
 end
