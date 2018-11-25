@@ -2,7 +2,6 @@ defmodule AkediaWeb.WebmentionController do
   use AkediaWeb, :controller
 
   alias Akedia.Mentions
-  alias Akedia.Mentions.Mention
 
   defp secret, do: "46042c23-6ce4-4d3e-bfdc-297877a16066"
 

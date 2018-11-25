@@ -7,7 +7,6 @@ defmodule Akedia.Posts do
   alias Akedia.Repo
 
   alias Akedia.Posts.Post
-  alias Akedia.Mentions.Mention
 
   @doc """
   Returns the list of posts.
