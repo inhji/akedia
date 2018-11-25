@@ -28,44 +28,8 @@
   <body>
     <div id="wrapper" class="container">
       <header>
-        <div class="hero is-dark is-bold">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
-                Technos &amp; Psyche
-              </h1>
-              <h2 class="subtitle">
-                Who cares about a subtitle?
-              </h2>
-            </div>
-          </div>
-        </div>
-        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="<%= Routes.page_url(@conn, :index) %>">
-              <img src="<%= Routes.static_path(@conn, "/images/logo-inv.png") %>" alt="Inhji.de" width="28" height="28">
-            </a>
-
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
-          <div class="navbar-menu" id="mainNav">
-            <div class="navbar-start">
-              <%= link "Posts", to: Routes.post_path(@conn, :index), class: "navbar-item" %>
-            </div>
-
-            <div class="navbar-end">
-              <%= if signed_in?(@conn) do %>
-                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" %>
-              <% else %>
-                <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
-              <% end %>
-            </div>
-          </div>
-        </nav>
+        <%= render "header.html" %>
+        <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
       </header>
       <main role="main">
         <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
