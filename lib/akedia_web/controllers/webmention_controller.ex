@@ -46,6 +46,8 @@ defmodule AkediaWeb.WebmentionController do
         conn |> text(message)
 
       {:ok, post_id} ->
+        IO.inspect(params)
+
         author = post["author"]
         mention_type = post["wm-property"]
         mention_value = post[mention_type]
