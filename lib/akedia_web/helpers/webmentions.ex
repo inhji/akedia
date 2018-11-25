@@ -4,7 +4,7 @@ defmodule AkediaWeb.Helpers.Webmentions do
   def send_webmentions(url, type, action) do
     Logger.info("Sending webmentions for: #{url}")
 
-    case Webmentions.send_webmentions(url) do
+    case Webmentions.send_webmentions(url, ".h-entry .content") do
       {:ok, list} ->
         Logger.info("Webmention sent: #{Webmentions.results_as_text(list)}")
 
