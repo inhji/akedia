@@ -20,7 +20,12 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :scrivener_ecto,
+        :scrivener_html
+      ]
     ]
   end
 
@@ -56,7 +61,9 @@ defmodule Akedia.MixProject do
       {:atomex, "~> 0.3.0"},
       {:microformats2, "~> 0.2.0"},
       {:floki, "~> 0.20.4"},
-      {:httpotion, "~> 3.1"}
+      {:httpotion, "~> 3.1"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"}
     ]
   end
 

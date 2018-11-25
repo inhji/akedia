@@ -33,5 +33,10 @@
         <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
       <% end %>
     </section>
+
+    <%= pagination_links @page,
+      previous: Phoenix.HTML.raw("&leftarrow;"),
+      next: Phoenix.HTML.raw("&rightarrow;")
+    %>
   </div>
 </div>

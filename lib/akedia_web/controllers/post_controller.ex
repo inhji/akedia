@@ -8,9 +8,15 @@ defmodule AkediaWeb.PostController do
   plug :check_auth when action in [:new, :create, :edit, :update, :delete]
   plug :put_layout, :admin when action in [:new, :create, :edit, :update, :delete]
 
-  def index(conn, _params) do
-    posts = Posts.list_posts()
-    render(conn, "index.html", posts: posts)
+  def index(conn, params) do
+    page = Posts.list_posts_paginated(params)
+
+    render(
+      conn,
+      "index.html",
+      page: page,
+      posts: page.entries
+    )
   end
 
   def new(conn, _params) do

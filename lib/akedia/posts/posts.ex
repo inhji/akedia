@@ -22,6 +22,13 @@ defmodule Akedia.Posts do
     Repo.all(query)
   end
 
+  def list_posts_paginated(params) do
+    Post
+    |> order_by([p], desc: p.inserted_at)
+    |> preload(:mentions)
+    |> Repo.paginate(params)
+  end
+
   @doc """
   Gets a single post.
 
