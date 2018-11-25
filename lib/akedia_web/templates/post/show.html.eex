@@ -14,9 +14,17 @@
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong><%= mention.author %> </strong> <small><%= from_now(mention.inserted_at) %></small>
+                  <strong class="username">
+                    <a href="<%= mention.source_url %>"><%= mention.author %></a>
+                  </strong> <small><%= from_now(mention.inserted_at) %></small>
                   <br>
-                  <%= mention.excerpt || mention.title %>
+                  <div class="content">
+                    <%= if mention.content_html do %>
+                      raw(mention.content_html)
+                    <% else %>
+                       mention.title
+                    <% end %>
+                  </div>                
                 </p>
               </div>
           </div>

@@ -14,6 +14,8 @@ defmodule Akedia.Mentions.Mention do
     field :excerpt, :string
     field :mention_type, :string, null: false
     field :mention_value, :string
+    field :content, :string
+    field :content_html, :string
 
     timestamps()
   end

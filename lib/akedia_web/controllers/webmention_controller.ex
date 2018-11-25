@@ -5,13 +5,9 @@ defmodule AkediaWeb.WebmentionController do
 
   defp secret, do: "46042c23-6ce4-4d3e-bfdc-297877a16066"
 
-  defp get_host(url) do
-    URI.parse(url).host
-  end
+  defp get_host(url), do: URI.parse(url).host
 
-  defp secret_matches?(secret) do
-    secret == secret()
-  end
+  defp secret_matches?(secret), do: secret == secret()
 
   defp host_matches?(conn, url) do
     get_host(Routes.page_url(conn, :index)) == get_host(url)
@@ -42,8 +38,10 @@ defmodule AkediaWeb.WebmentionController do
 
   def hook(conn, %{"post" => post} = params) do
     case is_valid_mention?(conn, params) do
-      {:error, message} ->
-        conn |> text(message)
+      {:error, reason} ->
+        conn
+        |> put_status(:bad_request)
+        |> text("Mention not accepted. Reason: #{reason}")
 
       {:ok, post_id} ->
         IO.inspect(params)
@@ -51,6 +49,8 @@ defmodule AkediaWeb.WebmentionController do
         author = post["author"]
         mention_type = post["wm-property"]
         mention_value = post[mention_type]
+        content = post["content"]["text"]
+        content_html = post["content"]["value"]
 
         Mentions.create_mention(%{
           mention_type: mention_type,
@@ -61,10 +61,13 @@ defmodule AkediaWeb.WebmentionController do
           author_avatar: author["photo"],
           author_url: author["url"],
           title: post["name"],
+          content: content,
+          content_html: content_html,
           post_id: post_id
         })
 
-        conn |> text("YAY!")
+        conn
+        |> text("Mention accepted!")
     end
   end
 end

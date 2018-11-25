@@ -7,18 +7,27 @@
     </div>
   <% end %>
   <div class="card-content">
-    <header>
-      <strong class="username">
-        <a href="<%= Routes.page_url(@conn, :index) %>" class="u-author" rel="author">Jonathan Jenne</a>
-      </strong>
-      <small class="permalink">
-        <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
-        </time>
-      </small>
-    </header>
-    <div class="content e-content p-name">
-      <%= raw(@post.content_html) %>
+    <div class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
+        </p>
+      </figure>
+      <div class="media-content">
+        <header>
+          <strong class="username">
+            <%= link "Jonathan Jenne", to: Routes.page_url(@conn, :index), class: "u-author", rel: "author" %>
+          </strong>
+          <small class="permalink">
+            <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
+              <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
+            </time>
+          </small>
+        </header>
+        <div class="content e-content p-name">
+          <%= raw(@post.content_html) %>
+        </div>
+      </div>
     </div>
   </div>
   <%= if signed_in?(@conn) do %>
