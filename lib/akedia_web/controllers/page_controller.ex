@@ -5,15 +5,10 @@ defmodule AkediaWeb.PageController do
   def index(conn, params) do
     page = Posts.list_posts_paginated(params)
 
-    render(
-      conn,
-      "index.html",
-      page: page,
-      posts: page.entries
-    )
+    render(conn, "index.html", page: page, posts: page.entries)
   end
 
   def now(conn, _params) do
-    render(conn, "n")
+    render(conn, "now.html")
   end
 end
