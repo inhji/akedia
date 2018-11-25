@@ -59,7 +59,7 @@
 
             <div class="navbar-end">
               <%= if signed_in?(@conn) do %>
-                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-background-danger has-text-black" %>
+                <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" %>
               <% else %>
                 <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
               <% end %>

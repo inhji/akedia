@@ -35,6 +35,7 @@ defmodule AkediaWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Posts.get_post!(id)
+
     render(conn, "show.html", post: post)
   end
 

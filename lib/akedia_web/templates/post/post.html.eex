@@ -21,4 +21,10 @@
       <%= raw(@post.content_html) %>
     </div>
   </div>
+  <%= if signed_in?(@conn) do %>
+  <footer class="card-footer">
+    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post), class: "card-footer-item" %>
+    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "card-footer-item has-text-danger" %>
+  </footer>
+  <% end %>
 </article>

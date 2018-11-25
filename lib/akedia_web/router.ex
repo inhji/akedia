@@ -34,6 +34,12 @@ defmodule AkediaWeb.Router do
     end
   end
 
+  scope "/api", AkediaWeb do
+    pipe_through :api
+
+    post "/webmention/hook", WebmentionController, :hook
+  end
+
   # scope "/webmention", AkediaWeb do
   #   pipe_through :api
   #
