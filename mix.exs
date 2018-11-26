@@ -60,10 +60,9 @@ defmodule Akedia.MixProject do
       {:edeliver, "~> 1.6"},
       {:atomex, "~> 0.3.0"},
       {:microformats2, "~> 0.2.0"},
-      {:floki, "~> 0.20.4"},
-      {:httpotion, "~> 3.1"},
       {:scrivener_ecto, "~> 2.0"},
-      {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"}
+      {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"},
+      {:plug_micropub, "~> 0.1.0"}
     ]
   end
 

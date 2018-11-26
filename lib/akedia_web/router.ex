@@ -23,7 +23,7 @@ defmodule AkediaWeb.Router do
     get "/feed", FeedController, :index
 
     resources "/posts", PostController
-    resources "/users", UserController, only: [:create, :new, :show, :edit, :update]
+    resources "/users", UserController, except: [:delete]
 
     scope "/admin" do
       get "/", AdminController, :index
@@ -36,15 +36,16 @@ defmodule AkediaWeb.Router do
     end
   end
 
-  scope "/api", AkediaWeb do
+  scope "/api" do
     pipe_through :api
 
-    post "/webmention/hook", WebmentionController, :hook
-  end
+    post "/webmention/hook",
+         AkediaWeb.WebmentionController,
+         :hook
 
-  # scope "/webmention", AkediaWeb do
-  #   pipe_through :api
-  #
-  #   post "/hook", MentionController, :hook
-  # end
+    forward "/micropub",
+            PlugMicropub,
+            handler: Akedia.Micropub.Handler,
+            json_encoder: Jason
+  end
 end
