@@ -39,12 +39,7 @@
           <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
         </div>
       </main>
-      <footer class="footer h-card">
-        <div class="content has-text-centered">
-          &copy; 2018 <a href="<%= Routes.page_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan Jenne</a>
-        </div>
-        <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;" alt="Inhji" />
-      </footer>
+      <%= render "footer.html", Map.put(assigns, :conn, @conn) %>
     </div>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>

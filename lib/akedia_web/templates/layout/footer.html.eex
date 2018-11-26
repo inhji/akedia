@@ -1,0 +1,6 @@
+<footer class="footer h-card">
+  <div class="content has-text-centered">
+    &copy; 2018 <a href="<%= Routes.page_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan Jenne</a>
+  </div>
+  <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;" alt="Inhji" />
+</footer>
