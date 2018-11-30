@@ -8,11 +8,11 @@
   <% end %>
   <div class="card-content">
     <div class="media">
-      <figure class="media-left">
+      <!-- <figure class="media-left">
         <p class="image is-64x64">
           <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
         </p>
-      </figure>
+      </figure> -->
       <div class="media-content">
         <header>
           <strong class="username">
@@ -27,6 +27,13 @@
         <div class="content e-content p-name">
           <%= raw(@post.content_html) %>
         </div>
+        <p class="tags">
+          <%= for tag <- @post.tags do %>
+            <span class="tag is-light p-category">
+              <%= tag.name %>
+            </span>
+          <% end %>
+        </p>
       </div>
     </div>
   </div>

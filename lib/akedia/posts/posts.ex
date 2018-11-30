@@ -18,15 +18,17 @@ defmodule Akedia.Posts do
 
   """
   def list_posts do
-    query = from p in Post, order_by: [desc: :inserted_at], preload: [:mentions]
-    Repo.all(query)
+    Repo.all(posts_query())
   end
 
   def list_posts_paginated(params) do
-    Post
-    |> order_by([p], desc: p.inserted_at)
-    |> preload(:mentions)
-    |> Repo.paginate(params)
+    Repo.paginate(posts_query(), params)
+  end
+
+  defp posts_query do
+    from p in Post,
+      order_by: [desc: :inserted_at],
+      preload: [:mentions, :tags]
   end
 
   @doc """
@@ -46,7 +48,7 @@ defmodule Akedia.Posts do
   def get_post!(id) do
     Post
     |> Repo.get!(id)
-    |> Repo.preload(:mentions)
+    |> Repo.preload([:mentions, :tags])
   end
 
   @doc """
@@ -62,8 +64,12 @@ defmodule Akedia.Posts do
 
   """
   def create_post(attrs \\ %{}) do
+    tags = prepare_tags(attrs)
+
     %Post{}
+    |> Repo.preload([:tags])
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:tags, Enum.map(tags, &Akedia.Tags.change_tag/1))
     |> Repo.insert()
   end
 
@@ -80,8 +86,11 @@ defmodule Akedia.Posts do
 
   """
   def update_post(%Post{} = post, attrs) do
+    tags = prepare_tags(attrs)
+
     post
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:tags, Enum.map(tags, &Akedia.Tags.change_tag/1))
     |> Repo.update()
   end
 
@@ -112,5 +121,16 @@ defmodule Akedia.Posts do
   """
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
+  end
+
+  defp prepare_tags(attrs) do
+    tags_list =
+      attrs["tags"]
+      |> String.split(",", trim: true)
+      |> Enum.map(&String.trim/1)
+
+    IO.inspect(tags_list)
+
+    Repo.all(from t in Akedia.Tags.Tag, where: t.name in ^tags_list)
   end
 end

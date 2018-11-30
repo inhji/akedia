@@ -1,6 +1,7 @@
 defmodule AkediaWeb.PostController do
   use AkediaWeb, :controller
 
+  alias Akedia.Repo
   alias Akedia.Posts
   alias Akedia.Posts.Post
   alias AkediaWeb.Helpers.Webmentions
@@ -20,7 +21,11 @@ defmodule AkediaWeb.PostController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    changeset =
+      %Post{}
+      |> Repo.preload(:tags)
+      |> Posts.change_post()
+
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -47,7 +52,10 @@ defmodule AkediaWeb.PostController do
 
   def edit(conn, %{"id" => id}) do
     post = Posts.get_post!(id)
+    tags = Enum.map(post.tags, fn t -> t.name end)
+
     changeset = Posts.change_post(post)
+
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 

@@ -14,6 +14,14 @@
   </div>
 
   <div class="field">
+    <%= label f, :tags, class: "label" %>
+    <div class="control">
+      <%= tag_input f, :tags %>
+    </div>
+    <%= error_tag f, :tags %>
+  </div>
+
+  <div class="field">
     <%= label f, :image, class: "label" %>
     <div class="control">
       <div class="file">

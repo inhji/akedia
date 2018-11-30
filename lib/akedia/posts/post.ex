@@ -11,6 +11,11 @@ defmodule Akedia.Posts.Post do
 
     has_many :mentions, Akedia.Mentions.Mention
 
+    many_to_many :tags,
+                 Akedia.Tags.Tag,
+                 join_through: "posts_tags",
+                 on_replace: :delete
+
     timestamps()
   end
 

@@ -23,6 +23,7 @@ defmodule AkediaWeb.Router do
     get "/feed", FeedController, :index
 
     resources "/posts", PostController
+    resources "/tags", TagController
     resources "/users", UserController, except: [:delete]
 
     scope "/admin" do

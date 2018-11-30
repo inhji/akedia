@@ -3,11 +3,24 @@
     <div class="column is-one-fifth">
       <aside class="menu">
         <p class="menu-label">
-          Content
+          Create
         </p>
         <ul class="menu-list">
           <li>
             <%= link "New Post", to: Routes.post_path(@conn, :new) %>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <li>
+            <%= link "New Tag", to: Routes.tag_path(@conn, :new) %>
+          </li>
+        </ul>
+        <p class="menu-label">
+          Content
+        </p>
+        <ul class="menu-list">
+          <li>
+            <%= link "Tags", to: Routes.tag_path(@conn, :index) %>
           </li>
         </ul>
         <p class="menu-label">
