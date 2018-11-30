@@ -62,7 +62,9 @@ defmodule Akedia.MixProject do
       {:microformats2, "~> 0.2.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"},
-      {:plug_micropub, "~> 0.1.0"}
+      {:plug_micropub, "~> 0.1.0"},
+      {:httpoison, "~> 0.11"},
+      {:floki, "~> 0.15"}
     ]
   end
 
