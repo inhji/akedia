@@ -1,10 +1,7 @@
-<h1 class="heading">Show Tag</h1>
+<h1 class="heading">Tagged with <%= @tag.name %></h1>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @tag.name %>
-  </li>
-
-</ul>
+<section class="posts with-tag-<%= @tag.name %>">
+  <%= for post <- @tag.posts do %>
+    <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+  <% end %>
+</section>

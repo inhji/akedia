@@ -4,8 +4,8 @@ defmodule AkediaWeb.TagController do
   alias Akedia.Tags
   alias Akedia.Tags.Tag
 
-  plug :check_auth
-  plug :put_layout, :admin
+  plug :check_auth when action not in [:show]
+  plug :put_layout, :admin when action not in [:show]
 
   def index(conn, _params) do
     tags = Tags.list_tags()
@@ -29,19 +29,20 @@ defmodule AkediaWeb.TagController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    tag = Tags.get_tag!(id)
+  def show(conn, %{"name" => name}) do
+    tag = Tags.get_tag_with_posts!(name)
+
     render(conn, "show.html", tag: tag)
   end
 
-  def edit(conn, %{"id" => id}) do
-    tag = Tags.get_tag!(id)
+  def edit(conn, %{"name" => name}) do
+    tag = Tags.get_tag!(name)
     changeset = Tags.change_tag(tag)
     render(conn, "edit.html", tag: tag, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "tag" => tag_params}) do
-    tag = Tags.get_tag!(id)
+  def update(conn, %{"name" => name, "tag" => tag_params}) do
+    tag = Tags.get_tag!(name)
 
     case Tags.update_tag(tag, tag_params) do
       {:ok, tag} ->
@@ -54,8 +55,8 @@ defmodule AkediaWeb.TagController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    tag = Tags.get_tag!(id)
+  def delete(conn, %{"name" => name}) do
+    tag = Tags.get_tag!(name)
     {:ok, _tag} = Tags.delete_tag(tag)
 
     conn

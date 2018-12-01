@@ -29,9 +29,9 @@
         </div>
         <p class="tags">
           <%= for tag <- @post.tags do %>
-            <span class="tag is-light p-category">
+            <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
               <%= tag.name %>
-            </span>
+            </a>
           <% end %>
         </p>
       </div>

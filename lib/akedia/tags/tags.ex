@@ -35,7 +35,19 @@ defmodule Akedia.Tags do
       ** (Ecto.NoResultsError)
 
   """
-  def get_tag!(id), do: Repo.get!(Tag, id)
+  def get_tag!(name), do: Repo.get_by!(Tag, name: name)
+
+  @doc """
+  Gets a tag by its name, then loads all posts tagged with this tag
+  AND preloads the tags inside each post
+
+  See: https://tkowal.wordpress.com/2016/04/23/nested-preload-in-ecto/
+  """
+  def get_tag_with_posts!(name) do
+    Tag
+    |> Repo.get_by!(name: name)
+    |> Repo.preload([{:posts, [:tags, :mentions]}])
+  end
 
   @doc """
   Creates a tag.

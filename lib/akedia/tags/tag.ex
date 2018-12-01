@@ -2,6 +2,7 @@ defmodule Akedia.Tags.Tag do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Phoenix.Param, key: :name}
   schema "tags" do
     field :name, :string
 
