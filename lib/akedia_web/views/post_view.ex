@@ -3,8 +3,8 @@ defmodule AkediaWeb.PostView do
   alias Akedia.Posts.PostImage
   import Scrivener.HTML
 
-  def image(post) do
-    PostImage.url({post.image, post}, :thumb)
+  def image(post, version \\ :thumb) do
+    PostImage.url({post.image, post}, version)
   end
 
   def has_image?(post) do
