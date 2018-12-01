@@ -20,7 +20,15 @@ $widescreen-enabled: false
   margin: 15px 0 30px 0
 
 footer.footer
-  text-align: center
+  .inner
+    width: 50%
+    margin: 0 auto
+
+    .avatar
+      img
+        width: 75px
+        border-radius: 75px
+
 
 aside#sidebar
   text-align: center
@@ -38,7 +46,7 @@ article.post
       margin-right: 0.3rem
       color: $grey
 
-    .reply  
+    .reply
       color: $grey
       a
         color: $grey
@@ -47,3 +55,8 @@ article.post
       margin-right: 0.3rem
       a
         color: $grey-dark
+
+@media screen and (min-width: $tablet)
+  footer.footer
+    .avatar
+      text-align: right

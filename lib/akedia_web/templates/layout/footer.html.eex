@@ -1,6 +1,30 @@
 <footer class="footer h-card">
+  <div class="columns inner">
+    <div class="column avatar">
+      <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" alt="Inhji" />
+    </div>
+    <div class="column about">
+      Hi, I'm <a href="<%= Routes.page_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;">Jenne</span></a>.
+      <p class="p-note">I write stories, make music and build a little indiewebsite.</p>
+
+      <a href="https://bandcamp.com/inhji" class="has-text-dark">
+        <i class="fab fa-bandcamp"></i>
+      </a>
+      <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
+        <i class="fab fa-steam"></i>
+      </a>
+      <a href="https://chaos.social/@inhji" class="has-text-dark">
+        <i class="fab fa-mastodon"></i>
+      </a>
+      <a href="https://github.com/inhji" class="has-text-dark">
+        <i class="fab fa-github-alt"></i>
+      </a>
+    </div>
+
+  </div>
+<!--
   <div class="content has-text-centered">
     &copy; 2018 <a href="<%= Routes.page_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan Jenne</a>
   </div>
-  <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;" alt="Inhji" />
+  <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;" alt="Inhji" /> -->
 </footer>
