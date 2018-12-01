@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.1.26",
+      version: "0.1.27",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -78,7 +78,8 @@ defmodule Akedia.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      build: ["edeliver build release"]
     ]
   end
 end
