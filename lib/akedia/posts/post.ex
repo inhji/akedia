@@ -9,6 +9,11 @@ defmodule Akedia.Posts.Post do
     field :excerpt, :string
     field :image, Akedia.Posts.PostImage.Type
 
+    field :in_reply_to, :string
+    field :bookmark_of, :string
+    field :like_of, :string
+    field :repost_of, :string
+
     has_many :mentions, Akedia.Mentions.Mention
 
     many_to_many :tags,
@@ -22,7 +27,14 @@ defmodule Akedia.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:content, :content_html])
+    |> cast(attrs, [
+      :content,
+      :content_html,
+      :in_reply_to,
+      :bookmark_of,
+      :like_of,
+      :repost_of
+    ])
     |> cast_attachments(attrs, [:image])
     |> validate_required([:content])
     |> maybe_create_excerpt
