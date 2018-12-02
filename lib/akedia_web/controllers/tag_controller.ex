@@ -22,7 +22,7 @@ defmodule AkediaWeb.TagController do
       {:ok, tag} ->
         conn
         |> put_flash(:info, "Tag created successfully.")
-        |> redirect(to: Routes.tag_path(conn, :show, tag))
+        |> redirect(to: Routes.tag_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
