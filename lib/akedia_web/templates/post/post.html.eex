@@ -9,61 +9,52 @@
     </div>
   <% end %>
   <div class="card-content">
-    <div class="media">
-      <!-- <figure class="media-left">
-        <p class="image is-64x64">
-          <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
-        </p>
-      </figure> -->
-      <div class="media-content">
-        <header>
-          <strong class="username">
-            <%= link "Jonathan Jenne", to: Routes.page_url(@conn, :index), class: "u-author", rel: "author" %>
-          </strong>
-          <small class="permalink">
-            <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-              <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
-            </time>
-          </small>
-          <%= if @post.in_reply_to do %>
-            <small class="reply">
-              <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a> <i class="fas fa-reply"></i>
-            </small>
-          <% end %>
-          <%= if @post.bookmark_of do %>
-            <small class="reply">
-              <a href="<%= @post.bookmark_of %>"><%= @post.bookmark_of %></a> <i class="fas fa-bookmark"></i>
-            </small>
-          <% end %>
-          <%= if @post.like_of do %>
-            <small class="reply">
-              <a href="<%= @post.like_of %>"><%= @post.like_of %></a> <i class="fas fa-heart"></i>
-            </small>
-          <% end %>
-        </header>
-        <div class="content e-content p-name">
-          <%= raw(@post.content_html) %>
+    <header>
+      <strong class="username">
+        <%= link "Jonathan Jenne", to: Routes.page_url(@conn, :index), class: "u-author", rel: "author" %>
+      </strong>
+      <small class="permalink">
+        <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
+          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
+        </time>
+      </small>
+      <%= if @post.in_reply_to do %>
+        <small class="reply">
+          <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a> <i class="fas fa-reply"></i>
+        </small>
+      <% end %>
+      <%= if @post.bookmark_of do %>
+        <small class="reply">
+          <a href="<%= @post.bookmark_of %>"><%= @post.bookmark_of %></a> <i class="fas fa-bookmark"></i>
+        </small>
+      <% end %>
+      <%= if @post.like_of do %>
+        <small class="reply">
+          <a href="<%= @post.like_of %>"><%= @post.like_of %></a> <i class="fas fa-heart"></i>
+        </small>
+      <% end %>
+    </header>
+    <div class="content e-content p-name">
+      <%= raw(@post.content_html) %>
 
-          <%= if @post.in_reply_to do %>
-            <a href="<%= @post.in_reply_to %>" class="u-in-reply-to"></a>
-          <% end %>
+      <%= if @post.in_reply_to do %>
+        <a href="<%= @post.in_reply_to %>" class="u-in-reply-to"></a>
+      <% end %>
 
-          <%= if @post.like_of do %>
-            <a href="<%= @post.like_of %>" class="u-like-of"></a>
-          <% end %>
+      <%= if @post.like_of do %>
+        <a href="<%= @post.like_of %>" class="u-like-of"></a>
+      <% end %>
 
-          <%= if @post.bookmark_of do %>
-            <a href="<%= @post.bookmark_of %>" class="u-bookmark-of"></a>
-          <% end %>
-        </div>
-        <p class="tags">
-          <%= for tag <- @post.tags do %>
-            <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
-              <%= tag.name %>
-            </a>
-          <% end %>
-        </p>
-      </div>
+      <%= if @post.bookmark_of do %>
+        <a href="<%= @post.bookmark_of %>" class="u-bookmark-of"></a>
+      <% end %>
+    </div>
+    <div class="tags">
+      <%= for tag <- @post.tags do %>
+        <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
+          <%= tag.name %>
+        </a>
+      <% end %>
     </div>
   </div>
   <%= if signed_in?(@conn) do %>
