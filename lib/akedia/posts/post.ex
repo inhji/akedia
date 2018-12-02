@@ -4,6 +4,7 @@ defmodule Akedia.Posts.Post do
   import Ecto.Changeset
 
   schema "posts" do
+    field :type, :string
     field :content, :string
     field :content_html, :string
     field :excerpt, :string
@@ -28,6 +29,7 @@ defmodule Akedia.Posts.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [
+      :type,
       :content,
       :content_html,
       :in_reply_to,
@@ -35,9 +37,37 @@ defmodule Akedia.Posts.Post do
       :like_of,
       :repost_of
     ])
+    |> set_post_type
+    |> validate_required(:type)
+    |> validate_inclusion(:type, valid_post_types())
     |> cast_attachments(attrs, [:image])
     |> maybe_create_excerpt
     |> maybe_render_markdown
+  end
+
+  defp valid_post_types, do: ["note", "like", "bookmark", "reply", "repost"]
+
+  defp set_post_type(changeset) do
+    changeset
+    |> maybe_set_type_to("like", :like_of)
+    |> maybe_set_type_to("bookmark", :bookmark_of)
+    |> maybe_set_type_to("repost", :repost_of)
+    |> maybe_set_type_to("reply", :in_reply_to)
+    |> maybe_set_default_type("note")
+  end
+
+  defp maybe_set_type_to(changeset, type, condition_field) do
+    case get_field(changeset, condition_field) do
+      nil -> changeset
+      _ -> put_change(changeset, :type, type)
+    end
+  end
+
+  defp maybe_set_default_type(changeset, default) do
+    case get_field(changeset, :type) do
+      nil -> put_change(changeset, :type, default)
+      _ -> changeset
+    end
   end
 
   defp maybe_create_excerpt(changeset) do
