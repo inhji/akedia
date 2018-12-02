@@ -89,7 +89,8 @@ defmodule Akedia.Micropub.Handler do
         Logger.error(error)
         error_response()
 
-      _ ->
+      {_, error} ->
+        IO.inspect(error)
         Logger.error("Unknown Error")
         error_response()
     end
