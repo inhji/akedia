@@ -21,6 +21,7 @@
     <link rel="authorization_endpoint" href="https://indieauth.com/auth">
     <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
 
+    <link rel="micropub" href="https://inhji.de/api/micropub">
     <link rel="microsub" href="https://aperture.p3k.io/microsub/171">
 
     <link rel="me" href="https://github.com/inhji" />
