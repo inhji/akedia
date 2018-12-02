@@ -1,39 +1,37 @@
 <article class="post card h-entry">
-  <%= render "post_image.html", Map.put(assigns, :post, @post) %>
-  <div class="card-content">
+  <div class="card-image">
+    <%= render "post_image.html", Map.put(assigns, :post, @post) %>
+  </div>
+
+  <div class="card-content has-ribbon">
+    <%= ribbon(@post) %>
     <%=
       render "post_header.html",
-        assigns
-        |> Map.put(:conn, @conn)
-        |> Map.put(:post, @post)
-    %>
-    <div class="content e-content p-name">
-      <%= raw(@post.content_html) %>
+      assigns
+      |> Map.put(:conn, @conn)
+      |> Map.put(:post, @post)
+      %>
+      <div class="content e-content p-name">
+        <%= raw(@post.content_html) %>
 
-      <%= if @post.in_reply_to do %>
+        <%= if @post.in_reply_to do %>
         <a href="<%= @post.in_reply_to %>" class="u-in-reply-to"></a>
-      <% end %>
+        <% end %>
 
-      <%= if @post.like_of do %>
+        <%= if @post.like_of do %>
         <a href="<%= @post.like_of %>" class="u-like-of"></a>
-      <% end %>
+        <% end %>
 
-      <%= if @post.bookmark_of do %>
+        <%= if @post.bookmark_of do %>
         <a href="<%= @post.bookmark_of %>" class="u-bookmark-of"></a>
-      <% end %>
-    </div>
-    <div class="tags">
-      <%= for tag <- @post.tags do %>
+        <% end %>
+      </div>
+      <div class="tags">
+        <%= for tag <- @post.tags do %>
         <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
           <%= tag.name %>
         </a>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
   </div>
-  <%= if signed_in?(@conn) do %>
-  <footer class="card-footer">
-    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post), class: "card-footer-item" %>
-    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "card-footer-item has-text-danger" %>
-  </footer>
-  <% end %>
 </article>

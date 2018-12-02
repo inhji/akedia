@@ -1,3 +1,10 @@
+<div class="buttons">
+  <%= if signed_in?(@conn) do %>
+    <%= link "Edit", to: Routes.post_path(@conn, :edit, @post), class: "button" %>
+    <%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
+  <% end %>
+</div>
+
 <%= render "post.html", Map.put(assigns, :post, @post) %>
 
 <div class="mentions">
@@ -24,7 +31,7 @@
                     <% else %>
                        mention.title
                     <% end %>
-                  </div>                
+                  </div>
                 </p>
               </div>
           </div>

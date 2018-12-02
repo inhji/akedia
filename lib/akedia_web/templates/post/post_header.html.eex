@@ -9,17 +9,17 @@
   </small>
   <%= if @post.in_reply_to do %>
     <small class="reply">
-      <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a> <i class="fas fa-reply"></i>
+      <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a></i>
     </small>
   <% end %>
   <%= if @post.bookmark_of do %>
     <small class="reply">
-      <a href="<%= @post.bookmark_of %>"><%= @post.bookmark_of %></a> <i class="fas fa-bookmark"></i>
+      <a href="<%= @post.bookmark_of %>"><%= @post.bookmark_of %></a></i>
     </small>
   <% end %>
   <%= if @post.like_of do %>
     <small class="reply">
-      <a href="<%= @post.like_of %>"><%= @post.like_of %></a> <i class="fas fa-heart"></i>
+      <a href="<%= @post.like_of %>"><%= @post.like_of %></a></i>
     </small>
   <% end %>
 </header>

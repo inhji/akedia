@@ -12,8 +12,9 @@
   </div>
   <div class="navbar-menu" id="mainNav">
     <div class="navbar-start">
-      <%= link "Notes", to: Routes.page_path(@conn, :notes), class: "navbar-item" %>
-      <%= link "Bookmarks", to: Routes.page_path(@conn, :bookmarks), class: "navbar-item" %>
+      <%= link "Notes", to: Routes.page_path(@conn, :type, "note"), class: "navbar-item" %>
+      <%= link "Bookmarks", to: Routes.page_path(@conn, :type, "bookmark"), class: "navbar-item" %>
+      <%= link "Likes", to: Routes.page_path(@conn, :type, "like"), class: "navbar-item" %>
     </div>
 
     <div class="navbar-end">

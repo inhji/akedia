@@ -1,9 +1,7 @@
 <%= if has_image?(@post) do %>
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <a href="<%= image(@post, :original) %>">
-        <img src="<%= image(@post) %>" />
-      </a>
-    </figure>
-  </div>
+  <figure class="image is-4by3">
+    <a href="<%= image(@post, :original) %>">
+      <img src="<%= image(@post) %>" />
+    </a>
+  </figure>
 <% end %>

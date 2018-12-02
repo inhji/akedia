@@ -10,4 +10,20 @@ defmodule AkediaWeb.PostView do
   def has_image?(post) do
     !!post.image
   end
+
+  def ribbon(post) do
+    {class, icon} =
+      cond do
+        post.in_reply_to -> {"is-success", "fas fa-comment"}
+        post.like_of -> {"is-danger", "fas fa-heart"}
+        post.bookmark_of -> {"is-primary", "fas fa-bookmark"}
+        post.repost_of -> {"is-warning", "fas fa-recycle"}
+        true -> {nil, nil}
+      end
+
+    cond do
+      is_nil(class) -> ""
+      true -> raw("<div class='ribbon is-small #{class}'><i class='#{icon}'></i></div>")
+    end
+  end
 end
