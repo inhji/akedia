@@ -36,7 +36,6 @@ defmodule Akedia.Posts.Post do
       :repost_of
     ])
     |> cast_attachments(attrs, [:image])
-    |> validate_required([:content])
     |> maybe_create_excerpt
     |> maybe_render_markdown
   end
