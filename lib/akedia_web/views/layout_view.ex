@@ -5,6 +5,15 @@ defmodule AkediaWeb.LayoutView do
     render(layout, Map.put(assigns, :inner_layout, content))
   end
 
+  def libravatar(email) do
+    id =
+      :crypto.hash(:md5, email)
+      |> Base.encode16()
+      |> String.downcase()
+
+    "https://seccdn.libravatar.org/avatar/#{id}"
+  end
+
   def get_indie_config_value(key) when is_atom(key) do
     Application.get_env(:akedia, :indie)[key]
   end

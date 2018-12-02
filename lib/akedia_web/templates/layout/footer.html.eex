@@ -1,12 +1,13 @@
 <footer class="footer h-card">
   <div class="columns inner is-mobile">
     <div class="column avatar">
-      <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" alt="Inhji" />
+      <figure class="image is-96x96">
+        <img src="<%= libravatar(get_indie_config_value(:email)) %>" class="u-photo" alt="Inhji" />
+      </figure>
     </div>
     <div class="column about">
       Hi, I'm <a href="<%= Routes.page_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;">Jenne</span></a>.
-      <p class="p-note">I write stories, make music and build a little indiewebsite.</p>
-
+      <p class="p-note">I write stories, make <a href="https://inhji.bandcamp.com/">music</a> and build a little<a href="https://github.com/inhji/akedia"> indiewebsite</a>.</p>
     </div>
   </div>
   <div class="social has-text-centered">

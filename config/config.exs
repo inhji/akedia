@@ -18,6 +18,7 @@ config :akedia, AkediaWeb.Endpoint,
   pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]
 
 config :akedia, :indie,
+  email: "johnnie@posteo.de",
   hostname: "https://inhji.de/",
   micropub_endpoint: "/api/micropub",
   token_endpoint: "https://tokens.indieauth.com/token",
