@@ -77,6 +77,18 @@ defmodule Akedia.Micropub.Handler do
         Logger.error("Token Endpoint returned #{res.status_code}")
         error_response()
 
+      %{"me" => me} ->
+        Logger.error("Mismatch in property <me>: #{me}")
+        error_response()
+
+      %{"scope" => scope} ->
+        Logger.error("Mismatch in property <scope>: #{scope}")
+        error_response()
+
+      %{:error, error} ->
+        Logger.error(error)
+        error_response()
+
       _ ->
         Logger.error("Unknown Error")
         error_response()
