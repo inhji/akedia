@@ -73,22 +73,6 @@ defmodule Akedia.Micropub.Handler do
          %{"me" => ^hostname, "scope" => scope} <- body do
       check_scope(scope, required_scope)
     else
-      # {:ok, %HTTPoison.Response{} = res} ->
-      #   Logger.error("Token Endpoint returned #{res.status_code}")
-      #   error_response()
-      #
-      # %{"me" => me} ->
-      #   Logger.error("Mismatch in property <me>: #{me}")
-      #   error_response()
-      #
-      # %{"scope" => scope} ->
-      #   Logger.error("Mismatch in property <scope>: #{scope}")
-      #   error_response()
-      #
-      # {:error, error} ->
-      #   Logger.error(error)
-      #   error_response()
-
       {atom, error} ->
         Logger.error("#{inspect(atom)} - #{inspect(error)}")
         Logger.error("Unknown Error")

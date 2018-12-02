@@ -67,7 +67,7 @@ defmodule Akedia.Posts do
     tags = prepare_tags(attrs)
 
     %Post{}
-    |> Repo.preload([:tags])
+    |> Repo.preload(:tags)
     |> Post.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:tags, Enum.map(tags, &Akedia.Tags.change_tag/1))
     |> Repo.insert()
@@ -89,6 +89,7 @@ defmodule Akedia.Posts do
     tags = prepare_tags(attrs)
 
     post
+    |> Repo.preload(:tags)
     |> Post.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:tags, Enum.map(tags, &Akedia.Tags.change_tag/1))
     |> Repo.update()
@@ -134,8 +135,7 @@ defmodule Akedia.Posts do
   end
 
   defp prepare_tags(attrs) do
-    tags_list = parse_tags(attrs[:tags])
-    IO.inspect(tags_list)
+    tags_list = parse_tags(attrs["tags"])
     Repo.all(from t in Akedia.Tags.Tag, where: t.name in ^tags_list)
   end
 end
