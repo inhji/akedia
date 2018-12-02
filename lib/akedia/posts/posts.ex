@@ -22,13 +22,22 @@ defmodule Akedia.Posts do
   end
 
   def list_posts_paginated(params) do
-    Repo.paginate(posts_query(), params)
+    Repo.paginate(posts_query, params)
   end
 
-  defp posts_query do
+  def list_posts_paginated(params, types) do
+    Repo.paginate(posts_query(types), params)
+  end
+
+  defp posts_query() do
     from p in Post,
       order_by: [desc: :inserted_at],
       preload: [:mentions, :tags]
+  end
+
+  defp posts_query(types) when is_list(types) do
+    from p in posts_query(),
+      where: p.type in ^types
   end
 
   @doc """
@@ -136,6 +145,10 @@ defmodule Akedia.Posts do
 
   defp prepare_tags(attrs) do
     tags_list = parse_tags(attrs["tags"])
-    Repo.all(from t in Akedia.Tags.Tag, where: t.name in ^tags_list)
+
+    Repo.all(
+      from t in Akedia.Tags.Tag,
+        where: t.name in ^tags_list
+    )
   end
 end

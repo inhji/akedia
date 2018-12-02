@@ -12,7 +12,8 @@
   </div>
   <div class="navbar-menu" id="mainNav">
     <div class="navbar-start">
-      <%= link "Posts", to: Routes.post_path(@conn, :index), class: "navbar-item" %>
+      <%= link "Notes", to: Routes.page_path(@conn, :notes), class: "navbar-item" %>
+      <%= link "Bookmarks", to: Routes.page_path(@conn, :bookmarks), class: "navbar-item" %>
     </div>
 
     <div class="navbar-end">

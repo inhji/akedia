@@ -17,10 +17,15 @@ defmodule AkediaWeb.Router do
   scope "/", AkediaWeb do
     pipe_through :browser
 
+    # Post Categories
     get "/", PageController, :index
+    get "/type/:type", PageController, :type
+
+    # Static Pages
     get "/now", PageController, :now
 
-    get "/feed", FeedController, :index
+    # Atom Feed
+    get "/feed.xml", FeedController, :index
 
     resources "/posts", PostController
     resources "/tags", TagController, param: "name"
