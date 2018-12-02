@@ -123,26 +123,19 @@ defmodule Akedia.Posts do
     Post.changeset(post, %{})
   end
 
-  @doc """
-  Returns a list of tags from a binary comma separated list
-  """
-  defp get_tags_list(attrs) do
-    attrs["tags"]
+  defp parse_tags(tags) when is_binary(tags), do: split_tags_string(tags)
+  defp parse_tags(tags) when is_list(tags), do: tags
+  defp parse_tags(_tags), do: []
+
+  defp split_tags_string(tags) do
+    tags
     |> String.split(",", trim: true)
     |> Enum.map(&String.trim/1)
   end
 
-  @doc """
-  Gets tags from the database
-  """
   defp prepare_tags(attrs) do
-    case tags = attrs["tags"] do
-      nil ->
-        []
-
-      _ ->
-        tags_list = get_tags_list(attrs)
-        Repo.all(from t in Akedia.Tags.Tag, where: t.name in ^tags_list)
-    end
+    tags_list = parse_tags(attrs[:tags])
+    IO.inspect(tags_list)
+    Repo.all(from t in Akedia.Tags.Tag, where: t.name in ^tags_list)
   end
 end

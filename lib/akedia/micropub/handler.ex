@@ -7,128 +7,94 @@ defmodule Akedia.Micropub.Handler do
 
   @access_token "abcd"
 
-  @impl true
-  def handle_create(type, properties, @access_token) do
-    IO.inspect(type)
-    IO.inspect(properties)
-
-    %{"content" => content} = properties
-
-    {:ok, post} =
-      Posts.create_post(%{
-        content: List.first(content)
-      })
-
-    {:ok, :created, Routes.post_url(AkediaWeb.Endpoint, :show, post)}
-  end
-
-  def handle_create(_, _, _), do: {:error, :insufficient_scope}
+  defp error_response, do: {:error, :insufficient_scope}
 
   @impl true
-  def handle_update(url, replace, add, delete, @access_token) do
-    uid = get_uid(url)
-    Store.update(uid, replace, add, delete)
-    :ok
-  end
-
-  def handle_update(_, _, _, _, _), do: {:error, :insufficient_scope}
-
-  @impl true
-  def handle_delete(url, @access_token) do
-    uid = get_uid(url)
-    Store.delete(uid)
-    :ok
-  end
-
-  def handle_delete(_, _), do: {:error, :insufficient_scope}
-
-  @impl true
-  def handle_undelete(url, @access_token) do
-    uid = get_uid(url)
-    Store.undelete(uid)
-    :ok
-  end
-
-  def handle_undelete(_, _), do: {:error, :insufficient_scope}
-
-  @impl true
-  def handle_config_query(@access_token) do
-    # media_url = Helpers.url(MicropubWeb.Endpoint) <> "/micropub/media"
-    media_url = "https://aac8937b.ngrok.io/micropub/media"
-    {:ok, %{"media-endpoint": media_url}}
-  end
-
-  def handle_config_query(_), do: {:error, :insufficient_scope}
-
-  @impl true
-  def handle_source_query(url, filter_properties, @access_token) do
-    uid = get_uid(url)
-
-    case Posts.get_post!(uid) do
-      nil ->
-        {:error, :invalid_request}
-
-      post ->
-        case filter_properties do
-          [] ->
-            {:ok, post}
-
-          filter_properties ->
-            post =
-              post
-              |> Map.delete(:type)
-              |> Map.update!(:properties, fn properties ->
-                properties
-                |> Enum.filter(fn {k, _} ->
-                  Enum.member?(filter_properties, k)
-                end)
-                |> Map.new()
-              end)
-
-            {:ok, post}
-        end
-    end
-  end
-
-  def handle_source_query(_, _), do: {:error, :insufficient_scope}
-
-  @impl true
-  def handle_media(file, @access_token) do
-    url = save_file(file)
-    {:ok, url}
-  end
-
-  def handle_media(_, _), do: {:error, :insufficient_scope}
-
-  defp get_uid(url) do
-    url
-    |> URI.parse()
-    |> Map.fetch!(:path)
-    |> Path.basename()
-  end
-
-  defp handle_uploads(properties) do
-    properties
-    |> _handle_uploads("photo")
-    |> _handle_uploads("video")
-  end
-
-  defp _handle_uploads(properties, key) do
-    if Map.has_key?(properties, key) do
-      Map.update!(properties, key, fn entries ->
-        Enum.map(entries, fn
-          upload = %Plug.Upload{} -> save_file(upload)
-          other -> other
-        end)
-      end)
+  def handle_create(type, properties, access_token) do
+    # use check_access_token_debug when in dev
+    with :ok <- check_access_token(access_token, "create"),
+         post_attrs <- parse_properties(properties) do
+      {:ok, post} = Posts.create_post(post_attrs)
+      {:ok, :created, Routes.post_url(AkediaWeb.Endpoint, :show, post)}
     else
-      properties
+      _ -> error_response()
     end
   end
 
-  defp save_file(file) do
-    file = %{content_type: file.content_type, content: File.read!(file.path)}
-    uuid = Store.create_media(file)
-    Routes.media_url(MicropubWeb.Endpoint, :get, uuid)
+  defp parse_properties(properties) do
+    post_attrs =
+      %{}
+      |> parse_tags(properties)
+      |> parse_like(properties)
+      |> parse_bookmark(properties)
+      |> parse_reply(properties)
+      |> parse_content(properties)
+  end
+
+  # Tags
+  defp parse_tags(attrs, %{"category" => tags}),
+    do: Map.put(attrs, :tags, tags)
+
+  defp parse_tags(attrs, _), do: attrs
+
+  # Like (like-of)
+  defp parse_like(attrs, %{"like-of" => [like_of]}),
+    do: Map.put(attrs, :like_of, like_of)
+
+  defp parse_like(attrs, _), do: attrs
+
+  # Bookmark (bookmark-of)
+  defp parse_bookmark(attrs, %{"bookmark-of" => [bookmark_of]}),
+    do: Map.put(attrs, :bookmark_of, bookmark_of)
+
+  defp parse_bookmark(attrs, _), do: attrs
+
+  # Reply (in-reply-to)
+  defp parse_reply(attrs, %{"in-reply-to" => [in_reply_to]}),
+    do: Map.put(attrs, :in_reply_to, in_reply_to)
+
+  defp parse_reply(attrs, _), do: attrs
+
+  # Content (content)
+  defp parse_content(attrs, %{"content" => [content]}),
+    do: Map.put(attrs, :content, content)
+
+  defp parse_content(attrs, _), do: attrs
+
+  defp check_access_token(access_token, required_scope \\ nil) do
+    indie_config = Application.get_env(:akedia, :indie)
+    token_endpoint = indie_config[:token_endpoint]
+    headers = [authorization: "Bearer #{access_token}", accept: "application/json"]
+    hostname = indie_config[:hostname]
+
+    with {:ok, %HTTPoison.Response{status_code: 200} = res} <-
+           HTTPoison.get(token_endpoint, headers),
+         {:ok, body} = Jason.decode(res.body),
+         %{"me" => ^hostname, "scope" => scope} <- body do
+      check_scope(scope, required_scope)
+    else
+      {:ok, %HTTPoison.Response{} = res} ->
+        Logger.error("Token Endpoint returned #{res.status_code}")
+        error_response()
+
+      _ ->
+        Logger.error("Unknown Error")
+        error_response()
+    end
+  end
+
+  defp check_access_token_debug(_, _), do: :ok
+
+  defp check_scope(_, nil), do: :ok
+
+  defp check_scope(scope, required_scope) do
+    scope = String.split(scope)
+
+    if required_scope in scope do
+      :ok
+    else
+      Logger.info("Required scope #{required_scope} not in scope")
+      error_response()
+    end
   end
 end
