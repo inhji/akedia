@@ -1,39 +1,12 @@
 <article class="post card h-entry">
-  <%= if has_image?(@post) do %>
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <a href="<%= image(@post, :original) %>">
-          <img src="<%= image(@post) %>" />
-        </a>
-      </figure>
-    </div>
-  <% end %>
+  <%= render "post_image.html", Map.put(assigns, :post, @post) %>
   <div class="card-content">
-    <header>
-      <strong class="username">
-        <%= link "Jonathan Jenne", to: Routes.page_url(@conn, :index), class: "u-author", rel: "author" %>
-      </strong>
-      <small class="permalink">
-        <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-          <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
-        </time>
-      </small>
-      <%= if @post.in_reply_to do %>
-        <small class="reply">
-          <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a> <i class="fas fa-reply"></i>
-        </small>
-      <% end %>
-      <%= if @post.bookmark_of do %>
-        <small class="reply">
-          <a href="<%= @post.bookmark_of %>"><%= @post.bookmark_of %></a> <i class="fas fa-bookmark"></i>
-        </small>
-      <% end %>
-      <%= if @post.like_of do %>
-        <small class="reply">
-          <a href="<%= @post.like_of %>"><%= @post.like_of %></a> <i class="fas fa-heart"></i>
-        </small>
-      <% end %>
-    </header>
+    <%=
+      render "post_header.html",
+        assigns
+        |> Map.put(:conn, @conn)
+        |> Map.put(:post, @post)
+    %>
     <div class="content e-content p-name">
       <%= raw(@post.content_html) %>
 
