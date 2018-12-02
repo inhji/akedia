@@ -41,9 +41,10 @@
         <div class="content-wrapper">
           <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
         </div>
-      </main>
-      <%= render "footer.html", Map.put(assigns, :conn, @conn) %>
+      </main>    
     </div>
+
+    <%= render "footer.html", Map.put(assigns, :conn, @conn) %>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
