@@ -4,8 +4,6 @@ defmodule AkediaWeb.Helpers.Input do
   def tag_input(form, field) do
     values = Phoenix.HTML.Form.input_value(form, field) || [""]
     name = Phoenix.HTML.Form.input_name(form, field)
-    id = Phoenix.HTML.Form.input_id(form, field)
-    IO.inspect(values)
 
     tag(:input,
       name: name,

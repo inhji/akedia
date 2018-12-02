@@ -5,17 +5,16 @@ defmodule Akedia.Micropub.Handler do
   alias AkediaWeb.Router.Helpers, as: Routes
   alias Akedia.Posts
 
-  @access_token "abcd"
-
   defp error_response, do: {:error, :insufficient_scope}
 
   @impl true
-  def handle_create(type, properties, access_token) do
+  def handle_create(_type, properties, access_token) do
     # use check_access_token_debug when in dev
     with :ok <- check_access_token(access_token, "create"),
          post_attrs <- parse_properties(properties) do
       {:ok, post} = Posts.create_post(post_attrs)
-      {:ok, :created, Routes.post_url(AkediaWeb.Endpoint, :show, post)}
+      post_url = Routes.post_url(AkediaWeb.Endpoint, :show, post)
+      {:ok, :created, post_url}
     else
       _ -> error_response()
     end
@@ -29,6 +28,8 @@ defmodule Akedia.Micropub.Handler do
       |> parse_bookmark(properties)
       |> parse_reply(properties)
       |> parse_content(properties)
+
+    post_attrs
   end
 
   # Tags

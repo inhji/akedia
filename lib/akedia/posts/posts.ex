@@ -22,7 +22,7 @@ defmodule Akedia.Posts do
   end
 
   def list_posts_paginated(params) do
-    Repo.paginate(posts_query, params)
+    Repo.paginate(posts_query(), params)
   end
 
   def list_posts_paginated(params, types) do
