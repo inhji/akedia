@@ -85,7 +85,7 @@ defmodule Akedia.Micropub.Handler do
         Logger.error("Mismatch in property <scope>: #{scope}")
         error_response()
 
-      %{:error, error} ->
+      {:error, error} ->
         Logger.error(error)
         error_response()
 
