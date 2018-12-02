@@ -52,8 +52,6 @@ defmodule AkediaWeb.PostController do
 
   def edit(conn, %{"id" => id}) do
     post = Posts.get_post!(id)
-    tags = Enum.map(post.tags, fn t -> t.name end)
-
     changeset = Posts.change_post(post)
 
     render(conn, "edit.html", post: post, changeset: changeset)

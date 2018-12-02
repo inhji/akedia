@@ -21,7 +21,7 @@ defmodule AkediaWeb.TagController do
     case Tags.create_tag(tag_params) do
       {:ok, tag} ->
         conn
-        |> put_flash(:info, "Tag created successfully.")
+        |> put_flash(:info, "Tag #{tag.name} created successfully.")
         |> redirect(to: Routes.tag_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
