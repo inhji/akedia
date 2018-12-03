@@ -86,11 +86,13 @@ defmodule Akedia.Posts.Post do
   end
 
   defp maybe_render_markdown(changeset) do
-    if new_content = get_change(changeset, :content) do
-      markdown = Earmark.as_html!(new_content)
-      put_change(changeset, :content_html, markdown)
-    else
-      changeset
+    new_content = get_change(changeset, :content)
+    is_empty? = is_nil(get_field(changeset, :content))
+
+    cond do
+      is_empty? -> put_change(changeset, :content_html, "")
+      is_nil(new_content) -> changeset
+      true -> put_change(changeset, :content_html, Earmark.as_html!(new_content))
     end
   end
 end
