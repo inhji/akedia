@@ -5,6 +5,7 @@ defmodule Akedia.Posts.Post do
 
   schema "posts" do
     field :type, :string
+    field :title, :string
     field :content, :string
     field :content_html, :string
     field :excerpt, :string
@@ -14,6 +15,8 @@ defmodule Akedia.Posts.Post do
     field :bookmark_of, :string
     field :like_of, :string
     field :repost_of, :string
+
+    field :syndicate_to_github, :boolean
 
     has_many :mentions, Akedia.Mentions.Mention
 
@@ -30,12 +33,14 @@ defmodule Akedia.Posts.Post do
     post
     |> cast(attrs, [
       :type,
+      :title,
       :content,
       :content_html,
       :in_reply_to,
       :bookmark_of,
       :like_of,
-      :repost_of
+      :repost_of,
+      :syndicate_to_github
     ])
     |> set_post_type
     |> validate_required(:type)
@@ -53,6 +58,7 @@ defmodule Akedia.Posts.Post do
     |> maybe_set_type_to("bookmark", :bookmark_of)
     |> maybe_set_type_to("repost", :repost_of)
     |> maybe_set_type_to("reply", :in_reply_to)
+    |> maybe_set_type_to("article", :title)
     |> maybe_set_default_type("note")
   end
 
