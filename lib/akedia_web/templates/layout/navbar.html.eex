@@ -19,8 +19,10 @@
 
     <div class="navbar-end">
       <%= if signed_in?(@conn) do %>
-        <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" %>
+        <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
         <%= link "Profile", to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item" %>
+        <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item" %>
+
       <% else %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
       <% end %>
