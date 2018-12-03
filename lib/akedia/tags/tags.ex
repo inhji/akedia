@@ -21,6 +21,10 @@ defmodule Akedia.Tags do
     Repo.all(Tag)
   end
 
+  def count_tags do
+    Repo.aggregate(Tag, :count, :id)
+  end
+
   @doc """
   Gets a single tag.
 

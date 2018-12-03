@@ -40,6 +40,17 @@ defmodule Akedia.Posts do
       where: p.type in ^types
   end
 
+  def count_posts do
+    Post
+    |> Repo.aggregate(:count, :id)
+  end
+
+  def count_posts(type) do
+    Post
+    |> where(type: ^type)
+    |> Repo.aggregate(:count, :id)
+  end
+
   @doc """
   Gets a single post.
 
