@@ -1,5 +1,7 @@
 defmodule AkediaWeb.AdminController do
   use AkediaWeb, :controller
+  alias Akedia.Posts
+  alias Akedia.Tags
 
   plug :check_auth
   # Nested Layouts:
@@ -7,6 +9,21 @@ defmodule AkediaWeb.AdminController do
   plug :put_layout, :admin
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    posts_count = Posts.count_posts()
+    tags_count = Tags.count_tags()
+
+    notes_count = Posts.count_posts("note")
+    replies_count = Posts.count_posts("reply")
+    bookmarks_count = Posts.count_posts("bookmark")
+    likes_count = Posts.count_posts("like")
+
+    render(conn, "index.html",
+      posts: posts_count,
+      tags: tags_count,
+      notes: notes_count,
+      replies: replies_count,
+      bookmarks: bookmarks_count,
+      likes: likes_count
+    )
   end
 end

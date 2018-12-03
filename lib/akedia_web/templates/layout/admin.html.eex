@@ -1,45 +1,14 @@
 <%= render_layout "app.html", assigns do %>
-  <div class="columns">
-    <div class="column is-one-fifth">
-      <aside class="menu">
-        <p class="menu-label">
-          Create
-        </p>
-        <ul class="menu-list">
-          <li>
-            <%= link "New Post", to: Routes.post_path(@conn, :new) %>
-          </li>
-        </ul>
-        <ul class="menu-list">
-          <li>
-            <%= link "New Tag", to: Routes.tag_path(@conn, :new) %>
-          </li>
-        </ul>
-        <p class="menu-label">
-          Content
-        </p>
-        <ul class="menu-list">
-          <li>
-            <%= link "Tags", to: Routes.tag_path(@conn, :index) %>
-          </li>
-        </ul>
-        <p class="menu-label">
-          Settings
-        </p>
-        <ul class="menu-list">
-          <li><%= link "User Settings", to: Routes.user_path(@conn, :show, @current_user) %></li>
-          <li><a>Site Settings</a></li>
-        </ul>
-        <p class="menu-label">
-          Misc
-        </p>
-        <ul class="menu-list">
-          <li><%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %></li>
-        </ul>
-      </aside>
-    </div>
-    <div class="column is-four-fifths">
-      <%= render @view_module, @view_template, assigns %>
-    </div>
+  <div class="level is-mobile">
+      <div class="level-item">
+        <a href="<%= Routes.admin_path(@conn, :index) %>" class="button is-white">
+          Home
+        </a>
+      </div>
+      <div class="level-item">
+        <%= link "New", to: Routes.post_path(@conn, :new), class: "button is-success" %>
+      </div>
   </div>
+
+  <%= render @view_module, @view_template, assigns %>
 <% end %>
