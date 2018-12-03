@@ -11,6 +11,14 @@ defmodule AkediaWeb.PostView do
     !!post.image
   end
 
+  def has_title?(post) do
+    !!post.title
+  end
+
+  def content_class(post) do
+    if has_title?(post), do: "", else: "p-name"
+  end
+
   def ribbon(post) do
     {class, icon} =
       cond do

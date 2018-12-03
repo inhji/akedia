@@ -1,6 +1,6 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="<%= Routes.page_url(@conn, :index) %>">
+    <a class="navbar-item" href="<%= Routes.post_url(@conn, :index) %>">
       <img src="<%= Routes.static_path(@conn, "/images/logo-inv.png") %>" alt="Inhji.de" width="28" height="28">
     </a>
 
@@ -12,9 +12,9 @@
   </div>
   <div class="navbar-menu" id="mainNav">
     <div class="navbar-start">
-      <%= link "Notes", to: Routes.page_path(@conn, :type, "note"), class: "navbar-item" %>
-      <%= link "Bookmarks", to: Routes.page_path(@conn, :type, "bookmark"), class: "navbar-item" %>
-      <%= link "Likes", to: Routes.page_path(@conn, :type, "like"), class: "navbar-item" %>
+      <%= link "Notes", to: Routes.post_path(@conn, :by_type, "note"), class: "navbar-item" %>
+      <%= link "Bookmarks", to: Routes.post_path(@conn, :by_type, "bookmark"), class: "navbar-item" %>
+      <%= link "Articles", to: Routes.post_path(@conn, :by_type, "article"), class: "navbar-item" %>
     </div>
 
     <div class="navbar-end">

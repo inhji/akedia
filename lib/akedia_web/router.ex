@@ -17,9 +17,10 @@ defmodule AkediaWeb.Router do
   scope "/", AkediaWeb do
     pipe_through :browser
 
-    # Post Categories
-    get "/", PageController, :index
-    get "/type/:type", PageController, :type
+    # Post routes
+    get "/", PostController, :index
+    get "/posts", PostController, :index_all
+    get "/type/:type", PostController, :by_type
 
     # Static Pages
     get "/now", PageController, :now

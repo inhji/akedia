@@ -9,7 +9,10 @@ defmodule AkediaWeb.PostController do
   plug :check_auth when action in [:new, :create, :edit, :update, :delete]
   plug :put_layout, :admin when action in [:new, :create, :edit, :update, :delete]
 
-  def index(conn, params) do
+  @index_types ["note", "bookmark", "reply", "repost"]
+  @allowed_types ["note", "bookmark", "reply", "repost", "like", "article"]
+
+  def index_all(conn, params) do
     page = Posts.list_posts_paginated(params)
 
     render(
@@ -18,6 +21,28 @@ defmodule AkediaWeb.PostController do
       page: page,
       posts: page.entries
     )
+  end
+
+  def index(conn, params) do
+    page = Posts.list_posts_paginated(params, @index_types)
+
+    render(conn, "index.html", page: page, posts: page.entries)
+  end
+
+  def by_type(conn, %{"type" => post_type} = params) do
+    if Enum.member?(@allowed_types, post_type) do
+      page = Posts.list_posts_paginated(params, [post_type])
+      count = Posts.count_posts(post_type)
+
+      render(conn, "index_by_type.html",
+        page: page,
+        posts: page.entries,
+        count: count,
+        type: String.capitalize(post_type)
+      )
+    else
+      redirect(conn, to: Routes.page_path(conn, :index))
+    end
   end
 
   def new(conn, _params) do

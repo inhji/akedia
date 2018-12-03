@@ -26,7 +26,7 @@
 
     <link rel="me" href="https://github.com/inhji" />
     <link rel="me" href="mailto:inhji@posteo.de" />
-    <link rel="me" href="<%= Routes.page_url(@conn, :index) %>" />
+    <link rel="me" href="<%= Routes.post_url(@conn, :index) %>" />
   </head>
   <body>
     <div id="wrapper" class="container">

@@ -1,0 +1,24 @@
+<h1 class="heading">Posts of type <%= @type %></h1>
+
+<section class="posts">
+  <%= if @count === 0 do %>
+    <section class="hero is-light is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Nothing here 😕
+          </h1>
+        </div>
+      </div>
+    </section>
+  <% else %>
+    <%= for post <- @posts do %>
+      <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
+    <% end %>
+  <% end %>
+</section>
+
+<%= pagination_links @page,
+  previous: Phoenix.HTML.raw("&leftarrow;"),
+  next: Phoenix.HTML.raw("&rightarrow;")
+%>

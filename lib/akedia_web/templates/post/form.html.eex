@@ -6,6 +6,14 @@
   <% end %>
 
   <div class="field">
+    <%= label f, :title, class: "label" %>
+    <div class="control">
+      <%= text_input f, :title, class: "input" %>
+    </div>
+    <%= error_tag f, :title %>
+  </div>
+
+  <div class="field">
     <%= label f, :content, class: "label" %>
     <div class="control">
       <%= textarea f, :content, placeholder: "compose an epic.", class: "textarea", rows: 10 %>
@@ -54,6 +62,13 @@
     <p class="control is-expanded">
       <%= text_input f, :bookmark_of, class: "input" %>
     </p>
+  </div>
+
+  <%= label f, "Brid.gy", class: "label" %>
+
+  <div class="field">
+    <%= checkbox f, :syndicate_to_github, class: "switch" %>
+    <%= label f, :syndicate_to_github, class: "label" %>
   </div>
 
   <div class="field">

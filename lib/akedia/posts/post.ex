@@ -50,15 +50,23 @@ defmodule Akedia.Posts.Post do
     |> maybe_render_markdown
   end
 
-  defp valid_post_types, do: ["note", "like", "bookmark", "reply", "repost"]
+  defp valid_post_types, do: ["note", "like", "bookmark", "reply", "repost", "article"]
 
+  @doc """
+  Sets the post type according to certain properties
+
+  article must be first, because a bookmark, repost, reply
+  can also have a title. Putting article after that
+  would set the type to article again. this means that
+  the type may be set multiple times.
+  """
   defp set_post_type(changeset) do
     changeset
+    |> maybe_set_type_to("article", :title)
     |> maybe_set_type_to("like", :like_of)
     |> maybe_set_type_to("bookmark", :bookmark_of)
     |> maybe_set_type_to("repost", :repost_of)
     |> maybe_set_type_to("reply", :in_reply_to)
-    |> maybe_set_type_to("article", :title)
     |> maybe_set_default_type("note")
   end
 

@@ -1,4 +1,4 @@
-<article class="post card h-entry">
+<article class="post <%= @post.type %> card h-entry">
   <div class="card-image">
     <%= render "post_image.html", Map.put(assigns, :post, @post) %>
   </div>
@@ -10,28 +10,67 @@
       assigns
       |> Map.put(:conn, @conn)
       |> Map.put(:post, @post)
-      %>
+    %>
+
+    <%= if @post.type === "note" do %>
       <div class="content e-content p-name">
         <%= raw(@post.content_html) %>
-
-        <%= if @post.in_reply_to do %>
-        <a href="<%= @post.in_reply_to %>" class="u-in-reply-to"></a>
-        <% end %>
-
-        <%= if @post.like_of do %>
-        <a href="<%= @post.like_of %>" class="u-like-of"></a>
-        <% end %>
-
-        <%= if @post.bookmark_of do %>
-        <a href="<%= @post.bookmark_of %>" class="u-bookmark-of"></a>
-        <% end %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
       </div>
-      <div class="tags">
-        <%= for tag <- @post.tags do %>
-        <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
-          <%= tag.name %>
-        </a>
-        <% end %>
+    <% end %>
+
+    <%= if @post.type === "bookmark" do %>
+      <%= if has_title?(@post) do %>
+        <h1 class="p-name title">
+          <a href="<%= @post.bookmark_of %>"><%= @post.title %></a>
+        </h1>
+      <% end %>
+      <div class="content e-content <%= content_class(@post) %>">
+        <%= raw(@post.content_html) %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
       </div>
+    <% end %>
+
+    <%= if @post.type === "reply" do %>
+      <%= if has_title?(@post) do %>
+        <h1 class="p-name title">
+          <%= @post.title %>
+        </h1>
+      <% end %>
+      <div class="content e-content <%= content_class(@post) %>">
+        <%= raw(@post.content_html) %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <%= if @post.type === "like" do %>
+      <div class="content e-content p-name">
+        <a href="<%= @post.like_of %>"><%= @post.like_of %></a>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <%= if @post.type === "repost" do %>
+      <div class="content e-content <%= content_class(@post) %>">
+        <%= raw(@post.content_html) %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <%= if @post.type === "article" do %>
+      <h1 class="p-name title"><%= @post.title %></h1>
+      <div class="content e-content p-name">
+        <%= raw(@post.content_html) %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <div class="tags">
+      <%= for tag <- @post.tags do %>
+      <a class="tag is-light p-category" href="<%= Routes.tag_path(@conn, :show, tag) %>">
+        <%= tag.name %>
+      </a>
+      <% end %>
+    </div>
   </div>
 </article>

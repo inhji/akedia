@@ -1,0 +1,15 @@
+<%= if @post.in_reply_to do %>
+  <a href="<%= @post.in_reply_to %>" class="u-in-reply-to"></a>
+<% end %>
+
+<%= if @post.like_of do %>
+  <a href="<%= @post.like_of %>" class="u-like-of"></a>
+<% end %>
+
+<%= if @post.bookmark_of do %>
+  <a href="<%= @post.bookmark_of %>" class="u-bookmark-of"></a>
+<% end %>
+
+<%= if @post.syndicate_to_github do %>
+  <a href="https://brid.gy/publish/github"></a>
+<% end %>

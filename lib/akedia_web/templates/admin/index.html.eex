@@ -16,6 +16,14 @@
 <div class="level is-mobile">
   <div class="level-item has-text-centered">
     <div>
+      <p class="heading">Articles</p>
+      <p class="title">
+        <%= link @articles, to: Routes.page_path(@conn, :type, "article"), class: "title" %>
+      </p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
       <p class="heading">Notes</p>
       <p class="title">
         <%= link @notes, to: Routes.page_path(@conn, :type, "note"), class: "title" %>

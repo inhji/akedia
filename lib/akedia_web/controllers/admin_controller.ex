@@ -16,6 +16,7 @@ defmodule AkediaWeb.AdminController do
     replies_count = Posts.count_posts("reply")
     bookmarks_count = Posts.count_posts("bookmark")
     likes_count = Posts.count_posts("like")
+    articles_count = Posts.count_posts("article")
 
     render(conn, "index.html",
       posts: posts_count,
@@ -23,7 +24,8 @@ defmodule AkediaWeb.AdminController do
       notes: notes_count,
       replies: replies_count,
       bookmarks: bookmarks_count,
-      likes: likes_count
+      likes: likes_count,
+      articles: articles_count
     )
   end
 end
