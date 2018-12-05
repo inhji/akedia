@@ -1,5 +1,13 @@
 # Akedia
 
+## Features
+
+* Bare minimum micropub
+* Sending webmentions
+* Receiving webmentions through webmention.io
+* POSSE to github via brid.gy <3
+* Image upload
+
 ## Deployment
 
 * Dependencies on the target system:
