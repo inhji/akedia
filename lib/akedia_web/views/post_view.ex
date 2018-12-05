@@ -21,12 +21,13 @@ defmodule AkediaWeb.PostView do
 
   def ribbon(post) do
     {class, icon} =
-      cond do
-        post.in_reply_to -> {"is-success", "fas fa-comment"}
-        post.like_of -> {"is-danger", "fas fa-heart"}
-        post.bookmark_of -> {"is-primary", "fas fa-bookmark"}
-        post.repost_of -> {"is-warning", "fas fa-recycle"}
-        true -> {nil, nil}
+      case post.type do
+        "reply" -> {"is-success", "fas fa-comment"}
+        "like" -> {"is-danger", "fas fa-heart"}
+        "bookmark" -> {"is-primary", "fas fa-bookmark"}
+        "repost" -> {"is-warning", "fas fa-recycle"}
+        "article" -> {"is-link", "fas fa-pen-nib"}
+        _ -> {nil, nil}
       end
 
     cond do
