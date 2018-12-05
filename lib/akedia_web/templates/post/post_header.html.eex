@@ -2,14 +2,20 @@
   <strong class="username">
     <%= link "Jonathan Jenne", to: Routes.post_url(@conn, :index), class: "u-author", rel: "author" %>
   </strong>
+
+  <%= if is_reply?(@post) do %>
+  <small class="action">
+    <%= if is_github_action?(@post) do %>
+      <%= github_action(@post) %>
+    <% else %>
+      replied to <a href="<%= @post.in_reply_to %>"><%= @post.in_reply_to %></a></i>
+    <% end %>
+  </small>
+  <% end %>
+
   <small class="permalink">
     <time datetime="<%= iso_date(@post.inserted_at) %>" class="dt-published">
-      <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url" %>
+      <%= link from_now(@post.inserted_at), to: Routes.post_url(@conn, :show, @post.id), class: "u-url has-text-grey" %>
     </time>
   </small>
-  <%= if @post.in_reply_to do %>
-    <small class="reply">
-      <a href="<%= @post.in_reply_to %>">in reply to <%= @post.in_reply_to %></a></i>
-    </small>
-  <% end %>
 </header>
