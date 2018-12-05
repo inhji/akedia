@@ -1,8 +1,8 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="<%= Routes.post_url(@conn, :index) %>">
+    <%= active_link(@conn, to: "/", active: :exact, class: "navbar-item") do %>
       <img src="<%= Routes.static_path(@conn, "/images/logo-inv.png") %>" alt="Inhji.de" width="28" height="28">
-    </a>
+    <% end %>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
       <span aria-hidden="true"></span>
@@ -12,15 +12,16 @@
   </div>
   <div class="navbar-menu" id="mainNav">
     <div class="navbar-start">
-      <%= link "Notes", to: Routes.post_path(@conn, :by_type, "note"), class: "navbar-item" %>
-      <%= link "Bookmarks", to: Routes.post_path(@conn, :by_type, "bookmark"), class: "navbar-item" %>
-      <%= link "Articles", to: Routes.post_path(@conn, :by_type, "article"), class: "navbar-item" %>
+
+      <%= active_link(@conn, "Notes", to: Routes.post_path(@conn, :by_type, "note"), class: "navbar-item") %>
+      <%= active_link(@conn, "Bookmarks", to: Routes.post_path(@conn, :by_type, "bookmark"), class: "navbar-item") %>
+      <%= active_link(@conn, "Articles", to: Routes.post_path(@conn, :by_type, "article"), class: "navbar-item") %>
     </div>
 
     <div class="navbar-end">
       <%= if signed_in?(@conn) do %>
-        <%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
-        <%= link "Profile", to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item" %>
+        <%= active_link(@conn, "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item") %>
+        <%= active_link(@conn, "Profile", to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item") %>
         <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item" %>
 
       <% else %>

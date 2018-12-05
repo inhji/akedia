@@ -39,6 +39,8 @@ config :scrivener_html,
   routes_helper: Akedia.Router.Helpers,
   view_style: :bulma
 
+config :phoenix_active_link, :defaults, class_active: "is-active"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

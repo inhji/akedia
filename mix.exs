@@ -64,7 +64,8 @@ defmodule Akedia.MixProject do
       {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"},
       {:plug_micropub, "~> 0.1.0"},
       {:httpoison, "~> 0.11"},
-      {:floki, "~> 0.15"}
+      {:floki, "~> 0.15"},
+      {:phoenix_active_link, "~> 0.2.1"}
     ]
   end
 
