@@ -10,11 +10,12 @@ import css from "../css/app.sass"
 // Import dependencies
 //
 import "phoenix_html"
+import Prism from "prismjs"
+Prism.highlightAll()
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 import {initBurger} from './burger'
-
 initBurger()

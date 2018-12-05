@@ -93,14 +93,24 @@ defmodule Akedia.Posts.Post do
     end
   end
 
+  defp render_markdown(markdown) do
+    opts = %Earmark.Options{code_class_prefix: "language-"}
+    Earmark.as_html!(markdown, opts)
+  end
+
   defp maybe_render_markdown(changeset) do
     new_content = get_change(changeset, :content)
     is_empty? = is_nil(get_field(changeset, :content))
 
     cond do
-      is_empty? -> put_change(changeset, :content_html, "")
-      is_nil(new_content) -> changeset
-      true -> put_change(changeset, :content_html, Earmark.as_html!(new_content))
+      is_empty? ->
+        put_change(changeset, :content_html, "")
+
+      is_nil(new_content) ->
+        changeset
+
+      true ->
+        put_change(changeset, :content_html, render_markdown(new_content))
     end
   end
 end
