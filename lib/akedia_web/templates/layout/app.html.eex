@@ -35,13 +35,13 @@
         <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
       </header>
       <main role="main">
-        <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="notification is-info" role="alert"><%= raw(get_flash(@conn, :info)) %></div>
+        <div class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></div>
 
         <div class="content-wrapper">
           <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
         </div>
-      </main>    
+      </main>
     </div>
 
     <%= render "footer.html", Map.put(assigns, :conn, @conn) %>

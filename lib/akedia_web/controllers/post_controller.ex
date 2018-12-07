@@ -57,11 +57,11 @@ defmodule AkediaWeb.PostController do
   def create(conn, %{"post" => post_params}) do
     case Posts.create_post(post_params) do
       {:ok, post} ->
+        url = Routes.post_url(conn, :show, post)
+        message = Webmentions.send_webmentions(url, "Post", "created")
+
         conn
-        |> put_flash(
-          :info,
-          Webmentions.send_webmentions(Routes.post_url(conn, :show, post), "Post", "created")
-        )
+        |> put_flash(:info, message)
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -87,11 +87,11 @@ defmodule AkediaWeb.PostController do
 
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
+        url = Routes.post_url(conn, :show, post)
+        message = Webmentions.send_webmentions(url, "Post", "updated")
+
         conn
-        |> put_flash(
-          :info,
-          Webmentions.send_webmentions(Routes.post_url(conn, :show, post), "Post", "created")
-        )
+        |> put_flash(:info, message)
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
