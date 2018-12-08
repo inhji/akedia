@@ -5,6 +5,15 @@ defmodule AkediaWeb.LayoutView do
     render(layout, Map.put(assigns, :inner_layout, content))
   end
 
+  def page_subtitle do
+    subtitles = [
+      "I'm ready to lose my mind but instead I use my mind.",
+      "If you are not tuned into happiness, change the station."
+    ]
+
+    Enum.random(subtitles)
+  end
+
   def libravatar(email) do
     id =
       :crypto.hash(:md5, email)
