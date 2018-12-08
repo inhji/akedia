@@ -64,6 +64,10 @@ defmodule AkediaWeb.PostController do
         url = Routes.post_url(conn, :show, post)
         message = Webmentions.send_webmentions(url, "Post", "created")
 
+        post
+        |> Post.photo_changeset(post_params)
+        |> Repo.update!()
+
         conn
         |> put_flash(:info, message)
         |> redirect(to: Routes.post_path(conn, :show, post))
@@ -93,6 +97,10 @@ defmodule AkediaWeb.PostController do
       {:ok, post} ->
         url = Routes.post_url(conn, :show, post)
         message = Webmentions.send_webmentions(url, "Post", "updated")
+
+        post
+        |> Post.photo_changeset(post_params)
+        |> Repo.update!()
 
         conn
         |> put_flash(:info, message)

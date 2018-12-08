@@ -25,14 +25,14 @@ defmodule Akedia.Posts.PostImage do
   end
 
   # Override the persisted filenames:
-  # def filename(version, _) do
-  #   version
-  # end
+  def filename(version, {file, scope}) do
+    version
+  end
 
   # Override the storage directory:
-  # def storage_dir(version, {file, scope}) do
-  #   "uploads/user/avatars/#{scope.id}"
-  # end
+  def storage_dir(version, {file, scope}) do
+    "uploads/posts/#{scope.id}/image"
+  end
 
   # Provide a default URL if there hasn't been a file uploaded
   # def default_url(version, scope) do

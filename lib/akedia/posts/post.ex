@@ -45,9 +45,13 @@ defmodule Akedia.Posts.Post do
     |> set_post_type
     |> validate_required(:type)
     |> validate_inclusion(:type, valid_post_types())
-    |> cast_attachments(attrs, [:image])
     |> maybe_create_excerpt
     |> maybe_render_markdown
+  end
+
+  def photo_changeset(post, attrs) do
+    post
+    |> cast_attachments(attrs, [:image])
   end
 
   defp valid_post_types, do: ["note", "like", "bookmark", "reply", "repost", "article"]
