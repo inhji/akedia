@@ -45,7 +45,10 @@ defmodule AkediaWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_akedia_key",
-    signing_salt: "9oYja4I3"
+    signing_salt: "bad20a0867e9402a8ff028b5c6dd2139",
+    encryption_salt: "a21b66180a55470f8c85a0313536bf04",
+    max_age: 604_800,
+    http_only: true
 
   plug AkediaWeb.Router
 end
