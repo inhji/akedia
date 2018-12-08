@@ -13,8 +13,11 @@ defmodule AkediaWeb.PostView do
   def is_type?(post, type \\ "note"), do: post.type === type
 
   def is_note?(post), do: is_type?(post)
-
   def is_reply?(post), do: is_type?(post, "reply")
+  def is_bookmark?(post), do: is_type?(post, "bookmark")
+  def is_like?(post), do: is_type?(post, "like")
+  def is_article?(post), do: is_type?(post, "article")
+  def is_repost?(post), do: is_type?(post, "repost")
 
   def has_image?(post), do: !!post.image
 

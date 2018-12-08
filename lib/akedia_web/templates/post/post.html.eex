@@ -12,26 +12,14 @@
       |> Map.put(:post, @post)
     %>
 
-    <%= if @post.type === "note" do %>
+    <%= if is_note?(@post) do %>
       <div class="content e-content p-name">
         <%= raw(@post.content_html) %>
         <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
       </div>
     <% end %>
 
-    <%= if @post.type === "bookmark" do %>
-      <%= if has_title?(@post) do %>
-        <h1 class="p-name title">
-          <a href="<%= @post.bookmark_of %>"><%= @post.title %></a>
-        </h1>
-      <% end %>
-      <div class="content e-content <%= content_class(@post) %>">
-        <%= raw(@post.content_html) %>
-        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
-      </div>
-    <% end %>
-
-    <%= if @post.type === "reply" do %>
+    <%= if is_bookmark?(@post) do %>
       <%= if has_title?(@post) do %>
         <h1 class="p-name title">
           <%= @post.title %>
@@ -43,21 +31,33 @@
       </div>
     <% end %>
 
-    <%= if @post.type === "like" do %>
-      <div class="content e-content p-name">
-        <a href="<%= @post.like_of %>"><%= @post.like_of %></a>
-        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
-      </div>
-    <% end %>
-
-    <%= if @post.type === "repost" do %>
+    <%= if is_reply?(@post) do %>
+      <%= if has_title?(@post) do %>
+        <h1 class="p-name title">
+          <%= @post.title %>
+        </h1>
+      <% end %>
       <div class="content e-content <%= content_class(@post) %>">
         <%= raw(@post.content_html) %>
         <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
       </div>
     <% end %>
 
-    <%= if @post.type === "article" do %>
+    <%= if is_like?(@post) do %>
+      <div class="content e-content p-name">
+        <a href="<%= @post.like_of %>"><%= @post.like_of %></a>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <%= if is_repost?(@post) do %>
+      <div class="content e-content <%= content_class(@post) %>">
+        <%= raw(@post.content_html) %>
+        <%= render "post_markers.html", Map.put(assigns, :post, @post) %>
+      </div>
+    <% end %>
+
+    <%= if is_article?(@post) do %>
       <h1 class="p-name title"><%= @post.title %></h1>
       <div class="content e-content p-name">
         <%= raw(@post.content_html) %>
