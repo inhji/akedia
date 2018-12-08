@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
 
-    <link rel="alternate" type="application/atom+xml" href="/feed" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+
+    <link rel="self" href="/feed.xml" />
+    <link rel="hub" href="https://inhji.superfeedr.com/" />   
 
     <link rel="webmention" href="https://webmention.io/inhji.de/webmention" />
     <link rel="pingback" href="https://webmention.io/inhji.de/xmlrpc" />

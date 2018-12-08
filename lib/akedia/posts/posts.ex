@@ -21,6 +21,10 @@ defmodule Akedia.Posts do
     Repo.all(posts_query())
   end
 
+  def list_posts(types) do
+    Repo.all(posts_query(types))
+  end
+
   def list_posts_paginated(params) do
     Repo.paginate(posts_query(), params)
   end

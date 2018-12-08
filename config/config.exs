@@ -22,7 +22,8 @@ config :akedia, :indie,
   hostname: "https://inhji.de/",
   micropub_endpoint: "/api/micropub",
   token_endpoint: "https://tokens.indieauth.com/token",
-  auth_endpoint: "https://indieauth.com/auth"
+  auth_endpoint: "https://indieauth.com/auth",
+  websub_hub: "http://inhji.superfeedr.com/"
 
 # Configures Elixir's Logger
 config :logger, :console,
