@@ -1,7 +1,7 @@
 defmodule AkediaWeb.Helpers.Input do
   use Phoenix.HTML
 
-  def tag_input(form, field) do
+  def tag_input(form, field, placeholder \\ "") do
     values = Phoenix.HTML.Form.input_value(form, field) || [""]
     name = Phoenix.HTML.Form.input_name(form, field)
 
@@ -9,6 +9,7 @@ defmodule AkediaWeb.Helpers.Input do
       name: name,
       type: "text",
       class: "input",
+      placeholder: placeholder,
       value:
         values
         |> Enum.map(fn tag -> tag.name end)

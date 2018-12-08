@@ -5,91 +5,116 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= label f, :title, class: "label" %>
-    <div class="control">
-      <%= text_input f, :title, class: "input" %>
+  <%= if Enum.member?(["article"], @type) do %>
+    <div class="field">
+      <div class="control">
+        <%= text_input f, :title, class: "input", placeholder: "grandiose title" %>
+      </div>
+      <%= error_tag f, :title %>
     </div>
-    <%= error_tag f, :title %>
-  </div>
+  <% end %>
 
-  <div class="field">
-    <%= label f, :content, class: "label" %>
-    <div class="control">
-      <%= textarea f, :content, placeholder: "compose an epic.", class: "textarea", rows: 10 %>
+  <%= if Enum.member?(["article", "note", "reply", "bookmark"], @type) do %>
+    <div class="field">
+      <div class="control">
+        <%= textarea f, :content, placeholder: "compose an epic.", class: "textarea", rows: 5 %>
+      </div>
+      <%= error_tag f, :content %>
     </div>
-    <%= error_tag f, :content %>
-  </div>
+  <% end %>
 
+  <%= if Enum.member?(["article", "note", "bookmark"], @type) do %>
   <div class="field">
-    <%= label f, :tags, class: "label" %>
     <div class="control">
-      <%= tag_input f, :tags %>
+      <%= tag_input f, :tags, "smash dem tags" %>
     </div>
     <%= error_tag f, :tags %>
   </div>
+  <% end %>
 
-  <%= label f, "Indie", class: "label" %>
-
-  <div class="field has-addons">
-    <p class="control">
-      <a class="button is-static">
-        in reply to
-      </a>
-    </p>
-    <p class="control is-expanded">
-      <%= text_input f, :in_reply_to, class: "input" %>
-    </p>
-  </div>
-
-  <div class="field has-addons">
-    <p class="control">
-      <a class="button is-static">
-        like of
-      </a>
-    </p>
-    <p class="control is-expanded">
-      <%= text_input f, :like_of, class: "input" %>
-    </p>
-  </div>
-
-  <div class="field has-addons">
-    <p class="control">
-      <a class="button is-static">
-        bookmark of
-      </a>
-    </p>
-    <p class="control is-expanded">
-      <%= text_input f, :bookmark_of, class: "input" %>
-    </p>
-  </div>
-
-  <%= label f, "Brid.gy", class: "label" %>
-
-  <div class="field">
-    <%= checkbox f, :syndicate_to_github, class: "switch" %>
-    <%= label f, :syndicate_to_github, class: "label" %>
-  </div>
-
-  <div class="field">
-    <%= label f, :image, class: "label" %>
-    <div class="control">
-      <div class="file">
-        <label class="file-label">
-          <%= file_input f, :image, class: "file-input" %>
-          <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-upload"></i>
-            </span>
-            <span class="file-label">
-              Choose a file…
-            </span>
-          </span>
-        </label>
-      </div>
+  <%= if Enum.member?(["reply"], @type) do %>
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-success">
+          in reply to
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <%= text_input f, :in_reply_to, class: "input" %>
+      </p>
     </div>
-    <%= error_tag f, :avatar %>
-  </div>
+  <% end %>
+
+  <%= if Enum.member?(["like"], @type) do %>
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-danger">
+          like of
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <%= text_input f, :like_of, class: "input" %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= if Enum.member?(["bookmark"], @type) do %>
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-primary">
+          bookmark of
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <%= text_input f, :bookmark_of, class: "input" %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= if Enum.member?(["repost"], @type) do %>
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-warning">
+          repost of
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <%= text_input f, :repost_of, class: "input" %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= if Enum.member?(["reply"], @type) do %>
+    <%= label f, "Brid.gy", class: "label" %>
+  <% end %>
+
+  <%= if Enum.member?(["reply"], @type) do %>
+    <div class="field">
+      <%= checkbox f, :syndicate_to_github, class: "switch" %>
+      <%= label f, :syndicate_to_github, class: "label" %>
+    </div>
+  <% end %>
+
+  <%= if Enum.member?(["note", "article"], @type) do %>
+    <div class="field">
+      <div class="control">
+        <div class="file">
+          <label class="file-label">
+            <%= file_input f, :image, class: "file-input" %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <%= error_tag f, :avatar %>
+    </div>
+  <% end %>
 
   <div class="field">
     <div class="control">

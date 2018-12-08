@@ -1,3 +1,5 @@
-<h1 class="heading">New Post</h1>
+<h1 class="heading">New <%= @type %></h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
+<%= render "form.html",
+  Map.merge(assigns, %{action: Routes.post_path(@conn, :create), type: @type}) 
+%>

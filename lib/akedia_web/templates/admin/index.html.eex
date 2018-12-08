@@ -1,10 +1,36 @@
+<div class="columns">
+  <div class="column">
+    <div class="columns is-mobile">
+      <div class="column has-text-centered">
+        <%= link "Note", to: Routes.post_path(@conn, :new, type: "note"), class: "button is-dark" %>
+      </div>
+      <div class="column has-text-centered">
+        <%= link "Article", to: Routes.post_path(@conn, :new, type: "article"), class: "button is-link" %>
+      </div>
+      <div class="column has-text-centered">
+        <%= link "Reply", to: Routes.post_path(@conn, :new, type: "reply"), class: "button is-success" %>
+      </div>
+      <div class="column has-text-centered">
+        <%= link "Bookmark", to: Routes.post_path(@conn, :new, type: "bookmark"), class: "button is-primary" %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile">
+      <div class="column has-text-centered">
+        <%= link "Like", to: Routes.post_path(@conn, :new, type: "like"), class: "button is-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="box">
   <div class="level is-mobile">
     <div class="level-item has-text-centered">
       <div>
         <p class="heading">Posts</p>
         <p class="title">
-          <%= link @posts, to: Routes.post_path(@conn, :index), class: "title" %> <i class="fas fa-file-alt"></i>          
+          <%= link @posts, to: Routes.post_path(@conn, :index), class: "title" %> <i class="fas fa-file-alt"></i>
         </p>
       </div>
     </div>

@@ -45,13 +45,17 @@ defmodule AkediaWeb.PostController do
     end
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"type" => post_type}) do
     changeset =
       %Post{}
       |> Repo.preload(:tags)
       |> Posts.change_post()
 
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, type: post_type)
+  end
+
+  def new(conn, _) do
+    redirect(conn, to: Routes.post_path(conn, :new, type: "note"))
   end
 
   def create(conn, %{"post" => post_params}) do
@@ -79,7 +83,7 @@ defmodule AkediaWeb.PostController do
     post = Posts.get_post!(id)
     changeset = Posts.change_post(post)
 
-    render(conn, "edit.html", post: post, changeset: changeset)
+    render(conn, "edit.html", post: post, changeset: changeset, type: post.type)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do

@@ -1,16 +1,3 @@
 <%= render_layout "app.html", assigns do %>
-  <div class="level is-mobile">
-      <div class="level-item">
-        <a href="<%= Routes.admin_path(@conn, :index) %>" class="button is-white">
-          Home
-        </a>
-      </div>
-      <div class="level-item">
-        <%= link "New", to: Routes.post_path(@conn, :new), class: "button is-success" %>
-      </div>
-  </div>
-
-  <hr />
-
   <%= render @view_module, @view_template, assigns %>
 <% end %>
