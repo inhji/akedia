@@ -24,7 +24,8 @@ defmodule Akedia.MixProject do
         :logger,
         :runtime_tools,
         :scrivener_ecto,
-        :scrivener_html
+        :scrivener_html,
+        :nadia
       ]
     ]
   end
@@ -63,9 +64,10 @@ defmodule Akedia.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"},
       {:plug_micropub, "~> 0.1.0"},
-      {:httpoison, "~> 0.11"},
+      {:httpoison, "~> 1.4.0", override: true},
       {:floki, "~> 0.15"},
-      {:phoenix_active_link, "~> 0.2.1"}
+      {:phoenix_active_link, "~> 0.2.1"},
+      {:nadia, "~> 0.4.4"}
     ]
   end
 
