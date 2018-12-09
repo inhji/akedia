@@ -1,1 +1,9 @@
+<h1 class="heading">Login with Password</h1>
+
 <%= render "form.html", assigns %>
+
+<div class="is-divider" data-content="OR"></div>
+
+<h1 class="heading">Login with Telegram</h1>
+
+<%= render "form_passwordless.html", assigns %>
