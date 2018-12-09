@@ -42,6 +42,9 @@ config :scrivener_html,
 
 config :phoenix_active_link, :defaults, class_active: "is-active"
 
+config :nadia,
+  token: "535962400:AAEOdZu56D9SlvuBBh-guVncuJ2v1Js1izQ"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
