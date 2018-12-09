@@ -1,6 +1,5 @@
 defmodule AkediaWeb.Helpers.Webmentions do
   require Logger
-  import Phoenix.HTML, only: [raw: 1]
 
   def send_webmentions(url, type, action) do
     Logger.info("Sending webmentions for: #{url}")

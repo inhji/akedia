@@ -28,7 +28,7 @@ defmodule AkediaWeb.Router do
     # Atom Feed
     get "/feed.xml", FeedController, :index
 
-    resources "/posts", PostController
+    resources "/posts", PostController, except: [:index]
     resources "/tags", TagController, param: "name"
     resources "/users", UserController, except: [:delete]
 

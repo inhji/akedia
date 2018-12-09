@@ -5,7 +5,7 @@
         Technos &amp; Psyche
       </h1>
       <h2 class="subtitle">
-        <%= page_subtitle %>
+        <%= page_subtitle() %>
       </h2>
     </div>
   </div>
