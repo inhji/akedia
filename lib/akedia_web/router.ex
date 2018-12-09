@@ -39,6 +39,7 @@ defmodule AkediaWeb.Router do
     scope "/auth" do
       get "/login", SessionController, :new
       post "/login", SessionController, :create
+      get "/token", SessionController, :token
       delete "/logout", SessionController, :delete
     end
   end
@@ -48,6 +49,10 @@ defmodule AkediaWeb.Router do
 
     post "/webmention/hook",
          AkediaWeb.WebmentionController,
+         :hook
+
+    post "/passwordless/hook",
+         AkediaWeb.SessionController,
          :hook
 
     forward "/micropub",
