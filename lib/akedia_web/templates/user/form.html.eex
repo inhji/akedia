@@ -22,6 +22,14 @@
   </div>
 
   <div class="field">
+    <%= label f, :chat_id, class: "label" %>
+    <div class="control">
+      <%= text_input f, :chat_id, class: "input" %>
+    </div>
+    <%= error_tag f, :chat_id %>
+  </div>
+
+  <div class="field">
     <%= label f, :password, class: "label" %>
     <div class="control">
       <%= text_input f, :encrypted_password, class: "input" %>

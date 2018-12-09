@@ -2,7 +2,7 @@
 
 <ul>
   <li><strong>Username:</strong> <%= @user.username %></li>
-  <li><strong>Password</strong> <%= elem(String.split_at(@user.encrypted_password, 20), 0)  %>..</li>
+  <li><strong>Chat Id:</strong> <%= @user.chat_id %></li>
   <li><strong>Email: </strong> <%= @user.email %></li></li>
 </ul>
 
