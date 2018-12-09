@@ -7,6 +7,7 @@ defmodule Akedia.Accounts do
   alias Akedia.Repo
 
   alias Akedia.Accounts.User
+  alias Akedia.Accounts.Token
 
   @doc """
   Counts the number of users
@@ -39,6 +40,14 @@ defmodule Akedia.Accounts do
 
   def get_by_username(username) do
     Repo.get_by(User, username: username)
+  end
+
+  def get_by_chat_id(chat_id) when is_nil(chat_id) do
+    nil
+  end
+
+  def get_by_chat_id(chat_id) do
+    Repo.get_by(User, chat_id: chat_id)
   end
 
   @doc """
@@ -133,5 +142,32 @@ defmodule Akedia.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  def create_token(attrs \\ %{}) do
+    %Token{}
+    |> Token.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def get_token(token) do
+    Repo.get_by(Token, token: token)
+  end
+
+  def delete_token(%Token{} = token) do
+    Repo.delete(token)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking token changes.
+
+  ## Examples
+
+      iex> change_token(token)
+      %Ecto.Changeset{source: %Token{}}
+
+  """
+  def change_token(%Token{} = token) do
+    Token.changeset(token, %{})
   end
 end
