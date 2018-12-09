@@ -15,7 +15,8 @@ config :akedia, AkediaWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "XMM4KKV5tVGkyNFW3KEt9bxiwuXKOUWQs5P7cuTg3OBK/b+fE5aIRACs4fxlbyAf",
   render_errors: [view: AkediaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2],
+  login_token_salt: "19799418-d915-4717-98d7-c47d94f38b1b"
 
 config :akedia, :indie,
   email: "johnnie@posteo.de",
