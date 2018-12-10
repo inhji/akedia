@@ -45,3 +45,5 @@ npm-debug.log
 !/uploads/.gitkeep
 
 .deliver/releases/
+
+.mix_tasks
