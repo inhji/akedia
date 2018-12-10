@@ -64,7 +64,7 @@ defmodule Akedia.Posts.Post do
   would set the type to article again. this means that
   the type may be set multiple times.
   """
-  defp set_post_type(changeset) do
+  def set_post_type(changeset) do
     changeset
     |> maybe_set_type_to("article", :title)
     |> maybe_set_type_to("like", :like_of)
