@@ -8,7 +8,8 @@ defmodule AkediaWeb.LayoutView do
   def page_subtitle do
     subtitles = [
       "I'm ready to lose my mind but instead I use my mind.",
-      "If you are not tuned into happiness, change the station."
+      "If you are not tuned into happiness, change the station.",
+      "This is not the right way. But it's my way."
     ]
 
     Enum.random(subtitles)
