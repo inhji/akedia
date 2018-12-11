@@ -2,19 +2,25 @@
 
   <div class="field">
     <%= label f, :username, class: "label" %>
-    <div class="control">
+    <div class="control has-icons-left">
       <%= text_input f, :username, class: "input" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
     </div>
   </div>
 
   <div class="field">
     <%= label f, :password, class: "label" %>
-    <div class="control">
+    <div class="control has-icons-left">
       <%= password_input f, :password, class: "input" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-key"></i>
+      </span>
     </div>
   </div>
 
   <div>
-    <%= submit "Login", class: "button is-primary" %>
+    <%= submit "L O G I N", class: "button is-primary" %>
   </div>
 <% end %>
