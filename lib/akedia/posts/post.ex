@@ -3,25 +3,32 @@ defmodule Akedia.Posts.Post do
   use Arc.Ecto.Schema
   import Ecto.Changeset
 
+  alias Akedia.Posts.PostImage
+  alias Akedia.Mentions.Mention
+  alias Akedia.Tags.Tag
+
   schema "posts" do
     field :type, :string
     field :title, :string
     field :content, :string
     field :content_html, :string
     field :excerpt, :string
-    field :image, Akedia.Posts.PostImage.Type
+    field :image, PostImage.Type
 
     field :in_reply_to, :string
     field :bookmark_of, :string
     field :like_of, :string
     field :repost_of, :string
 
+    field :is_page, :boolean
+    field :is_deleted, :boolean
+
     field :syndicate_to_github, :boolean
 
-    has_many :mentions, Akedia.Mentions.Mention
+    has_many :mentions, Mention
 
     many_to_many :tags,
-                 Akedia.Tags.Tag,
+                 Tag,
                  join_through: "posts_tags",
                  on_replace: :delete
 
@@ -40,7 +47,9 @@ defmodule Akedia.Posts.Post do
       :bookmark_of,
       :like_of,
       :repost_of,
-      :syndicate_to_github
+      :syndicate_to_github,
+      :is_page,
+      :is_deleted
     ])
     |> set_post_type
     |> validate_required(:type)
@@ -74,7 +83,7 @@ defmodule Akedia.Posts.Post do
     |> maybe_set_default_type("note")
   end
 
-  defp maybe_set_type_to(changeset, type, condition_field) do
+  defp maybe_set_type_to(changeset, type, condition_field) when is_atom(condition_field) do
     case get_field(changeset, condition_field) do
       nil -> changeset
       _ -> put_change(changeset, :type, type)
