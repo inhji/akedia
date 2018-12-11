@@ -48,8 +48,8 @@ defmodule Akedia.Micropub.Handler do
   def check_access_token(access_token, required_scope \\ nil) do
     indie_config = Application.get_env(:akedia, :indie)
     token_endpoint = indie_config[:token_endpoint]
-    headers = [authorization: "Bearer #{access_token}", accept: "application/json"]
     hostname = indie_config[:hostname]
+    headers = build_access_token_headers(access_token)
 
     with {:ok, %HTTPoison.Response{status_code: 200} = res} <-
            HTTPoison.get(token_endpoint, headers),
@@ -69,17 +69,15 @@ defmodule Akedia.Micropub.Handler do
   def check_scope(_, nil), do: :ok
 
   def check_scope(scope, required_scope) do
-    if !Enum.member?(@supported_scopes, required_scope) do
-      error_response()
-    else
-      scope = String.split(scope)
-
-      if Enum.member?(scope, required_scope) do
-        :ok
-      else
-        error_response()
-      end
+    case [@supported_scopes, String.split(scope)]
+         |> Enum.all?(&Enum.member?(&1, required_scope)) do
+      true -> :ok
+      _ -> error_response()
     end
+  end
+
+  def build_access_token_headers(access_token) do
+    [authorization: "Bearer #{access_token}", accept: "application/json"]
   end
 
   def get_post_id(url) do

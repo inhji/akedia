@@ -5,7 +5,7 @@ defmodule Akedia.Micropub.PropertiesTest do
     alias Akedia.Micropub.Properties
 
     @create_attrs %{
-      "title" => ["grandiose title"],
+      "name" => ["grandiose title"],
       "content" => ["foo"],
       "like-of" => ["https://google.de"],
       "bookmark-of" => ["https://google.de"],
@@ -27,7 +27,7 @@ defmodule Akedia.Micropub.PropertiesTest do
     }
 
     @replace_attrs %{
-      "title" => ["even more grandiose title"]
+      "name" => ["even more grandiose title"]
     }
 
     @delete_attrs %{
