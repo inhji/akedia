@@ -7,7 +7,7 @@ defmodule Akedia.Micropub.Properties do
     "bookmark-of" => :bookmark_of,
     "in-reply-to" => :in_reply_to,
     "content" => :content,
-    "title" => :title
+    "name" => :title
   }
 
   def parse(properties) do
