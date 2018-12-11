@@ -42,7 +42,7 @@ defmodule Akedia.Micropub.Properties do
   def remove_properties({k, _v}, props) do
     case key = @allowed_properties[k] do
       nil -> props
-      _ -> Map.put(props, key, "nil")
+      _ -> Map.put(props, key, nil)
     end
   end
 end

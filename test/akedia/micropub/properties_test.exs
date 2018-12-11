@@ -37,7 +37,7 @@ defmodule Akedia.Micropub.PropertiesTest do
     @update_result %{
       title: "even more grandiose title",
       tags: ["foo", "bar"],
-      content: "nil"
+      content: nil
     }
 
     test "parse_properties/1 parses properties correctly" do
@@ -45,7 +45,8 @@ defmodule Akedia.Micropub.PropertiesTest do
     end
 
     test "parse_properties/3 parses properties correctly" do
-      assert Properties.parse(@replace_attrs, @add_attrs, @delete_attrs) == @update_result
+      props = Properties.parse(@replace_attrs, @add_attrs, @delete_attrs)
+      assert props == @update_result
     end
   end
 end
