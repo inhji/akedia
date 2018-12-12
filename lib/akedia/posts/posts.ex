@@ -135,6 +135,14 @@ defmodule Akedia.Posts do
     Repo.delete(post)
   end
 
+  def soft_delete_post(%Post{} = post) do
+    update_post(post, %{is_deleted: true})
+  end
+
+  def undelete_post(%Post{} = post) do
+    update_post(post, %{is_deleted: false})
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking post changes.
 
