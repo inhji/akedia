@@ -1,0 +1,37 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="control">
+      <%= text_input f, :caption, class: "input", placeholder: "a snappy caption" %>
+    </div>
+    <%= error_tag f, :caption %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <div class="file">
+        <label class="file-label">
+          <%= file_input f, :name, class: "file-input" %>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+        </label>
+      </div>
+    </div>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div>
+    <%= submit "Save", class: "button is-primary" %>
+  </div>
+<% end %>

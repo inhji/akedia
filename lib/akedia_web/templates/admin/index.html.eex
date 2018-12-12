@@ -20,6 +20,9 @@
       <div class="column has-text-centered">
         <%= link "Like", to: Routes.post_path(@conn, :new, type: "like"), class: "button is-danger" %>
       </div>
+      <div class="column has-text-centered">
+        <%= link "Image", to: Routes.image_path(@conn, :new), class: "button" %>
+      </div>
     </div>
   </div>
 </div>
@@ -39,6 +42,14 @@
         <p class="heading">Tags</p>
         <p class="title">
           <%= link @tags, to: Routes.tag_path(@conn, :index), class: "title" %> <i class="fas fa-tag"></i>
+        </p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Images</p>
+        <p class="title">
+          <%= link @images, to: Routes.image_path(@conn, :index), class: "title" %> <i class="fas fa-image"></i>
         </p>
       </div>
     </div>

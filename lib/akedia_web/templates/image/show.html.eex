@@ -1,0 +1,11 @@
+<img src="<%= image_url(@image) %>" alt="">
+<p>
+  <%= @image.caption %>
+</p>
+<p>
+  <pre><%= image_url(@image) %></pre>
+</p>
+
+<span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
+<span><%= link "Delete", to: Routes.image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"] %>
+</span>
