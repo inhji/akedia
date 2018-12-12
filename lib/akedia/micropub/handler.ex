@@ -14,8 +14,6 @@ defmodule Akedia.Micropub.Handler do
 
   @impl true
   def handle_create(_type, properties, access_token) do
-    Logger.info("Micropub: create post #{inspect(properties)}")
-
     # use check_access_token_debug when in dev
     with :ok <- check_access_token(access_token, "create"),
          post_attrs <- Properties.parse(properties) do
@@ -29,8 +27,6 @@ defmodule Akedia.Micropub.Handler do
 
   @impl true
   def handle_update(url, replace, add, delete, access_token) do
-    Logger.info("Micropub: update post #{inspect(%{replace: replace, add: add, delete: delete})}")
-
     with :ok <- check_access_token(access_token, "update"),
          post_attrs <- Properties.parse(replace, add, delete),
          post_id <- get_post_id(url) do
@@ -39,7 +35,7 @@ defmodule Akedia.Micropub.Handler do
       case Posts.update_post(post, post_attrs) do
         {:ok, post} ->
           post_url = Routes.post_url(AkediaWeb.Endpoint, :show, post)
-          {:ok, :created, post_url}
+          :ok
 
         _ ->
           error_response()
