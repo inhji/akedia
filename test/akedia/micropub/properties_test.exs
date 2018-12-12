@@ -22,6 +22,14 @@ defmodule Akedia.Micropub.PropertiesTest do
       tags: ["foo", "bar"]
     }
 
+    @create_html_attrs %{
+      "content" => [%{"html" => "<p>foo</p>"}]
+    }
+
+    @create_html_result %{
+      content: "<p>foo</p>"
+    }
+
     @add_attrs %{
       "category" => ["foo", "bar"]
     }
@@ -31,17 +39,22 @@ defmodule Akedia.Micropub.PropertiesTest do
     }
 
     @delete_attrs %{
-      "content" => ["foo"]
+      "content" => ["foo"],
+      "category" => ["foo"]
     }
 
     @update_result %{
       title: "even more grandiose title",
-      tags: ["foo", "bar"],
+      tags: ["bar"],
       content: nil
     }
 
     test "parse_properties/1 parses properties correctly" do
       assert Properties.parse(@create_attrs) == @create_result
+    end
+
+    test "parse_properties/1 parses properties with html content correctly" do
+      assert Properties.parse(@create_html_attrs) == @create_html_result
     end
 
     test "parse_properties/3 parses properties correctly" do

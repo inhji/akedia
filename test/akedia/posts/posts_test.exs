@@ -6,8 +6,8 @@ defmodule Akedia.PostsTest do
   describe "posts" do
     alias Akedia.Posts.Post
 
-    @valid_attrs %{content: "some content"}
-    @update_attrs %{content: "some updated content"}
+    @valid_attrs %{content: "some content", tags: ["foo", "bar"]}
+    @update_attrs %{content: "some updated content", tags: ["foo", "bar", "baz"]}
     @invalid_attrs %{content: nil}
 
     def post_fixture(attrs \\ %{}) do

@@ -1,5 +1,6 @@
 defmodule Akedia.Micropub.Properties do
   @array_attributes ["category"]
+  @html_attributes ["content"]
 
   @allowed_properties %{
     "category" => :tags,
@@ -25,16 +26,28 @@ defmodule Akedia.Micropub.Properties do
     |> Enum.reduce(add_replace, &remove_properties/2)
   end
 
-  def add_replace_properties({k, [first | last]}, props) do
+  def add_replace_properties({k, [head | tail]}, props) do
     case key = @allowed_properties[k] do
       nil ->
         props
 
       _ ->
-        if Enum.member?(@array_attributes, k) do
-          Map.put(props, key, [first | last])
-        else
-          Map.put(props, key, first)
+        cond do
+          Enum.member?(@array_attributes, k) ->
+            Map.put(props, key, [head | tail])
+
+          Enum.member?(@html_attributes, k) and is_map(head) ->
+            value =
+              cond do
+                Map.has_key?(head, "html") -> head["html"]
+                Map.has_key?(head, "value") -> head["value"]
+                true -> ""
+              end
+
+            Map.put(props, key, value)
+
+          true ->
+            Map.put(props, key, head)
         end
     end
   end

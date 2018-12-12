@@ -174,7 +174,11 @@ defmodule Akedia.Posts do
   end
 
   def prepare_tags(attrs) do
-    tags_list = parse_tags(attrs["tags"])
+    # This is fucking stupid
+    tags = attrs[:tags] || attrs["tags"]
+    tags_list = parse_tags(tags)
+
+    Logger.debug("Prepared tags: #{inspect(tags_list)}")
 
     Repo.all(
       from t in Akedia.Tags.Tag,
