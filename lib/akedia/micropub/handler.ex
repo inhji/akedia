@@ -10,7 +10,7 @@ defmodule Akedia.Micropub.Handler do
 
   @supported_scopes ["create", "update"]
 
-  defp error_response, do: {:error, :insufficient_scope}
+  defp error_response(reason \\ :insufficient_scope), do: {:error, reason}
 
   @impl true
   def handle_create(_type, properties, access_token) do
@@ -40,6 +40,55 @@ defmodule Akedia.Micropub.Handler do
         _ ->
           error_response()
       end
+    else
+      _ -> error_response()
+    end
+  end
+
+  @impl true
+  def handle_delete(url, access_token) do
+    with :ok <- check_access_token(access_token, "delete"),
+         post_id <- get_post_id(url) do
+      Posts.soft_delete_post(post_id)
+    else
+      _ -> error_response()
+    end
+  end
+
+  @impl true
+  def handle_undelete(url, access_token) do
+    with :ok <- check_access_token(access_token, "delete"),
+         post_id <- get_post_id(url) do
+      Posts.undelete_post(post_id)
+    else
+      _ -> error_response()
+    end
+  end
+
+  @impl true
+  def handle_config_query(access_token) do
+    with :ok <- check_access_token(access_token) do
+      # TODO: Add media url
+      media_url = ""
+      {:ok, %{"media-endpoint": media_url}}
+    else
+      _ -> error_response()
+    end
+  end
+
+  @impl true
+  def handle_source_query(url, filter_properties, access_token) do
+    with :ok <- check_access_token(access_token) do
+      # TODO: Handle source query
+    else
+      _ -> error_response()
+    end
+  end
+
+  @impl true
+  def handle_media(file, access_token) do
+    with :ok <- check_access_token(access_token, "media") do
+      # TODO: Handle media upload
     else
       _ -> error_response()
     end
