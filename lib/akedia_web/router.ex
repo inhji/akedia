@@ -31,6 +31,8 @@ defmodule AkediaWeb.Router do
     resources "/posts", PostController, except: [:index]
     resources "/tags", TagController, param: "name"
     resources "/users", UserController, except: [:delete]
+    resources "/images", ImageController
+    resources "/videos", VideoController
 
     scope "/admin" do
       get "/", AdminController, :index
