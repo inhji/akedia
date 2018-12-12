@@ -52,6 +52,10 @@ defmodule AkediaWeb.Router do
          AkediaWeb.WebmentionController,
          :hook
 
+    post "/micropub/media",
+         AkediaWeb.MicropubController,
+         :media
+
     forward "/micropub",
             PlugMicropub,
             handler: Akedia.Micropub.Handler,

@@ -34,20 +34,10 @@ defmodule Akedia.PostsTest do
       assert post.content == "some content"
     end
 
-    test "create_post/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Posts.create_post(@invalid_attrs)
-    end
-
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
       assert {:ok, %Post{} = post} = Posts.update_post(post, @update_attrs)
       assert post.content == "some updated content"
-    end
-
-    test "update_post/2 with invalid data returns error changeset" do
-      post = post_fixture()
-      assert {:error, %Ecto.Changeset{}} = Posts.update_post(post, @invalid_attrs)
-      assert post == Posts.get_post!(post.id)
     end
 
     test "delete_post/1 deletes the post" do
@@ -59,6 +49,24 @@ defmodule Akedia.PostsTest do
     test "change_post/1 returns a post changeset" do
       post = post_fixture()
       assert %Ecto.Changeset{} = Posts.change_post(post)
+    end
+
+    test "parse_tags/1 splits a string and returns a list" do
+      assert Posts.parse_tags("foo,bar") == ["foo", "bar"]
+      assert Posts.parse_tags("foo    ,bar    ") == ["foo", "bar"]
+      assert Posts.parse_tags("   foo    ,   bar    ") == ["foo", "bar"]
+    end
+
+    test "parse_tags/1 returns a list of strings unchanged" do
+      assert Posts.parse_tags(["foo", "bar"]) == ["foo", "bar"]
+      assert Posts.parse_tags(["foo ", "bar"]) == ["foo", "bar"]
+    end
+
+    test "parse_tags/1 returns an empty list for invalid arguments" do
+      assert Posts.parse_tags(1) == []
+      assert Posts.parse_tags(nil) == []
+      assert Posts.parse_tags(%{"tag1" => "foo"}) == []
+      assert Posts.parse_tags(%{:tag1 => "foo"}) == []
     end
   end
 end

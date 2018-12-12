@@ -3,6 +3,8 @@ defmodule Akedia.Posts do
   The Posts context.
   """
 
+  require Logger
+
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
@@ -91,7 +93,7 @@ defmodule Akedia.Posts do
     tags = prepare_tags(attrs)
 
     %Post{}
-    |> Repo.preload(:tags)
+    |> Repo.preload([:tags, :mentions])
     |> Post.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:tags, Enum.map(tags, &Akedia.Tags.change_tag/1))
     |> Repo.insert()
@@ -156,17 +158,22 @@ defmodule Akedia.Posts do
     Post.changeset(post, %{})
   end
 
-  defp parse_tags(tags) when is_binary(tags), do: split_tags_string(tags)
-  defp parse_tags(tags) when is_list(tags), do: tags
-  defp parse_tags(_tags), do: []
-
-  defp split_tags_string(tags) do
+  def parse_tags(tags) when is_binary(tags) do
     tags
     |> String.split(",", trim: true)
     |> Enum.map(&String.trim/1)
   end
 
-  defp prepare_tags(attrs) do
+  def parse_tags(tags) when is_list(tags) do
+    Enum.map(tags, &String.trim/1)
+  end
+
+  def parse_tags(tags) do
+    Logger.debug("This is not a valid list of tags: #{inspect(tags)}")
+    []
+  end
+
+  def prepare_tags(attrs) do
     tags_list = parse_tags(attrs["tags"])
 
     Repo.all(

@@ -8,12 +8,14 @@ defmodule Akedia.Micropub.Handler do
 
   @post_id ~r/\/posts\/(?<id>\d+)$/
 
-  @supported_scopes ["create", "update"]
+  @supported_scopes ["create", "update", "delete", "undelete"]
 
   defp error_response(reason \\ :insufficient_scope), do: {:error, reason}
 
   @impl true
   def handle_create(_type, properties, access_token) do
+    Logger.info("Micropub: create post #{inspect(properties)}")
+
     # use check_access_token_debug when in dev
     with :ok <- check_access_token(access_token, "create"),
          post_attrs <- Properties.parse(properties) do
@@ -27,6 +29,8 @@ defmodule Akedia.Micropub.Handler do
 
   @impl true
   def handle_update(url, replace, add, delete, access_token) do
+    Logger.info("Micropub: update post #{inspect(%{replace: replace, add: add, delete: delete})}")
+
     with :ok <- check_access_token(access_token, "update"),
          post_attrs <- Properties.parse(replace, add, delete),
          post_id <- get_post_id(url) do
@@ -103,7 +107,14 @@ defmodule Akedia.Micropub.Handler do
     with {:ok, %HTTPoison.Response{status_code: 200} = res} <-
            HTTPoison.get(token_endpoint, headers),
          {:ok, body} = Jason.decode(res.body),
-         %{"me" => ^hostname, "scope" => scope} <- body do
+         %{
+           "me" => ^hostname,
+           "scope" => scope,
+           "client_id" => client_id,
+           "issued_at" => issued_at,
+           "issued_by" => issued_by,
+           "nonce" => nonce
+         } <- body do
       check_scope(scope, required_scope)
     else
       {atom, error} ->
