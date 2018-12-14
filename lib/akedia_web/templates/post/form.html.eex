@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%= if Enum.member?(["article"], @type) do %>
+  <%= if Enum.member?(["article", "bookmark"], @type) do %>
     <div class="field">
       <div class="control">
         <%= text_input f, :title, class: "input", placeholder: "grandiose title" %>
