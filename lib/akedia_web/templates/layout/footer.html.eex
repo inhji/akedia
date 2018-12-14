@@ -6,7 +6,7 @@
       </figure>
     </div>
     <div class="column about">
-      Hi, I'm <a href="<%= Routes.post_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;">Jenne</span></a>.
+      Hi, I'm <a href="<%= Routes.post_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;"> Jenne</span></a>.
       <p class="p-note">I write stories, make <a href="https://inhji.bandcamp.com/">music</a> and build a little<a href="https://github.com/inhji/akedia"> indiewebsite</a>.</p>
     </div>
   </div>
