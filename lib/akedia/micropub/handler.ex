@@ -2,9 +2,10 @@ defmodule Akedia.Micropub.Handler do
   @behaviour PlugMicropub.HandlerBehaviour
   require Logger
 
-  alias AkediaWeb.Router.Helpers, as: Routes
   alias Akedia.Posts
   alias Akedia.Micropub.Properties
+  alias AkediaWeb.Router.Helpers, as: Routes
+  alias AkediaWeb.Helpers.Webmentions
 
   @post_id ~r/\/posts\/(?<id>\d+)$/
 
