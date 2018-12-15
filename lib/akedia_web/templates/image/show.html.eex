@@ -1,11 +1,18 @@
-<img src="<%= image_url(@image) %>" alt="">
-<p>
+<div class="field is-grouped">
+  <p class="control">
+    <%= link "Edit", to: Routes.image_path(@conn, :edit, @image), class: "button" %>
+  </p>
+  <p class="control">
+    <%= link "Delete", to: Routes.image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
+  </p>
+</div>
+
+<figure class="image is-4by3">
+  <img src="<%= image_url(@image, :thumb) %>" alt="<%= @image.caption %>" title="<%= @image.caption %>">
+</figure>
+
+<p class="title">
   <%= @image.caption %>
 </p>
-<p>
-  <pre><%= image_url(@image) %></pre>
-</p>
 
-<span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
-<span><%= link "Delete", to: Routes.image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"] %>
-</span>
+<a href="<%= image_url(@image, :original) %>">Permalink</a>

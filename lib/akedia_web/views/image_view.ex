@@ -3,6 +3,9 @@ defmodule AkediaWeb.ImageView do
   alias Akedia.Images.ImageUploader
 
   def image_url(image, version \\ :thumb) do
-    ImageUploader.url({image.name, image}, version)
+    Path.join(
+      Routes.post_url(AkediaWeb.Endpoint, :index),
+      ImageUploader.url({image.name, image}, version)
+    )
   end
 end

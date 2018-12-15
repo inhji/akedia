@@ -4,6 +4,7 @@
     <a href="<%= Routes.image_path(@conn, :show, image) %>">
       <img src="<%= image_url(image) %>" alt="<%= image.caption %>" title="<%= image.caption %>">
     </a>
+    <span><%= image.caption %></span>
   </div>
   <% end %>
 </div>
