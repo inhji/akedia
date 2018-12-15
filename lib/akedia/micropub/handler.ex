@@ -14,12 +14,17 @@ defmodule Akedia.Micropub.Handler do
 
   @impl true
   def handle_create(_type, properties, access_token) do
-    # use check_access_token_debug when in dev
     with :ok <- check_access_token(access_token, "create"),
          post_attrs <- Properties.parse(properties) do
-      {:ok, post} = Posts.create_post(post_attrs)
-      post_url = Routes.post_url(AkediaWeb.Endpoint, :show, post)
-      {:ok, :created, post_url}
+      case Posts.create_post(post_attrs) do
+        {:ok, post} ->
+          post_url = Routes.post_url(AkediaWeb.Endpoint, :show, post)
+          _message = Webmentions.send_webmentions(post_url, "Post", "created")
+          {:ok, :created, post_url}
+
+        {:error, _} ->
+          error_response()
+      end
     else
       _ -> error_response()
     end
@@ -33,12 +38,8 @@ defmodule Akedia.Micropub.Handler do
       post = Posts.get_post!(post_id)
 
       case Posts.update_post(post, post_attrs) do
-        {:ok, post} ->
-          post_url = Routes.post_url(AkediaWeb.Endpoint, :show, post)
-          :ok
-
-        _ ->
-          error_response()
+        {:ok, _post} -> :ok
+        _ -> error_response()
       end
     else
       _ -> error_response()
@@ -77,7 +78,7 @@ defmodule Akedia.Micropub.Handler do
   end
 
   @impl true
-  def handle_source_query(url, filter_properties, access_token) do
+  def handle_source_query(_url, _filter_properties, access_token) do
     with :ok <- check_access_token(access_token) do
       # TODO: Handle source query
     else
@@ -86,7 +87,7 @@ defmodule Akedia.Micropub.Handler do
   end
 
   @impl true
-  def handle_media(file, access_token) do
+  def handle_media(_file, access_token) do
     with :ok <- check_access_token(access_token, "media") do
       # TODO: Handle media upload
     else
@@ -106,10 +107,10 @@ defmodule Akedia.Micropub.Handler do
          %{
            "me" => ^hostname,
            "scope" => scope,
-           "client_id" => client_id,
-           "issued_at" => issued_at,
-           "issued_by" => issued_by,
-           "nonce" => nonce
+           "client_id" => _client_id,
+           "issued_at" => _issued_at,
+           "issued_by" => _issued_by,
+           "nonce" => _nonce
          } <- body do
       check_scope(scope, required_scope)
     else
