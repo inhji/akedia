@@ -1,33 +1,67 @@
 <footer class="footer h-card">
-  <div class="columns inner is-mobile">
-    <div class="column avatar">
-      <figure class="image is-96x96">
-        <img src="<%= libravatar(get_indie_config_value(:email)) %>" class="u-photo" alt="Inhji" />
-      </figure>
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="media">
+          <figure class="media-left">
+            <p class="image avatar is-96x96">
+              <img src="<%= libravatar(get_indie_config_value(:email)) %>" class="u-photo" alt="Inhji" />
+            </p>
+          </figure>
+          <div class="media-content">
+            <strong class="is-size-5">
+              Hi, I'm <a href="<%= Routes.post_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;"> Jenne</span></a>.
+            </strong>
+            <p class="p-note">
+              I write stories, make <a href="https://inhji.bandcamp.com/">music</a> and build a little<a href="https://github.com/inhji/akedia"> indiewebsite</a>.
+              <br/>
+              <a href="/about">more..</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="social">
+          <strong class="is-size-5">
+            Me elsewhere
+          </strong>
+          <ul>
+            <li>
+              <a href="https://blog.inhji.de" class="has-text-dark">
+                <i class="icon-ghost"></i> Ghost Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://bandcamp.com/inhji" class="has-text-dark">
+                <i class="fab fa-bandcamp"></i> Bandcamp
+              </a>
+            </li>
+            <li>
+              <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
+                <i class="fab fa-steam"></i> Steam
+              </a>
+            </li>
+            <li>
+              <a href="https://chaos.social/@inhji" class="has-text-dark">
+                <i class="fab fa-mastodon"></i> Mastodon
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/inhji" class="has-text-dark">
+                <i class="fab fa-github-alt"></i> Github
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <strong class="is-size-5">
+          About this site
+        </strong>
+        <p>
+          This site supports <i class="icon-webmention"></i>ebmentions and <i class="icon-microformats"></i> Microformats
+        </p>
+      </div>
     </div>
-    <div class="column about">
-      Hi, I'm <a href="<%= Routes.post_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan<span style="display: none;"> Jenne</span></a>.
-      <p class="p-note">I write stories, make <a href="https://inhji.bandcamp.com/">music</a> and build a little<a href="https://github.com/inhji/akedia"> indiewebsite</a>.</p>
-    </div>
   </div>
-  <div class="social has-text-centered">
-    <a href="https://bandcamp.com/inhji" class="has-text-dark">
-      <i class="fab fa-2x fa-bandcamp"></i>
-    </a>
-    <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
-      <i class="fab fa-2x fa-steam"></i>
-    </a>
-    <a href="https://chaos.social/@inhji" class="has-text-dark">
-      <i class="fab fa-2x fa-mastodon"></i>
-    </a>
-    <a href="https://github.com/inhji" class="has-text-dark">
-      <i class="fab fa-2x fa-github-alt"></i>
-    </a>
-  </div>
-
-<!--
-  <div class="content has-text-centered">
-    &copy; 2018 <a href="<%= Routes.post_url(@conn, :index) %>" class="p-name u-url u-uid">Jonathan Jenne</a>
-  </div>
-  <img src="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>" class="u-photo" style="display: none;" alt="Inhji" /> -->
 </footer>
