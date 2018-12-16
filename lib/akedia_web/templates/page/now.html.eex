@@ -1,1 +1,32 @@
-<h1 class="heading">Now</h1>
+<div class="box">
+  <h1 class="heading">Now</h1>
+
+  <div class="columns">
+    <div class="column is-two-thirds">
+      <strong>Tracks I recently listened to:</strong>
+
+      <ul>
+        <%= for track <- @tracks do %>
+          <li>
+            <span><%= track.name %> by <%= track.artist %></span>
+            <i> (<%= from_now(track.listened_at) %>)</i>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="column is-one-third">
+      <strong>Artists I listened to today:</strong>
+
+      <ul>
+        <%= for {artist, count} <- @artists do %>
+          <li>
+            <span><%= artist %></span>
+            <i> (<%= count %> times)</i>
+          </li>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+
+</div>
