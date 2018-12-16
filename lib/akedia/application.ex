@@ -11,9 +11,9 @@ defmodule Akedia.Application do
       # Start the Ecto repository
       Akedia.Repo,
       # Start the endpoint when the application starts
-      AkediaWeb.Endpoint
+      AkediaWeb.Endpoint,
       # Starts a worker by calling: Akedia.Worker.start_link(arg)
-      # {Akedia.Worker, arg},
+      {Akedia.Tracks.Worker, %{last_listen: 0, last_call: :empty}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
