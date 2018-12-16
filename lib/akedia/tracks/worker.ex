@@ -51,7 +51,7 @@ defmodule Akedia.Tracks.Worker do
   end
 
   def init(state) do
-    schedule_track_fetch()
+    schedule_track_fetch(5_000)
     {:ok, state}
   end
 
@@ -93,7 +93,7 @@ defmodule Akedia.Tracks.Worker do
     |> format_tracks()
     |> Enum.each(&Tracks.create_track/1)
 
-    schedule_track_fetch()
+    schedule_track_fetch(state[:interval])
 
     case Enum.count(new_tracks) do
       0 ->
@@ -122,6 +122,8 @@ defmodule Akedia.Tracks.Worker do
   defp get_tracks(count) do
     user = "inhji"
 
+    IO.puts("Getting last #{count} tracks for user #{user}")
+
     data =
       "https://api.listenbrainz.org/1/user/#{user}/listens?count=#{count}"
       |> HTTPoison.get!()
@@ -133,7 +135,7 @@ defmodule Akedia.Tracks.Worker do
     |> Map.get("listens")
   end
 
-  defp schedule_track_fetch do
-    Process.send_after(self(), :track_fetch, 5_000)
+  defp schedule_track_fetch(milliseconds) do
+    Process.send_after(self(), :track_fetch, milliseconds)
   end
 end
