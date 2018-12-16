@@ -39,8 +39,12 @@ defmodule Akedia.Micropub.Handler do
       post = Posts.get_post!(post_id)
 
       case Posts.update_post(post, post_attrs) do
-        {:ok, _post} -> :ok
-        _ -> error_response()
+        {:ok, _post} ->
+          _message = Webmentions.send_webmentions(url, "Post", "updated")
+          :ok
+
+        _ ->
+          error_response()
       end
     else
       _ -> error_response()
