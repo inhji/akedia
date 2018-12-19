@@ -32,7 +32,7 @@
   "jason": {:hex, :jason, "1.1.2", "b03dedea67a99223a2eaf9f1264ce37154564de899fd3d8b9a21b1a6fd64afe7", [:mix], [{:decimal, "~> 1.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm"},
   "mariaex": {:hex, :mariaex, "0.9.1", "83266fec657ea68dd426f4bbc12594be45ee91fe162ebf1bf017ce3cfa098ddd", [:mix], [{:db_connection, "~> 2.0", [hex: :db_connection, repo: "hexpm", optional: false]}, {:decimal, "~> 1.2", [hex: :decimal, repo: "hexpm", optional: false]}, {:poison, ">= 0.0.0", [hex: :poison, repo: "hexpm", optional: true]}], "hexpm"},
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], [], "hexpm"},
-  "microformats2": {:hex, :microformats2, "0.2.0", "5dc4dd6fef58a974f2cfd107391685d01f1874fc23e9894f2aadd3e5368451b3", [:mix], [{:floki, "~> 0.7", [hex: :floki, repo: "hexpm", optional: false]}, {:httpotion, "~> 3.0", [hex: :httpotion, repo: "hexpm", optional: false]}], "hexpm"},
+  "microformats2": {:hex, :microformats2, "0.2.1", "452e8749566500ea70fcaa9b5680b00a20803aa8d1e490f8f84ae3c38a30799a", [:mix], [{:floki, "~> 0.7", [hex: :floki, repo: "hexpm", optional: false]}, {:httpotion, "~> 3.0", [hex: :httpotion, repo: "hexpm", optional: false]}], "hexpm"},
   "mime": {:hex, :mime, "1.3.1", "30ce04ab3175b6ad0bdce0035cba77bba68b813d523d1aac73d9781b4d193cf8", [:mix], [], "hexpm"},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], [], "hexpm"},
   "mochiweb": {:hex, :mochiweb, "2.18.0", "eb55f1db3e6e960fac4e6db4e2db9ec3602cc9f30b86cd1481d56545c3145d2e", [:rebar3], [], "hexpm"},
