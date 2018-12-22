@@ -23,12 +23,12 @@ defmodule Akedia.Images.ImageUploader do
   end
 
   # Override the persisted filenames:
-  def filename(version, {file, scope}) do
+  def filename(version, {_file, scope}) do
     "#{version}-#{scope.id}"
   end
 
   # Override the storage directory:
-  def storage_dir(version, {file, scope}) do
+  def storage_dir(_version, {_file, _scope}) do
     "uploads/images"
   end
 

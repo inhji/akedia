@@ -36,6 +36,13 @@ defmodule Akedia.Posts do
     Repo.paginate(posts_query(types), params)
   end
 
+  def last_posts(type, limit \\ 1) do
+    Repo.all(
+      from p in posts_query([type]),
+        limit: ^limit
+    )
+  end
+
   defp posts_query() do
     from p in Post,
       order_by: [desc: :inserted_at],

@@ -21,6 +21,13 @@ defmodule Akedia.Images do
     Repo.all(Image)
   end
 
+  def list_images(limit) do
+    Repo.all(
+      from i in Image,
+        limit: ^limit
+    )
+  end
+
   def count_images do
     Image
     |> Repo.aggregate(:count, :id)

@@ -29,6 +29,6 @@ defmodule AkediaWeb.SessionController do
     conn
     |> delete_session(:user_id)
     |> put_flash(:info, "Logged out :(")
-    |> redirect(to: Routes.post_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 end

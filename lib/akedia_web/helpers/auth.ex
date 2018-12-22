@@ -32,7 +32,7 @@ defmodule AkediaWeb.Helpers.Auth do
   defp serious_error!(conn, message) do
     conn
     |> put_flash(:error, message)
-    |> redirect(to: Routes.post_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
     |> halt()
   end
 end

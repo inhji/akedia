@@ -6,7 +6,6 @@ defmodule Akedia.Tags do
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
-  alias Akedia.Tags
   alias Akedia.Tags.Tag
 
   @doc """
@@ -129,7 +128,7 @@ defmodule Akedia.Tags do
     Enum.map(tags, &String.trim/1)
   end
 
-  def parse_tags(tags), do: []
+  def parse_tags(_tags), do: []
 
   def prepare_tags(attrs) do
     # This is fucking stupid
@@ -137,7 +136,7 @@ defmodule Akedia.Tags do
 
     existing_tags =
       Repo.all(
-        from t in Akedia.Tags.Tag,
+        from t in Tag,
           where: t.name in ^tags_list
       )
 

@@ -37,6 +37,15 @@ defmodule Akedia.Tracks do
     )
   end
 
+  def last_track() do
+    Repo.one(
+      from(t in Track,
+        order_by: [desc: :listened_at],
+        limit: 1
+      )
+    )
+  end
+
   defp get_today() do
     Date.utc_today()
     |> Timex.to_datetime()

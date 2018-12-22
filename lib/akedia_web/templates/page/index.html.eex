@@ -1,10 +1,47 @@
-<section class="posts">
-  <%= for post <- @posts do %>
-    <%= render AkediaWeb.PostView, "post.html", Map.put(assigns, :post, post) %>
-  <% end %>
-</section>
+<div class="tile is-ancestor">
+  <div class="tile is-4 is-vertical is-parent">
+    <article class="tile is-child">
+      <div class="subtitle">Music</div>
+      <p>
+        <span>Listened to <%= @track.name %> by <%= @track.artist %> </p>
+        <span class="has-text-grey">
+          <%= from_now(@note.inserted_at) %>
+        </span>
+      </p>
+    </article>
+    <article class="tile is-child">
+      <div class="subtitle">Bookmarks</div>
+      <%= for bookmark <- @bookmarks do %>
+      <p>
+        <%= link bookmark.title, to: Routes.post_url(@conn, :show, bookmark.id) %>
+        <span>in <%= bookmark.tags |> Enum.map(fn t -> t.name end) |> Enum.join(", ") %></span>
+        <span class="has-text-grey">
+          <%= link from_now(bookmark.inserted_at), to: Routes.post_url(@conn, :show, bookmark.id), class: "u-url has-text-grey" %>
+        </span>
+      </p>
+      <% end %>
 
-<%= pagination_links @page,
-  previous: Phoenix.HTML.raw("&leftarrow;"),
-  next: Phoenix.HTML.raw("&rightarrow;")
-%>
+    </article>
+  </div>
+  <div class="tile is-8 is-vertical is-parent">
+    <div class="tile is-child">
+      <div class="subtitle">Note</div>
+      <p><%= raw(@note.content_html) %></p>
+      <span class="has-text-grey">
+        <%= link from_now(@note.inserted_at), to: Routes.post_url(@conn, :show, @note.id), class: "u-url has-text-grey" %>
+      </span>
+    </div>
+    <div class="tile is-vertical is-child">
+      <div class="subtitle">Photos</div>
+      <div class="tile is-parent">
+        <%= for photo <- @photos do %>
+          <div class="tile is-child">
+            <%= link to: Routes.image_url(@conn, :show, photo.id) do %>
+              <img src="<%= image_url(photo) %>" style="width: 100%" />
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

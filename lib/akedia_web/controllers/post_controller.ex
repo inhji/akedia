@@ -9,10 +9,9 @@ defmodule AkediaWeb.PostController do
   plug :check_auth when action in [:new, :create, :edit, :update, :delete]
   plug :put_layout, :admin when action in [:new, :create, :edit, :update, :delete]
 
-  @index_types ["note", "bookmark", "reply", "repost"]
   @allowed_types ["note", "bookmark", "reply", "repost", "like", "article"]
 
-  def index_all(conn, params) do
+  def index(conn, params) do
     page = Posts.list_posts_paginated(params)
 
     render(
@@ -21,12 +20,6 @@ defmodule AkediaWeb.PostController do
       page: page,
       posts: page.entries
     )
-  end
-
-  def index(conn, params) do
-    page = Posts.list_posts_paginated(params, @index_types)
-
-    render(conn, "index.html", page: page, posts: page.entries)
   end
 
   def by_type(conn, %{"type" => post_type} = params) do
@@ -117,6 +110,6 @@ defmodule AkediaWeb.PostController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: Routes.post_path(conn, :index))
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 end
