@@ -32,14 +32,6 @@ mix edeliver restart production
 mix edeliver migrate production
 ```
 
-build an upgrade
-
-```
-mix edeliver build upgrade --with=<oldversion>
-mix edeliver upgrade
-mix edeliver migrate production
-```
-
 ## Webmention
 
 ```
