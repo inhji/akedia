@@ -18,6 +18,7 @@
         <%= active_link(@conn, "Notes", to: Routes.post_path(@conn, :by_type, "note"), class: "navbar-item") %>
         <%= active_link(@conn, "Bookmarks", to: Routes.post_path(@conn, :by_type, "bookmark"), class: "navbar-item") %>
         <%= active_link(@conn, "Articles", to: Routes.post_path(@conn, :by_type, "article"), class: "navbar-item") %>
+        <%= active_link(@conn, "Photos", to: Routes.image_path(@conn, :index), class: "navbar-item") %>
       </div>
 
       <div class="navbar-end">
