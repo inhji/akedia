@@ -1,100 +1,98 @@
-<div class="columns">
-  <div class="column">
-    <div class="columns is-mobile">
-      <div class="column has-text-centered">
-        <%= link "Note", to: Routes.post_path(@conn, :new, type: "note"), class: "button is-dark" %>
-      </div>
-      <div class="column has-text-centered">
-        <%= link "Article", to: Routes.post_path(@conn, :new, type: "article"), class: "button is-link" %>
-      </div>
-      <div class="column has-text-centered">
-        <%= link "Reply", to: Routes.post_path(@conn, :new, type: "reply"), class: "button is-success" %>
-      </div>
-      <div class="column has-text-centered">
-        <%= link "Bookmark", to: Routes.post_path(@conn, :new, type: "bookmark"), class: "button is-primary" %>
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="columns is-mobile">
-      <div class="column has-text-centered">
-        <%= link "Like", to: Routes.post_path(@conn, :new, type: "like"), class: "button is-danger" %>
-      </div>
-      <div class="column has-text-centered">
-        <%= link "Image", to: Routes.image_path(@conn, :new), class: "button" %>
-      </div>
-    </div>
-  </div>
+<div class="tabs">
+  <ul>
+    <li><a>New:</a></li>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new, type: "note") do %>
+        <span class="icon is-small"><i class="fas fa-sticky-note"></i></span>
+        <span>Note</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new, type: "article") do %>
+        <span class="icon is-small"><i class="fas fa-pen-nib"></i></span>
+        <span>Article</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new, type: "reply") do %>
+        <span class="icon is-small"><i class="fas fa-comment"></i></span>
+        <span>Reply</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new, type: "bookmark") do %>
+        <span class="icon is-small"><i class="fas fa-bookmark"></i></span>
+        <span>Bookmark</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new, type: "like") do %>
+        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+        <span>Like</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.image_path(@conn, :new) do %>
+        <span class="icon is-small"><i class="fas fa-image"></i></span>
+        <span>Image</span>
+      <% end %>
+    </li>
+  </ul>
 </div>
 
-<div class="box">
-  <div class="level is-mobile">
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Posts</p>
-        <p class="title">
-          <%= link @posts, to: Routes.post_path(@conn, :index), class: "title" %> <i class="fas fa-file-alt"></i>
-        </p>
-      </div>
+<div class="box has-text-centered">
+  <div class="columns is-centered">
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :index), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-file-alt"></i></span>
+        <span><%= @posts %> Posts</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Tags</p>
-        <p class="title">
-          <%= link @tags, to: Routes.tag_path(@conn, :index), class: "title" %> <i class="fas fa-tag"></i>
-        </p>
-      </div>
+    <div class="column is-one-third">
+      <%= link to: Routes.tag_path(@conn, :index), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-tag"></i></span>
+        <span><%= @tags %> Tags</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Images</p>
-        <p class="title">
-          <%= link @images, to: Routes.image_path(@conn, :index), class: "title" %> <i class="fas fa-image"></i>
-        </p>
-      </div>
+    <div class="column is-one-third">
+      <%= link to: Routes.image_path(@conn, :index), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-image"></i></span>
+        <span><%= @images %> Images</span>
+      <% end %>
     </div>
   </div>
-
-  <div class="level is-mobile">
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Articles</p>
-        <p class="title">
-          <%= link @articles, to: Routes.post_path(@conn, :by_type, "article"), class: "title" %> <i class="fas fa-pen-nib"></i>
-        </p>
-      </div>
+  <div class="columns is-centered">
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :by_type, "article"), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-pen-nib"></i></span>
+        <span><%= @articles %> Articles</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Notes</p>
-        <p class="title">
-          <%= link @notes, to: Routes.post_path(@conn, :by_type, "note"), class: "title" %> <i class="fas fa-sticky-note"></i>
-        </p>
-      </div>
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :by_type, "note"), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-sticky-note"></i></span>
+        <span><%= @notes %> Notes</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Replies</p>
-        <p class="title">
-          <%= link @replies, to: Routes.post_path(@conn, :by_type, "reply"), class: "title" %> <i class="fas fa-comment"></i>
-        </p>
-      </div>
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :by_type, "reply"), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-comment"></i></span>
+        <span><%= @replies %> Replies</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Bookmarks</p>
-        <p class="title">
-          <%= link @bookmarks, to: Routes.post_path(@conn, :by_type, "bookmark"), class: "title" %> <i class="fas fa-bookmark"></i>
-        </p>
-      </div>
+  </div>
+  <div class="columns is-centered">
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :by_type, "bookmark"), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-bookmark"></i></span>
+        <span><%= @bookmarks %> Bookmarks</span>
+      <% end %>
     </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Likes</p>
-        <p class="title">
-          <%= link @likes, to: Routes.post_path(@conn, :by_type, "like"), class: "title" %> <i class="fas fa-heart"></i>
-        </p>
-      </div>
+    <div class="column is-one-third">
+      <%= link to: Routes.post_path(@conn, :by_type, "like"), class: "subtitle" do %>
+        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+        <span><%= @likes %> Likes</span>
+      <% end %>
     </div>
   </div>
 
