@@ -39,13 +39,12 @@ defmodule Akedia.Micropub.PropertiesTest do
     }
 
     @delete_attrs %{
-      "content" => ["foo"],
-      "category" => ["foo"]
+      "content" => ["foo"]
     }
 
     @update_result %{
       title: "even more grandiose title",
-      tags: ["bar"],
+      tags: ["foo", "bar"],
       content: nil
     }
 
