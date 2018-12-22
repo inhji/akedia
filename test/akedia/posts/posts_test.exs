@@ -49,23 +49,5 @@ defmodule Akedia.PostsTest do
       post = post_fixture()
       assert %Ecto.Changeset{} = Posts.change_post(post)
     end
-
-    test "parse_tags/1 splits a string and returns a list" do
-      assert Posts.parse_tags("foo,bar") == ["foo", "bar"]
-      assert Posts.parse_tags("foo    ,bar    ") == ["foo", "bar"]
-      assert Posts.parse_tags("   foo    ,   bar    ") == ["foo", "bar"]
-    end
-
-    test "parse_tags/1 returns a list of strings unchanged" do
-      assert Posts.parse_tags(["foo", "bar"]) == ["foo", "bar"]
-      assert Posts.parse_tags(["foo ", "bar"]) == ["foo", "bar"]
-    end
-
-    test "parse_tags/1 returns an empty list for invalid arguments" do
-      assert Posts.parse_tags(1) == []
-      assert Posts.parse_tags(nil) == []
-      assert Posts.parse_tags(%{"tag1" => "foo"}) == []
-      assert Posts.parse_tags(%{:tag1 => "foo"}) == []
-    end
   end
 end

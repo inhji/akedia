@@ -6,6 +6,7 @@ defmodule Akedia.Tags do
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
+  alias Akedia.Tags
   alias Akedia.Tags.Tag
 
   @doc """
@@ -116,5 +117,43 @@ defmodule Akedia.Tags do
   """
   def change_tag(%Tag{} = tag) do
     Tag.changeset(tag, %{})
+  end
+
+  def parse_tags(tags) when is_binary(tags) do
+    tags
+    |> String.split(",", trim: true)
+    |> Enum.map(&String.trim/1)
+  end
+
+  def parse_tags(tags) when is_list(tags) do
+    Enum.map(tags, &String.trim/1)
+  end
+
+  def parse_tags(tags), do: []
+
+  def prepare_tags(attrs) do
+    # This is fucking stupid
+    tags_list = parse_tags(attrs[:tags] || attrs["tags"])
+
+    existing_tags =
+      Repo.all(
+        from t in Akedia.Tags.Tag,
+          where: t.name in ^tags_list
+      )
+
+    new_tags =
+      maybe_add_new_tags(
+        tags_list,
+        existing_tags
+        |> Enum.map(fn tag -> tag.name end)
+      )
+
+    existing_tags ++ new_tags
+  end
+
+  def maybe_add_new_tags(tags_list, existing_tags_list) do
+    tags_list
+    |> Enum.filter(fn tag -> !Enum.member?(existing_tags_list, tag) end)
+    |> Enum.map(fn tag -> Repo.insert!(%Tag{name: tag}) end)
   end
 end

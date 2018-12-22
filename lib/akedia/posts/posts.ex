@@ -9,6 +9,7 @@ defmodule Akedia.Posts do
   alias Akedia.Repo
 
   alias Akedia.Posts.Post
+  alias Akedia.Tags
 
   @doc """
   Returns the list of posts.
@@ -90,7 +91,7 @@ defmodule Akedia.Posts do
 
   """
   def create_post(attrs \\ %{}) do
-    tags = prepare_tags(attrs)
+    tags = Tags.prepare_tags(attrs)
 
     %Post{}
     |> Repo.preload([:tags, :mentions])
@@ -112,7 +113,7 @@ defmodule Akedia.Posts do
 
   """
   def update_post(%Post{} = post, attrs) do
-    tags = prepare_tags(attrs)
+    tags = Tags.prepare_tags(attrs)
 
     post
     |> Repo.preload(:tags)
@@ -156,33 +157,5 @@ defmodule Akedia.Posts do
   """
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
-  end
-
-  def parse_tags(tags) when is_binary(tags) do
-    tags
-    |> String.split(",", trim: true)
-    |> Enum.map(&String.trim/1)
-  end
-
-  def parse_tags(tags) when is_list(tags) do
-    Enum.map(tags, &String.trim/1)
-  end
-
-  def parse_tags(tags) do
-    Logger.debug("This is not a valid list of tags: #{inspect(tags)}")
-    []
-  end
-
-  def prepare_tags(attrs) do
-    # This is fucking stupid
-    tags = attrs[:tags] || attrs["tags"]
-    tags_list = parse_tags(tags)
-
-    Logger.debug("Prepared tags: #{inspect(tags_list)}")
-
-    Repo.all(
-      from t in Akedia.Tags.Tag,
-        where: t.name in ^tags_list
-    )
   end
 end

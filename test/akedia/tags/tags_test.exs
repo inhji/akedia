@@ -60,5 +60,37 @@ defmodule Akedia.TagsTest do
       tag = tag_fixture()
       assert %Ecto.Changeset{} = Tags.change_tag(tag)
     end
+
+    test "parse_tags/1 splits a string and returns a list" do
+      assert Tags.parse_tags("foo,bar") == ["foo", "bar"]
+      assert Tags.parse_tags("foo    ,bar    ") == ["foo", "bar"]
+      assert Tags.parse_tags("   foo    ,   bar    ") == ["foo", "bar"]
+    end
+
+    test "parse_tags/1 returns a list of strings unchanged" do
+      assert Tags.parse_tags(["foo", "bar"]) == ["foo", "bar"]
+      assert Tags.parse_tags(["foo ", "bar"]) == ["foo", "bar"]
+    end
+
+    test "parse_tags/1 returns an empty list for invalid arguments" do
+      assert Tags.parse_tags(1) == []
+      assert Tags.parse_tags(nil) == []
+      assert Tags.parse_tags(%{"tag1" => "foo"}) == []
+      assert Tags.parse_tags(%{:tag1 => "foo"}) == []
+    end
+
+    test "prepare_tags/1 fetches the tag models from a list of tags" do
+      tag = tag_fixture()
+      tags = Tags.prepare_tags(%{:tags => [tag.name]})
+
+      assert tags == [tag]
+    end
+
+    test "prepare_tags/1 inserts unknown tags" do
+      tag = tag_fixture()
+      tags = Tags.prepare_tags(%{:tags => [tag.name, "foo"]})
+
+      assert tags == [tag]
+    end
   end
 end
