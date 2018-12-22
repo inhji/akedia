@@ -6,8 +6,8 @@ defmodule Akedia.ImagesTest do
   describe "images" do
     alias Akedia.Images.Image
 
-    @valid_attrs %{caption: "some caption", name: "some name"}
-    @update_attrs %{caption: "some updated caption", name: "some updated name"}
+    @valid_attrs %{caption: "some caption"}
+    @update_attrs %{caption: "some updated caption"}
     @invalid_attrs %{caption: nil, name: nil}
 
     def image_fixture(attrs \\ %{}) do
@@ -32,7 +32,6 @@ defmodule Akedia.ImagesTest do
     test "create_image/1 with valid data creates a image" do
       assert {:ok, %Image{} = image} = Images.create_image(@valid_attrs)
       assert image.caption == "some caption"
-      assert image.name == "some name"
     end
 
     test "create_image/1 with invalid data returns error changeset" do
@@ -43,7 +42,6 @@ defmodule Akedia.ImagesTest do
       image = image_fixture()
       assert {:ok, %Image{} = image} = Images.update_image(image, @update_attrs)
       assert image.caption == "some updated caption"
-      assert image.name == "some updated name"
     end
 
     test "update_image/2 with invalid data returns error changeset" do

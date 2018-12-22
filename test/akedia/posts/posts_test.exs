@@ -8,7 +8,6 @@ defmodule Akedia.PostsTest do
 
     @valid_attrs %{content: "some content", tags: ["foo", "bar"]}
     @update_attrs %{content: "some updated content", tags: ["foo", "bar", "baz"]}
-    @invalid_attrs %{content: nil}
 
     def post_fixture(attrs \\ %{}) do
       {:ok, post} =
