@@ -4,7 +4,7 @@ defmodule AkediaWeb.PageController do
   alias Akedia.Posts
   alias Akedia.Images
 
-  def index(conn, params) do
+  def index(conn, _params) do
     note = List.first(Posts.last_posts("note"))
     bookmarks = Posts.last_posts("bookmark", 3)
     track = Tracks.last_track()
