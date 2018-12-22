@@ -60,11 +60,16 @@
         <p>
           This site supports <i class="icon-webmention"></i>ebmentions and <i class="icon-microformats"></i> Microformats
         </p>
+
       </div>
     </div>
     <div class="has-text-centered">
-      <%= page_subtitle() %>
+      <p class="subtitle">„<%= page_subtitle() %>“</p>
+      <p>
+        <a href="https://xn--sr8hvo.ws/🏄📀🌏/previous">↫ prev</a>
+        An IndieWeb Webring 🕸💍
+        <a href="https://xn--sr8hvo.ws/🏄📀🌏/next">next ↬</a>
+      </p>
     </div>
-
   </div>
 </footer>
