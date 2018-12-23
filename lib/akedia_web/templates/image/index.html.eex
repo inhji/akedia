@@ -1,4 +1,4 @@
-<div class="columns">
+<div class="columns is-multiline">
   <%= for image <- @images do %>
   <div class="column is-one-quarter">
     <a href="<%= Routes.image_path(@conn, :show, image) %>">
