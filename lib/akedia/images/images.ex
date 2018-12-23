@@ -18,12 +18,16 @@ defmodule Akedia.Images do
 
   """
   def list_images do
-    Repo.all(Image)
+    Repo.all(
+      from i in Image,
+        order_by: [desc: :inserted_at]
+    )
   end
 
   def list_images(limit) do
     Repo.all(
       from i in Image,
+        order_by: [desc: :inserted_at],
         limit: ^limit
     )
   end
