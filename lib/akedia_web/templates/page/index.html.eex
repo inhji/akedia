@@ -31,9 +31,9 @@
         <%= link from_now(@note.inserted_at), to: Routes.post_url(@conn, :show, @note.id), class: "u-url has-text-grey" %>
       </span>
     </div>
-    <div class="tile is-vertical is-child">
+    <div class="tile is-child">
       <div class="subtitle">Photos</div>
-      <div class="tile is-parent">
+      <div class="tile">
         <%= for photo <- @photos do %>
           <div class="tile is-child">
             <%= link to: Routes.image_url(@conn, :show, photo.id) do %>
