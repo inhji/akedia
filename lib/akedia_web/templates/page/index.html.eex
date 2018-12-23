@@ -5,7 +5,7 @@
       <p>
         <span>Listened to <%= @track.name %> by <%= @track.artist %> </p>
         <span class="has-text-grey">
-          <%= from_now(@note.inserted_at) %>
+          <%= from_now(@track.listened_at) %>
         </span>
       </p>
     </article>
