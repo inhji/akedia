@@ -7,6 +7,7 @@ defmodule AkediaWeb.PageController do
   def index(conn, _params) do
     note = List.first(Posts.last_posts("note"))
     bookmarks = Posts.last_posts("bookmark", 3)
+    articles = Posts.last_posts("article", 3)
     track = Tracks.last_track()
     photos = Images.list_images(4)
 
@@ -16,6 +17,7 @@ defmodule AkediaWeb.PageController do
       note: note,
       track: track,
       bookmarks: bookmarks,
+      articles: articles,
       photos: photos
     )
   end

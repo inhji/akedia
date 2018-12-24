@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <%= link to: "/", active: :exact, class: "navbar-item" do %>
       <!--<img src="<%= Routes.static_path(@conn, "/images/logo-inv.png") %>" alt="Inhji.de" width="28" height="28">-->
-      <strong>Technos &amp; Psyche</strong>
+      <span class="page-title">Technos &amp; Psyche</span>
       <% end %>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">

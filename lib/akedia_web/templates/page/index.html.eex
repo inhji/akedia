@@ -1,38 +1,71 @@
 <div class="tile is-ancestor">
   <div class="tile is-4 is-vertical is-parent">
     <article class="tile is-child">
-      <div class="subtitle">Music</div>
+      <div class="title">Music</div>
       <p>
-        <span>Listened to <%= @track.name %> by <%= @track.artist %> </p>
+        <span><%= @track.name %> by <%= @track.artist %></span>
         <span class="has-text-grey">
           <%= from_now(@track.listened_at) %>
         </span>
       </p>
     </article>
     <article class="tile is-child">
-      <div class="subtitle">Bookmarks</div>
-      <%= for bookmark <- @bookmarks do %>
-      <p>
-        <%= link bookmark.title, to: Routes.post_url(@conn, :show, bookmark.id) %>
-        <span>in <%= bookmark.tags |> Enum.map(fn t -> t.name end) |> Enum.join(", ") %></span>
-        <span class="has-text-grey">
-          <%= link from_now(bookmark.inserted_at), to: Routes.post_url(@conn, :show, bookmark.id), class: "u-url has-text-grey" %>
-        </span>
-      </p>
+      <div class="title">
+        Articles <small class="is-pulled-right">
+          <%= link "↬ More", to: Routes.post_url(@conn, :by_type, "article") %>
+        </small>
+      </div>
+      <%= if Enum.count(@articles) == 0 do %>
+        <span class="has-text-grey">No Articles yet :/</span>
+      <% else %>
+        <%= for article <- @articles do %>
+        <p>
+          <%= link article.title, to: Routes.post_url(@conn, :show, article.id) %>
+          <span>in <%= tags_as_string(article.tags) %></span>
+          <span class="has-text-grey">
+            <%= from_now_link(article) %>
+          </span>
+        </p>
+        <% end %>
       <% end %>
-
+    </article>
+    <article class="tile is-child">
+      <div class="title">
+        Bookmarks <small class="is-pulled-right">
+          <%= link "↬ More", to: Routes.post_url(@conn, :by_type, "bookmark") %>
+        </small>
+      </div>
+      <%= if Enum.count(@bookmarks) == 0 do %>
+        <span class="has-text-grey">No Articles yet :/</span>
+      <% else %>
+        <%= for bookmark <- @bookmarks do %>
+        <p>
+          <%= link bookmark.title, to: Routes.post_url(@conn, :show, bookmark.id) %>
+          <span>in <%= tags_as_string(bookmark.tags) %></span>
+          <span class="has-text-grey">
+            <%= from_now_link(bookmark) %>
+          </span>
+        </p>
+        <% end %>
+      <% end %>
     </article>
   </div>
   <div class="tile is-8 is-vertical is-parent">
     <div class="tile is-child">
-      <div class="subtitle">Note</div>
+      <div class="title">
+        Notes <small class="is-pulled-right">
+          <%= link "↬ More", to: Routes.post_url(@conn, :by_type, "note") %>
+        </small>
+      </div>
       <p><%= raw(@note.content_html) %></p>
       <span class="has-text-grey">
         <%= link from_now(@note.inserted_at), to: Routes.post_url(@conn, :show, @note.id), class: "u-url has-text-grey" %>
       </span>
     </div>
     <div class="tile is-child">
-      <div class="subtitle">Photos</div>
+      <div class="title">Photos <small class="is-pulled-right">
+        <%= link "↬ More", to: Routes.image_url(@conn, :index) %>
+      </small></div>
       <div class="tile">
         <%= for photo <- @photos do %>
           <div class="tile is-child">
@@ -44,4 +77,5 @@
       </div>
     </div>
   </div>
+
 </div>

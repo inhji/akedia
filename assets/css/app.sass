@@ -2,10 +2,16 @@
 
 @import "bulma/sass/utilities/_all"
 
+// User defined
+$redpink: #dd3344
+
+// Settings
 $fullhd-enabled: false
 $widescreen-enabled: false
 
+// Variable overrides
 $box-radius: $radius-small
+$footer-background-color: hsl(200, 25%, 94%)
 
 @import "bulma/bulma"
 @import "bulma-extensions/ribbons"
@@ -16,25 +22,32 @@ $box-radius: $radius-small
 @import "fontawesome/solid"
 @import "openwebicons/openwebicons"
 
+// === GENERAL STYLES ===
+
+.navbar-brand
+  .page-title
+    font-weight: bold
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.2)
+
 .notification:empty
   display: none
 
-.pagination
-  margin: 0 auto
-
 .content-wrapper
-  margin: 15px 0 30px 0
+  margin: 1rem 0.5rem
+  @media screen and (min-width: $desktop)
+    margin: 1rem 0
 
-.image.avatar
-  float: right
-
+.avatar
   img
-    width: 96px
-    border-radius: 100px
+    border-radius: 5rem
 
+// === HOMEPAGE STYLES ===
 
-aside#sidebar
-  text-align: center
+.tile .title
+  font-size: $size-medium
+  font-weight: 700
+
+// === POST STYLES ===
 
 article.post
   margin-bottom: 2rem
