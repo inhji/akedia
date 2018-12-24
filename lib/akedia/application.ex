@@ -13,8 +13,7 @@ defmodule Akedia.Application do
       # Start the endpoint when the application starts
       AkediaWeb.Endpoint,
       # Starts a worker by calling: Akedia.Worker.start_link(arg)
-      {Akedia.Tracks.Worker, %{interval: 10 * 60 * 1000, last_listen: 0, last_call: :empty}}
-      # {Akedia.Tracks.Worker, %{interval: 5_000, last_listen: 0, last_call: :empty}}
+      Akedia.Tracks.Worker
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

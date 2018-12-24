@@ -46,8 +46,20 @@ defmodule Akedia.Tracks.Worker do
   #   %{listened_at: 1544951419, name: "Mika"}
   # ]
 
-  def start_link(args \\ %{}) do
-    GenServer.start_link(__MODULE__, args, name: __MODULE__)
+  def start_link(_args) do
+    config = Application.get_env(:akedia, Akedia.Tracks.Worker)
+
+    interval_ms = config[:interval] || 600_000
+    last_listen = config[:last_listen] || 0
+    last_call = config[:last_call] || :empty
+
+    initial_state = %{
+      interval: interval_ms,
+      last_listen: last_listen,
+      last_call: last_call
+    }
+
+    GenServer.start_link(__MODULE__, initial_state, name: __MODULE__)
   end
 
   def init(state) do
