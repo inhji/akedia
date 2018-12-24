@@ -21,7 +21,7 @@ defmodule AkediaWeb.LayoutView do
       |> Base.encode16()
       |> String.downcase()
 
-    "https://seccdn.libravatar.org/avatar/#{id}"
+    "https://seccdn.libravatar.org/avatar/#{id}?s=96"
   end
 
   def get_indie_config_value(key) when is_atom(key) do
