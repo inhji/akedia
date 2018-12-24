@@ -45,8 +45,17 @@ defmodule AkediaWeb do
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Auth, only: [signed_in?: 1]
-      import AkediaWeb.Helpers.Time, only: [from_now: 1, iso_date: 1]
-      import AkediaWeb.Helpers.Content, only: [image_url: 1, image_url: 2]
+
+      import AkediaWeb.Helpers.Content,
+        only: [
+          image_url: 1,
+          image_url: 2,
+          tags_as_string: 1,
+          from_now_link: 1,
+          from_now: 1,
+          iso_date: 1
+        ]
+
       import AkediaWeb.Helpers.Input
       alias AkediaWeb.Router.Helpers, as: Routes
     end
