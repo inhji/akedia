@@ -84,11 +84,9 @@
     </div>
   <% end %>
 
-  <%= if Enum.member?(["reply"], @type) do %>
+  <%= if Enum.member?(["reply", "like"], @type) do %>
     <%= label f, "Brid.gy", class: "label" %>
-  <% end %>
 
-  <%= if Enum.member?(["reply"], @type) do %>
     <div class="field">
       <%= checkbox f, :syndicate_to_github, class: "switch" %>
       <%= label f, :syndicate_to_github, class: "label" %>
