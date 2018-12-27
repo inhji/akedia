@@ -20,6 +20,9 @@ config :akedia, AkediaWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+# Fetch more tracks in production
+config :akedia, Akedia.Tracks.Worker, count: 20
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

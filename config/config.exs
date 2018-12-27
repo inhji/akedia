@@ -36,7 +36,9 @@ config :phoenix, :json_library, Jason
 config :arc,
   storage: Arc.Storage.Local
 
-config :akedia, Akedia.Tracks.Worker, interval: 600_000
+config :akedia, Akedia.Tracks.Worker,
+  interval: 600_000,
+  count: 5
 
 config :scrivener_html,
   routes_helper: Akedia.Router.Helpers,

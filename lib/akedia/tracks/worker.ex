@@ -49,14 +49,16 @@ defmodule Akedia.Tracks.Worker do
   def start_link(_args) do
     config = Application.get_env(:akedia, Akedia.Tracks.Worker)
 
+    fetch_count = config[:count] || 5
     interval_ms = config[:interval] || 600_000
     last_listen = config[:last_listen] || 0
     last_call = config[:last_call] || :empty
 
     initial_state = %{
+      fetch_count: fetch_count,
       interval: interval_ms,
       last_listen: last_listen,
-      last_call: last_call
+      last_call: last_cal
     }
 
     GenServer.start_link(__MODULE__, initial_state, name: __MODULE__)
@@ -97,7 +99,7 @@ defmodule Akedia.Tracks.Worker do
   end
 
   def handle_info(:track_fetch, state) do
-    count = 5
+    count = state[:fetch_count]
     tracks = get_tracks(count)
     new_tracks = get_new_tracks(tracks, state[:last_listen])
 
