@@ -9,7 +9,8 @@ defmodule AkediaWeb.LayoutView do
     subtitles = [
       "I'm ready to lose my mind but instead I use my mind.",
       "If you are not tuned into happiness, change the station.",
-      "This is not the right way. But it's my way."
+      "This is not the right way. But it's my way.",
+      "Live slow, die old."
     ]
 
     Enum.random(subtitles)
