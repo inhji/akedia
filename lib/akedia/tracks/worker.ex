@@ -58,7 +58,7 @@ defmodule Akedia.Tracks.Worker do
       fetch_count: fetch_count,
       interval: interval_ms,
       last_listen: last_listen,
-      last_call: last_cal
+      last_call: last_call
     }
 
     GenServer.start_link(__MODULE__, initial_state, name: __MODULE__)
