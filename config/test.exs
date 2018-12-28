@@ -16,3 +16,6 @@ config :akedia, Akedia.Repo,
   database: "akedia_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :akedia, Akedia.Tracks.Worker,
+  enabled: false

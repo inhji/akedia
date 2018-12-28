@@ -21,6 +21,9 @@ config :akedia, AkediaWeb.Endpoint,
     ]
   ]
 
+config :akedia, Akedia.Tracks.Worker,
+  enabled: false
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

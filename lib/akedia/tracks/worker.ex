@@ -49,12 +49,14 @@ defmodule Akedia.Tracks.Worker do
   def start_link(_args) do
     config = Application.get_env(:akedia, Akedia.Tracks.Worker)
 
+    fetch_enabled = config[:enabled]
     fetch_count = config[:count] || 5
     interval_ms = config[:interval] || 600_000
     last_listen = config[:last_listen] || 0
     last_call = config[:last_call] || :empty
 
     initial_state = %{
+      fetch_enabled: fetch_enabled,
       fetch_count: fetch_count,
       interval: interval_ms,
       last_listen: last_listen,
@@ -65,7 +67,10 @@ defmodule Akedia.Tracks.Worker do
   end
 
   def init(state) do
-    schedule_track_fetch(5_000)
+    if state[:fetch_enabled] do
+      schedule_track_fetch(5_000)
+    end
+
     {:ok, state}
   end
 

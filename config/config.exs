@@ -37,6 +37,7 @@ config :arc,
   storage: Arc.Storage.Local
 
 config :akedia, Akedia.Tracks.Worker,
+  enabled: true,
   interval: 600_000,
   count: 5
 
