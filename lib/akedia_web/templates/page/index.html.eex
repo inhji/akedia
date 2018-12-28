@@ -3,10 +3,14 @@
     <article class="tile is-child">
       <div class="title">Music</div>
       <p>
-        <span><%= @track.name %> by <%= @track.artist %></span>
-        <span class="has-text-grey">
-          <%= from_now(@track.listened_at) %>
-        </span>
+        <%= if @track == nil do %>
+          <span class="has-text-grey">No Tracks yet :/</span>
+        <% else %>
+          <span><%= @track.name %> by <%= @track.artist %></span>
+          <span class="has-text-grey">
+            <%= from_now(@track.listened_at) %>
+          </span>
+        <% end %>
       </p>
     </article>
     <article class="tile is-child">
@@ -36,7 +40,7 @@
         </small>
       </div>
       <%= if Enum.count(@bookmarks) == 0 do %>
-        <span class="has-text-grey">No Articles yet :/</span>
+        <span class="has-text-grey">No Bookmarks yet :/</span>
       <% else %>
         <%= for bookmark <- @bookmarks do %>
         <p>
@@ -57,10 +61,14 @@
           <%= link "↬ More", to: Routes.post_url(@conn, :by_type, "note") %>
         </small>
       </div>
-      <p><%= raw(@note.content_html) %></p>
-      <span class="has-text-grey">
-        <%= link from_now(@note.inserted_at), to: Routes.post_url(@conn, :show, @note.id), class: "u-url has-text-grey" %>
-      </span>
+      <%= if @note == nil do %>
+        <span class="has-text-grey">No Notes yet :/</span>
+      <% else %>
+        <p><%= raw(@note.content_html) %></p>
+        <span class="has-text-grey">
+          <%= link from_now(@note.inserted_at), to: Routes.post_url(@conn, :show, @note.id), class: "u-url has-text-grey" %>
+        </span>
+      <% end %>
     </div>
     <div class="tile is-child">
       <div class="title">Photos <small class="is-pulled-right">
