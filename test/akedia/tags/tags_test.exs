@@ -90,7 +90,9 @@ defmodule Akedia.TagsTest do
       tag = tag_fixture()
       tags = Tags.prepare_tags(%{:tags => [tag.name, "foo"]})
 
-      assert tags == [tag]
+      assert Enum.count(tags) == 2
+      assert [tag, new_tag] = tags
+      assert new_tag.name == "foo"
     end
   end
 end
