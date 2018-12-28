@@ -20,9 +20,20 @@ defmodule AkediaWeb.ImageControllerTest do
   end
 
   describe "new image" do
-    test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.image_path(conn, :new))
+    setup [:create_user]
+
+    test "renders form", %{conn: conn, user: user} do
+      conn =
+        build_conn()
+        |> put_private(:user_id, user.id)
+        |> get(Routes.image_path(conn, :new))
+
       assert html_response(conn, 200) =~ "New Image"
+    end
+
+    test "redirects to index when user is not authenticated", %{conn: conn} do
+      conn = get(conn, Routes.image_path(conn, :new))
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
     end
   end
 
@@ -44,27 +55,49 @@ defmodule AkediaWeb.ImageControllerTest do
   end
 
   describe "edit image" do
-    setup [:create_image]
+    setup [:create_image, :create_user]
 
-    test "renders form for editing chosen image", %{conn: conn, image: image} do
-      conn = get(conn, Routes.image_path(conn, :edit, image))
+    test "renders form for editing chosen image", %{conn: conn, image: image, user: user} do
+      conn =
+        build_conn()
+        |> put_private(:user_id, user.id)
+        |> get(Routes.image_path(conn, :edit, image))
+
       assert html_response(conn, 200) =~ "Edit Image"
+    end
+
+    test "redirects to index when user is not authenticated", %{conn: conn, image: image} do
+      conn = get(conn, Routes.image_path(conn, :edit, image))
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
     end
   end
 
   describe "update image" do
-    setup [:create_image]
+    setup [:create_image, :create_user]
 
-    test "redirects when data is valid", %{conn: conn, image: image} do
-      conn = put(conn, Routes.image_path(conn, :update, image), image: @update_attrs)
+    test "redirects when data is valid", %{conn: conn, image: image, user: user} do
+      conn =
+        build_conn()
+        |> put_private(:user_id, user.id)
+        |> put(Routes.image_path(conn, :update, image), image: @update_attrs)
+
       assert redirected_to(conn) == Routes.image_path(conn, :show, image)
 
       conn = get(conn, Routes.image_path(conn, :show, image))
       assert html_response(conn, 200) =~ "some updated caption"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, image: image} do
-      conn = put(conn, Routes.image_path(conn, :update, image), image: @invalid_attrs)
+    test "redirects to index when user is not authenticated", %{conn: conn, image: image, user: user} do
+      conn = put(conn, Routes.image_path(conn, :update, image), image: @update_attrs)
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
+    end
+
+    test "renders errors when data is invalid", %{conn: conn, image: image, user: user} do
+      conn =
+        build_conn()
+        |> put_private(:user_id, user.id)
+        |> put(Routes.image_path(conn, :update, image), image: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "Edit Image"
     end
   end
