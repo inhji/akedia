@@ -8,6 +8,10 @@ PRODUCTION_HOSTS="inhji.de"
 PRODUCTION_USER="akedia"
 DELIVER_TO="/home/akedia/akedia/release"
 
+# Skip cleaning dependencies:
+# https://github.com/edeliver/edeliver/wiki/Faster-builds
+SKIP_MIX_CLEAN="true"
+
 pre_erlang_get_and_update_deps() {
   status "Copying production secrets" # log output prepended with "----->"
   local _prod_secret_path="/home/akedia/akedia/config/prod.secret.exs"
