@@ -13,6 +13,8 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "index" do
+    setup [:create_user]
+
     test "lists all tags", %{conn: conn} do
       conn = get(conn, Routes.tag_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing Tags"
@@ -20,6 +22,8 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "new tag" do
+    setup [:create_user]
+
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.tag_path(conn, :new))
       assert html_response(conn, 200) =~ "New Tag"
@@ -27,14 +31,11 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "create tag" do
-    test "redirects to show when data is valid", %{conn: conn} do
+    setup [:create_user]
+
+    test "redirects to index when data is valid", %{conn: conn} do
       conn = post(conn, Routes.tag_path(conn, :create), tag: @create_attrs)
-
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.tag_path(conn, :show, id)
-
-      conn = get(conn, Routes.tag_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Tag"
+      assert redirected_to(conn) == Routes.tag_path(conn, :index)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -44,7 +45,7 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "edit tag" do
-    setup [:create_tag]
+    setup [:create_tag, :create_user]
 
     test "renders form for editing chosen tag", %{conn: conn, tag: tag} do
       conn = get(conn, Routes.tag_path(conn, :edit, tag))
@@ -53,10 +54,11 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "update tag" do
-    setup [:create_tag]
+    setup [:create_tag, :create_user]
 
     test "redirects when data is valid", %{conn: conn, tag: tag} do
       conn = put(conn, Routes.tag_path(conn, :update, tag), tag: @update_attrs)
+      tag = Tags.get_tag!(@update_attrs[:name])
       assert redirected_to(conn) == Routes.tag_path(conn, :show, tag)
 
       conn = get(conn, Routes.tag_path(conn, :show, tag))
@@ -70,7 +72,7 @@ defmodule AkediaWeb.TagControllerTest do
   end
 
   describe "delete tag" do
-    setup [:create_tag]
+    setup [:create_tag, :create_user]
 
     test "deletes chosen tag", %{conn: conn, tag: tag} do
       conn = delete(conn, Routes.tag_path(conn, :delete, tag))
