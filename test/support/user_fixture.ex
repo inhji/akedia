@@ -1,5 +1,6 @@
 defmodule Akedia.UserFixture do
   alias Akedia.Accounts
+  import Plug.Conn
 
   @create_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
 
@@ -8,8 +9,11 @@ defmodule Akedia.UserFixture do
     user
   end
 
-  def create_user(_) do
+  def create_user(%{:conn => conn} = args) do
     user = user_fixture(:user)
-    {:ok, user: user}
+    conn = conn
+    |> put_private(:user_id, user.id)
+
+    {:ok, conn: conn, user: user}
   end
 end
