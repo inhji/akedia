@@ -1,10 +1,6 @@
 defmodule AkediaWeb.LayoutView do
   use AkediaWeb, :view
 
-  def render_layout(layout, assigns, do: content) do
-    render(layout, Map.put(assigns, :inner_layout, content))
-  end
-
   def page_subtitle do
     subtitles = [
       "I'm ready to lose my mind but instead I use my mind.",

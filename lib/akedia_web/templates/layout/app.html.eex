@@ -34,7 +34,6 @@
   <body>
     <header>
       <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
-      
     </header>
 
     <div id="wrapper" class="container">
@@ -43,7 +42,7 @@
         <div class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></div>
 
         <div class="content-wrapper">
-          <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
+          <%= render @view_module, @view_template, assigns %>
         </div>
       </main>
     </div>
