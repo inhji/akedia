@@ -9,7 +9,7 @@ defmodule Akedia.UserFixture do
     user
   end
 
-  def create_user(%{:conn => conn} = args) do
+  def create_user(%{:conn => conn} = _args) do
     user = user_fixture(:user)
     conn = conn
     |> put_private(:user_id, user.id)
