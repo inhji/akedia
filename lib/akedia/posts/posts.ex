@@ -45,6 +45,7 @@ defmodule Akedia.Posts do
 
   defp posts_query() do
     from p in Post,
+      where: is_nil(p.is_page) or p.is_page == false,
       order_by: [desc: :inserted_at],
       preload: [:mentions, :tags]
   end
