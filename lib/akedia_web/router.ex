@@ -19,7 +19,6 @@ defmodule AkediaWeb.Router do
 
     # Post routes
     get "/", PageController, :index
-    get "/type/:type", PostController, :by_type
 
     # Static Pages
     get "/now", PageController, :now
@@ -27,7 +26,9 @@ defmodule AkediaWeb.Router do
     # Atom Feed
     get "/feed.xml", FeedController, :index
 
+    get "/posts/of-type/:type", PostController, :by_type
     resources "/posts", PostController
+
     resources "/tags", TagController, param: "name"
     resources "/users", UserController, except: [:delete]
     resources "/images", ImageController
