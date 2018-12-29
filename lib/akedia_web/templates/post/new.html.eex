@@ -1,5 +1,7 @@
+<%= render AkediaWeb.LayoutView, "admin_add.html", conn: @conn %>
+
 <h1 class="heading">New <%= @type %></h1>
 
 <%= render "form.html",
-  Map.merge(assigns, %{action: Routes.post_path(@conn, :create), type: @type}) 
+  Map.merge(assigns, %{action: Routes.post_path(@conn, :create), type: @type})
 %>

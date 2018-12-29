@@ -1,3 +1,5 @@
+<%= render AkediaWeb.LayoutView, "admin_add.html", conn: @conn %>
+
 <h1 class="heading">New Image</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.image_path(@conn, :create)) %>

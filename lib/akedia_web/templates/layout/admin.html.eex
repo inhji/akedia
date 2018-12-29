@@ -11,7 +11,20 @@
     <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
   </head>
   <body>
-    <%= render @view_module, @view_template, assigns %>
+    <header>
+      <%= render "admin_navbar.html", Map.put(assigns, :conn, @conn) %>
+    </header>
+
+    <div id="wrapper" class="container">
+      <main role="main">
+        <div class="notification is-info" role="alert"><%= raw(get_flash(@conn, :info)) %></div>
+        <div class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></div>
+
+        <div class="content-wrapper">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
+      </main>
+    </div>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

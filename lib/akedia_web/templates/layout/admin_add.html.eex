@@ -1,0 +1,38 @@
+<div class="tabs">
+  <ul>
+    <%= active_link @conn, to: Routes.post_path(@conn, :new, type: "note"), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+      <span class="icon is-small"><i class="fas fa-sticky-note"></i></span>
+      <span>Note</span>
+    <% end %>
+    <li>
+      <%= active_link @conn, to: Routes.post_path(@conn, :new, type: "article"), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+        <span class="icon is-small"><i class="fas fa-pen-nib"></i></span>
+        <span>Article</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, to: Routes.post_path(@conn, :new, type: "reply"), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+        <span class="icon is-small"><i class="fas fa-comment"></i></span>
+        <span>Reply</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, to: Routes.post_path(@conn, :new, type: "bookmark"), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+        <span class="icon is-small"><i class="fas fa-bookmark"></i></span>
+        <span>Bookmark</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, to: Routes.post_path(@conn, :new, type: "like"), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+        <span>Like</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, to: Routes.image_path(@conn, :new), class_active: "is-active", active: :exact_with_params, wrap_tag: :li do %>
+        <span class="icon is-small"><i class="fas fa-image"></i></span>
+        <span>Image</span>
+      <% end %>
+    </li>
+  </ul>
+</div>

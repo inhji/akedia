@@ -1,0 +1,31 @@
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <%= link to: Routes.admin_path(@conn, :index), active: :exact, class: "navbar-item" do %>
+      <span class="page-title">Admin</span>
+      <% end %>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="mainNav">
+      <div class="navbar-start">
+
+        <%= active_link(@conn, "New", to: Routes.post_path(@conn, :new), class: "navbar-item") %>
+      </div>
+
+      <div class="navbar-end">
+        <%= if signed_in?(@conn) do %>
+        <%= link "Back to site", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
+        <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item" %>
+
+        <% else %>
+        <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

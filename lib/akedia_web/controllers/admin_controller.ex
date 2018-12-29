@@ -5,8 +5,6 @@ defmodule AkediaWeb.AdminController do
   alias Akedia.Images
 
   plug :check_auth
-  # Nested Layouts:
-  # http://blog.plataformatec.com.br/2018/05/nested-layouts-with-phoenix/
   plug :put_layout, :admin
 
   def index(conn, _params) do
