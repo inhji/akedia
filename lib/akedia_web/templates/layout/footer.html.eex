@@ -24,33 +24,52 @@
           <strong class="is-size-5">
             Me elsewhere
           </strong>
-          <ul>
-            <li>
-              <a href="https://blog.inhji.de" class="has-text-dark">
-                <i class="icon-ghost"></i> Ghost Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://bandcamp.com/inhji" class="has-text-dark">
-                <i class="fab fa-bandcamp"></i> Bandcamp
-              </a>
-            </li>
-            <li>
-              <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
-                <i class="fab fa-steam"></i> Steam
-              </a>
-            </li>
-            <li>
-              <a href="https://chaos.social/@inhji" class="has-text-dark">
-                <i class="fab fa-mastodon"></i> Mastodon
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/inhji" class="has-text-dark">
-                <i class="fab fa-github-alt"></i> Github
-              </a>
-            </li>
-          </ul>
+
+          <div class="columns">
+            <div class="column">
+              <ul>
+                <li>
+                  <a href="https://blog.inhji.de" class="has-text-dark">
+                    <i class="icon-ghost"></i> Ghost Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="https://bandcamp.com/inhji" class="has-text-dark">
+                    <i class="fab fa-bandcamp"></i> Bandcamp
+                  </a>
+                </li>
+                <li>
+                  <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
+                    <i class="fab fa-steam"></i> Steam
+                  </a>
+                </li>
+                <li>
+                  <a href="https://chaos.social/@inhji" class="has-text-dark">
+                    <i class="fab fa-mastodon"></i> Mastodon
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/inhji" class="has-text-dark">
+                    <i class="fab fa-github-alt"></i> Github
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <ul>
+                <li>
+                  <a href="https://listenbrainz.org/user/inhji" class="has-text-dark">
+                    <i class="fas fa-headphones"></i> Listenbrainz
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.modulargrid.net/e/racks/view/686881" class="has-text-dark">
+                    <i class="fas fa-music"></i> ModularGrid
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div class="column">
