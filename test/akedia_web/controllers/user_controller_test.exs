@@ -11,7 +11,7 @@ defmodule AkediaWeb.UserControllerTest do
   describe "new user" do
     setup [:create_user]
 
-    test "apologizes to the hacker :3", %{conn: conn} do
+    test "prevents another user from registering when one user exists", %{conn: conn} do
       conn =
         conn
         |> fetch_flash
@@ -25,7 +25,7 @@ defmodule AkediaWeb.UserControllerTest do
   describe "create user" do
     setup [:create_user]
 
-    test "apologizes to the hacker :3", %{conn: conn} do
+    test "prevents another user from registering when one user exists", %{conn: conn} do
       conn =
         conn
         |> fetch_flash
@@ -40,11 +40,7 @@ defmodule AkediaWeb.UserControllerTest do
     setup [:create_user]
 
     test "renders form for editing chosen user", %{conn: conn, user: user} do
-      conn =
-        build_conn()
-        |> put_private(:user_id, user.id)
-        |> get(Routes.user_path(conn, :edit, user))
-
+      conn = get(conn, Routes.user_path(conn, :edit, user))
       assert html_response(conn, 200) =~ "Edit User"
     end
   end
@@ -53,27 +49,15 @@ defmodule AkediaWeb.UserControllerTest do
     setup [:create_user]
 
     test "redirects when data is valid", %{conn: conn, user: user} do
-      conn =
-        build_conn()
-        |> put_private(:user_id, user.id)
-        |> put(Routes.user_path(conn, :update, user), user: @update_attrs)
+      result_conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
+      assert redirected_to(result_conn) == Routes.user_path(result_conn, :show, user)
 
-      assert redirected_to(conn) == Routes.user_path(conn, :show, user)
-
-      conn =
-        build_conn()
-        |> put_private(:user_id, user.id)
-        |> get(Routes.user_path(conn, :show, user))
-
-      assert html_response(conn, 200) =~ "some updated username"
+      result_conn = get(conn, Routes.user_path(conn, :show, user))
+      assert html_response(result_conn, 200) =~ "some updated username"
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn =
-        build_conn()
-        |> put_private(:user_id, user.id)
-        |> put(Routes.user_path(conn, :update, user), user: @invalid_attrs)
-
+      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
       assert html_response(conn, 200) =~ "Edit User"
     end
   end
