@@ -14,13 +14,22 @@
     <div class="navbar-menu" id="mainNav">
       <div class="navbar-start">
 
-        <%= active_link(@conn, "New", to: Routes.post_path(@conn, :new), class: "navbar-item") %>
+        <%= active_link(@conn, to: Routes.post_path(@conn, :new), class: "navbar-item") do %>
+          <span class="icon"><i class="fas fa-plus"></i></span>
+          <span>New</span>
+        <% end %>
       </div>
 
       <div class="navbar-end">
         <%= if signed_in?(@conn) do %>
-        <%= link "Back to site", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
-        <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item" %>
+        <%= link to: Routes.page_path(@conn, :index), class: "navbar-item" do %>
+          <span class="icon"><i class="fas fa-reply"></i></span>
+          <span>Back to site</span>
+        <% end %>
+        <%= link to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item has-icon" do %>
+          <span class="icon"><i class="fas fa-power-off"></i></span>
+          <span>Logout</span>
+        <% end %>
 
         <% else %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>

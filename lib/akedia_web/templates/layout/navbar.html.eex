@@ -14,7 +14,6 @@
 
     <div class="navbar-menu" id="mainNav">
       <div class="navbar-start">
-
         <%= active_link(@conn, "Notes", to: Routes.post_path(@conn, :by_type, "note"), class: "navbar-item") %>
         <%= active_link(@conn, "Bookmarks", to: Routes.post_path(@conn, :by_type, "bookmark"), class: "navbar-item") %>
         <%= active_link(@conn, "Articles", to: Routes.post_path(@conn, :by_type, "article"), class: "navbar-item") %>
@@ -23,7 +22,10 @@
 
       <div class="navbar-end">
         <%= if signed_in?(@conn) do %>
-          <%= active_link(@conn, "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item") %>
+          <%= active_link(@conn, to: Routes.admin_path(@conn, :index), class: "navbar-item") do %>
+            <span class="icon"><i class="fas fa-unlock-alt"></i></span>
+            <span>Admin</span>
+          <% end %>
         <% else %>
           <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
         <% end %>
