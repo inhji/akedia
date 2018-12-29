@@ -8,7 +8,7 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
 
-    <title>Technos &amp; Psyche</title>
+    <title><%= page_title(@conn) %></title>
 
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
