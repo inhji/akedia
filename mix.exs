@@ -65,7 +65,8 @@ defmodule Akedia.MixProject do
       {:plug_micropub, "~> 0.1.0"},
       {:httpoison, "~> 0.11"},
       {:floki, "~> 0.15"},
-      {:phoenix_active_link, "~> 0.2.1"}
+      {:phoenix_active_link, "~> 0.2.1"},
+      {:totpex, "~> 0.1.3"}
     ]
   end
 

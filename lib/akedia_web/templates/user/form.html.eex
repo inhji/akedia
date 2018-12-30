@@ -29,6 +29,14 @@
     <%= error_tag f, :encrypted_password %>
   </div>
 
+  <div class="field">
+    <%= label f, :totp_secret, class: "label" %>
+    <div class="control">
+      <%= text_input f, :totp_secret, class: "input" %>
+    </div>
+    <%= error_tag f, :totp_secret %>
+  </div>
+
   <div>
     <%= submit "Update", class: "button is-primary" %>
   </div>

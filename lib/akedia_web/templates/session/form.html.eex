@@ -1,26 +1,63 @@
 <%= form_for @conn, Routes.session_path(@conn, :new), [as: :session] , fn f -> %>
 
-  <div class="field">
-    <%= label f, :username, class: "label" %>
-    <div class="control has-icons-left">
-      <%= text_input f, :username, class: "input" %>
-      <span class="icon is-small is-left">
-        <i class="fas fa-user"></i>
-      </span>
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <%= label f, :username, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control is-expanded has-icons-left">
+          <%= text_input f, :username, class: "input" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <%= label f, :password, class: "label" %>
-    <div class="control has-icons-left">
-      <%= password_input f, :password, class: "input" %>
-      <span class="icon is-small is-left">
-        <i class="fas fa-key"></i>
-      </span>
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <%= label f, :password, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control has-icons-left">
+          <%= password_input f, :password, class: "input" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div>
-    <%= submit "L O G I N", class: "button is-primary" %>
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <%= label f, :totp, class: "label" %>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control has-icons-left">
+          <%= text_input f, :totp, class: "input" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <!-- Left empty for spacing -->
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= submit "Login", class: "button is-primary" %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
