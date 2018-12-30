@@ -36,11 +36,24 @@
       <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
     </header>
 
+    <%= if get_flash(@conn, :info) != nil do %>
+      <div class="notification is-info" role="alert">
+        <div class="container">
+          <%= raw(get_flash(@conn, :info)) %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= if get_flash(@conn, :error) != nil do %>
+      <div class="notification is-danger" role="alert">
+        <div class="container">
+          <%= get_flash(@conn, :error) %>
+        </div>
+      </div>
+    <% end %>
+
     <div id="wrapper" class="container">
       <main role="main">
-        <div class="notification is-info" role="alert"><%= raw(get_flash(@conn, :info)) %></div>
-        <div class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></div>
-
         <div class="content-wrapper">
           <%= render @view_module, @view_template, assigns %>
         </div>
