@@ -44,8 +44,6 @@ defmodule AkediaWeb.WebmentionController do
         |> text("Mention not accepted. Reason: #{reason}")
 
       {:ok, post_id} ->
-        IO.inspect(params)
-
         author = post["author"]
         mention_type = post["wm-property"]
         mention_value = post[mention_type]

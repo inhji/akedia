@@ -29,8 +29,6 @@ defmodule AkediaWeb.PageController do
       Tracks.list_artists_for(:today)
       |> Enum.sort_by(fn {_, count} -> count end, &>/2)
 
-    IO.inspect(artists)
-
     render(conn, "now.html", tracks: tracks, artists: artists)
   end
 end
