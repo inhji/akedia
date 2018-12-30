@@ -1,3 +1,1 @@
-<div class="box">
-  <%= render "form.html", assigns %>
-</div>
+<%= render "form.html", assigns %>
