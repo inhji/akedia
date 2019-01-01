@@ -30,15 +30,21 @@ defmodule AkediaWeb.Router do
     resources "/posts", PostController
 
     resources "/tags", TagController, param: "name"
-    resources "/users", UserController, except: [:delete]
+    resources "/users", UserController, except: [:delete, :create, :new]
     resources "/photos", ImageController
     resources "/videos", VideoController
+
+    resources "/menus", MenuController do
+      resources "/links", LinkController, except: [:index]
+    end
 
     scope "/admin" do
       get "/", AdminController, :index
     end
 
     scope "/auth" do
+      get "/register", UserController, :new
+      post "/register", UserController, :create
       get "/login", SessionController, :new
       post "/login", SessionController, :create
       delete "/logout", SessionController, :delete

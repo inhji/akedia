@@ -6,7 +6,7 @@ defmodule AkediaWeb.UserController do
 
   plug :can_register? when action in [:new, :create]
   plug :check_auth when action in [:show, :edit, :update]
-  plug :put_layout, :admin
+  plug :put_layout, :admin when action not in [:new, :create]
 
   def new(conn, _params) do
     changeset = Accounts.change_user(%User{})

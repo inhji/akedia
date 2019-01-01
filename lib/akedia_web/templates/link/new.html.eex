@@ -1,0 +1,1 @@
+<%= render "form.html", Map.put(assigns, :action, Routes.menu_link_path(@conn, :create, @menu)) %>

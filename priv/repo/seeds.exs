@@ -10,19 +10,23 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-contents = File.read!("./data.json")
-list = Jason.decode!(contents)
+seed_file = "./data.json"
 
-list
-|> Enum.map(fn item ->
-  %{
-    :artist => item["artist_name"],
-    :timestamp => item["timestamp"],
-    :album => item["release_name"],
-    :name => item["track_name"],
-    :listened_at =>
-      (item["timestamp"] * 1000)
-      |> DateTime.from_unix!(:millisecond)
-  }
-end)
-|> Enum.each(&Akedia.Tracks.create_track/1)
+if File.exists?(seed_file) do
+  contents = File.read!(seed_file)
+  list = Jason.decode!(contents)
+
+  list
+  |> Enum.map(fn item ->
+    %{
+      :artist => item["artist_name"],
+      :timestamp => item["timestamp"],
+      :album => item["release_name"],
+      :name => item["track_name"],
+      :listened_at =>
+        (item["timestamp"] * 1000)
+        |> DateTime.from_unix!(:millisecond)
+    }
+  end)
+  |> Enum.each(&Akedia.Tracks.create_track/1)
+end

@@ -1,0 +1,38 @@
+<h1 class="title"><%= @menu.name %></h1>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <td>Icon</td>
+      <td>Name</td>
+      <td>URL</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for link <- @menu.links do %>
+      <tr>
+        <td>
+          <%= if link.icon do %>
+            <i class="<%= link.icon %>"></i>
+          <% end %>
+        </td>
+        <td><%= link link.name, to: Routes.menu_link_path(@conn, :show, @menu, link) %></td>
+        <td><%= link link.url, to: link.url, target: "_blank" %></td>
+        <td>
+          <%= link "Edit", to: Routes.menu_link_path(@conn, :edit, @menu, link) %>
+          <%= link "Delete", to: Routes.menu_link_path(@conn, :delete, @menu, link), method: :delete, data: [confirm: "Are you sure?"] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render AkediaWeb.LinkView,
+    "new.html",
+    conn: @conn,
+    menu: @menu,
+    changeset: @link_changeset
+%>
+
+<span></span>

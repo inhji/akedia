@@ -13,13 +13,19 @@
     </div>
     <div class="navbar-menu" id="mainNav">
       <div class="navbar-start">
-        <%= active_link @conn, to: Routes.post_path(@conn, :new), class: "navbar-item" do %>
-          <span class="icon"><i class="fas fa-plus"></i></span>
-          <span>New</span>
-        <% end %>
-        <%= active_link @conn, to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item" do %>
-          <span class="icon"><i class="fas fa-user"></i></span>
-          <span>User</span>
+        <%= if signed_in?(@conn) do %>
+          <%= active_link @conn, to: Routes.post_path(@conn, :new), class: "navbar-item" do %>
+            <span class="icon"><i class="fas fa-plus"></i></span>
+            <span>New</span>
+          <% end %>
+          <%= active_link @conn, to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item" do %>
+            <span class="icon"><i class="fas fa-user"></i></span>
+            <span>User</span>
+          <% end %>
+          <%= active_link @conn, to: Routes.menu_path(@conn, :index), class: "navbar-item" do %>
+            <span class="icon"><i class="fas fa-list-alt"></i></span>
+            <span>Menus</span>
+          <% end %>
         <% end %>
       </div>
 

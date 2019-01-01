@@ -1,0 +1,7 @@
+<%= if @link.icon do %>
+  <h1 class="title"><i class="<%= @link.icon %>"></i> <%= @link.name %></h1>
+<% else %>
+  <h1 class="title"><%= @link.name %></h1>
+<% end %>
+
+<h2 class="subtitle"><%= @link.url %></h2>

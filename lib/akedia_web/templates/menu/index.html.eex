@@ -1,0 +1,23 @@
+<h1 class="title">Menus</h1>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for menu <- @menus do %>
+        <tr>
+          <td><%= link menu.name, to: Routes.menu_path(@conn, :show, menu) %></td>
+          <td>
+            <%= link "Edit", to: Routes.menu_path(@conn, :edit, menu) %>
+            <%= link "Delete", to: Routes.menu_path(@conn, :delete, menu), method: :delete, data: [confirm: "Are you sure?"] %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Menu", to: Routes.menu_path(@conn, :new), class: "button is-primary" %></span>
