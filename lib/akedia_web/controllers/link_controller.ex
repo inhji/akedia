@@ -3,7 +3,6 @@ defmodule AkediaWeb.LinkController do
 
   alias Akedia.Menus
   alias Akedia.Menus.Link
-  alias Akedia.Menus.Menu
 
   plug :check_auth
   plug :put_layout, :admin
@@ -24,7 +23,7 @@ defmodule AkediaWeb.LinkController do
       )
 
     case Akedia.Repo.insert(link_changeset) do
-      {:ok, link} ->
+      {:ok, _link} ->
         conn
         |> put_flash(:info, "Link created successfully.")
         |> redirect(to: Routes.menu_path(conn, :show, menu))
@@ -49,7 +48,7 @@ defmodule AkediaWeb.LinkController do
     link = Menus.get_link!(id)
 
     case Menus.update_link(link, link_params) do
-      {:ok, link} ->
+      {:ok, _link} ->
         conn
         |> put_flash(:info, "Link updated successfully.")
         |> redirect(to: Routes.menu_path(conn, :show, menu_id))
