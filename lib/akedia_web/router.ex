@@ -1,13 +1,16 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
+  alias AkediaWeb.Plugs
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug AkediaWeb.Plugs.AssignUser
+    plug Plugs.AssignUser
+    plug Plugs.MenuItems, ["social"]
   end
 
   pipeline :api do

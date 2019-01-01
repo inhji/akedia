@@ -41,6 +41,12 @@ defmodule Akedia.Menus do
     |> Repo.preload(:links)
   end
 
+  def get_menu_by_name(name) do
+    Menu
+    |> Repo.get_by(name: name)
+    |> Repo.preload(:links)
+  end
+
   @doc """
   Creates a menu.
 

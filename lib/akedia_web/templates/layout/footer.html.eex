@@ -25,50 +25,16 @@
             Me elsewhere
           </strong>
 
-          <div class="columns">
-            <div class="column">
-              <ul>
-                <li>
-                  <a href="https://blog.inhji.de" class="has-text-dark">
-                    <i class="icon-ghost"></i> Ghost Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="https://bandcamp.com/inhji" class="has-text-dark">
-                    <i class="fab fa-bandcamp"></i> Bandcamp
-                  </a>
-                </li>
-                <li>
-                  <a href="https://steamcommunity.com/id/inhji" class="has-text-dark">
-                    <i class="fab fa-steam"></i> Steam
-                  </a>
-                </li>
-                <li>
-                  <a href="https://chaos.social/@inhji" class="has-text-dark">
-                    <i class="fab fa-mastodon"></i> Mastodon
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/inhji" class="has-text-dark">
-                    <i class="fab fa-github-alt"></i> Github
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="column">
-              <ul>
-                <li>
-                  <a href="https://listenbrainz.org/user/inhji" class="has-text-dark">
-                    <i class="fas fa-headphones"></i> Listenbrainz
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.modulargrid.net/e/racks/view/686881" class="has-text-dark">
-                    <i class="fas fa-music"></i> ModularGrid
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <div class="columns is-multiline is-gapless">
+            <%= if @menus[:social] do %>
+              <%= for link <- @menus[:social] do %>
+              <div class="column is-half">
+                <a href="<%= link.url %>" class="has-text-dark">
+                  <i class="<%= link.icon %>"></i> <%= link.name %>
+                </a>
+              </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
