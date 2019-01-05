@@ -1,6 +1,8 @@
 defmodule Akedia.Tracks.Worker do
   use GenServer
   alias Akedia.Tracks
+  alias Akedia.Tracks.Importer
+  require Logger
 
   # Sample Track Response
   # %{
@@ -50,6 +52,7 @@ defmodule Akedia.Tracks.Worker do
     config = Application.get_env(:akedia, Akedia.Tracks.Worker)
 
     fetch_enabled = config[:enabled]
+    fetch_user = config[:user]
     fetch_count = config[:count] || 5
     interval_ms = config[:interval] || 600_000
     last_listen = config[:last_listen] || 0
@@ -58,6 +61,7 @@ defmodule Akedia.Tracks.Worker do
     initial_state = %{
       fetch_enabled: fetch_enabled,
       fetch_count: fetch_count,
+      fetch_user: fetch_user,
       interval: interval_ms,
       last_listen: last_listen,
       last_call: last_call
@@ -74,84 +78,22 @@ defmodule Akedia.Tracks.Worker do
     {:ok, state}
   end
 
-  def last_listen(tracks) do
-    tracks
-    |> List.first()
-    |> Access.get("listened_at")
-  end
-
-  def get_new_tracks(tracks, last_listen) do
-    tracks
-    |> Enum.filter(fn t -> t["listened_at"] > last_listen end)
-  end
-
-  def format_tracks(tracks) do
-    tracks
-    |> Enum.map(fn t ->
-      %{
-        :listened_at => convert_timestamp(t["listened_at"]),
-        :timestamp => t["listened_at"],
-        :name => t["track_metadata"]["track_name"],
-        :artist => t["track_metadata"]["artist_name"],
-        :album => t["track_metadata"]["release_name"]
-      }
-    end)
-  end
-
-  def convert_timestamp(timestamp) do
-    (timestamp * 1000)
-    |> DateTime.from_unix!(:millisecond)
-  end
-
   def handle_info(:track_fetch, state) do
     count = state[:fetch_count]
-    tracks = get_tracks(count)
-    new_tracks = get_new_tracks(tracks, state[:last_listen])
+    user = state[:fetch_user]
+    last_listen = state[:last_listen]
 
-    new_tracks
-    |> format_tracks()
-    |> Enum.each(&Tracks.create_track/1)
+    {:ok, new_last_listen} = Importer.fetch(user, count, last_listen)
 
-    schedule_track_fetch(state[:interval])
-
-    case Enum.count(new_tracks) do
-      0 ->
-        new_state =
-          state
-          |> Map.put(:last_call, :empty)
-
-        {:noreply, new_state}
-
-      new_track_count ->
-        IO.puts("Imported #{new_track_count} new Tracks!")
-
-        new_state =
-          state
-          |> Map.put(:last_listen, last_listen(tracks))
-          |> Map.put(:last_call, :new_tracks)
-
-        {:noreply, new_state}
-    end
+    {:noreply,
+     state
+     |> Map.put(:last_listen, new_last_listen)
+     |> Map.put(:last_call, :new_tracks)}
   end
 
-  def handle_info(info, _state) do
-    IO.inspect(info)
-  end
-
-  defp get_tracks(count) do
-    user = "inhji"
-
-    IO.puts("Getting last #{count} tracks for user #{user}")
-
-    data =
-      "https://api.listenbrainz.org/1/user/#{user}/listens?count=#{count}"
-      |> HTTPoison.get!()
-      |> Map.get(:body)
-      |> Jason.decode!()
-
-    data
-    |> Map.get("payload")
-    |> Map.get("listens")
+  def handle_info(info, state) do
+    Logger.debug("handle_info: #{inspect(info)}")
+    {:noreply, state}
   end
 
   defp schedule_track_fetch(milliseconds) do
