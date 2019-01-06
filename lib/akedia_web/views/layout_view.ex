@@ -65,6 +65,7 @@ defmodule AkediaWeb.LayoutView do
       "I'm ready to lose my mind but instead I use my mind.",
       "If you are not tuned into happiness, change the station.",
       "This is not the right way. But it's my way.",
+      "We don’t make mistakes, we just have happy little accidents.",
       "Live slow, die old."
     ]
 
