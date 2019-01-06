@@ -1,37 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta property="og:title" content="Technos &amp; Psyche - Inhji.de">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="<%= Routes.static_path(@conn, "/images/avatar.jpg") %>">
-
-    <title><%= page_title(@conn) %></title>
-
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
-
-    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
-
-    <link rel="self" href="/feed.xml" />
-    <link rel="hub" href="https://inhji.superfeedr.com/" />
-
-    <link rel="webmention" href="https://webmention.io/inhji.de/webmention" />
-    <link rel="pingback" href="https://webmention.io/inhji.de/xmlrpc" />
-
-    <link rel="authorization_endpoint" href="<%= get_indie_config_value(:auth_endpoint) %>">
-    <link rel="token_endpoint" href="<%= get_indie_config_value(:token_endpoint) %>">
-
-    <link rel="micropub" href="https://inhji.de<%= get_indie_config_value(:micropub_endpoint) %>">
-    <link rel="microsub" href="https://aperture.p3k.io/microsub/171">
-
-    <%= if @menus[:relme] do %>
-      <%= for link <- @menus[:relme] do %>
-      <link rel="me" href="<%= link.url %>" />
-      <% end %>
-    <% end %>
+    <%= render "head.html", conn: @conn, menus: @menus %>
   </head>
   <body>
     <header>
@@ -62,7 +32,7 @@
       </main>
     </div>
 
-    <%= render "footer.html", Map.put(assigns, :conn, @conn) %>
+    <%= render "footer.html", conn: @conn, menus: @menus %>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
