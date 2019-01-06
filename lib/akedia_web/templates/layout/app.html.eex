@@ -27,9 +27,11 @@
     <link rel="micropub" href="https://inhji.de<%= get_indie_config_value(:micropub_endpoint) %>">
     <link rel="microsub" href="https://aperture.p3k.io/microsub/171">
 
-    <link rel="me" href="https://github.com/inhji" />
-    <link rel="me" href="mailto:inhji@posteo.de" />
-    <link rel="me" href="<%= Routes.post_url(@conn, :index) %>" />
+    <%= if @menus[:relme] do %>
+      <%= for link <- @menus[:relme] do %>
+      <link rel="me" href="<%= link.url %>" />
+      <% end %>
+    <% end %>
   </head>
   <body>
     <header>
