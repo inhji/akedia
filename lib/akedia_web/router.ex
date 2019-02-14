@@ -10,6 +10,7 @@ defmodule AkediaWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Plugs.AssignUser
+    plug Plugs.CheckUser
     plug Plugs.MenuItems, ["social", "relme"]
   end
 
