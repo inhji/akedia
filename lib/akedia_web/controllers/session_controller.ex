@@ -2,6 +2,7 @@ defmodule AkediaWeb.SessionController do
   use AkediaWeb, :controller
 
   alias Akedia.Accounts
+  alias AkediaWeb.Helpers.Auth
 
   plug :check_auth when action in [:delete]
 
@@ -11,8 +12,8 @@ defmodule AkediaWeb.SessionController do
 
   def create(conn, %{"session" => auth_params}) do
     with user <- Accounts.get_by_username(auth_params["username"]),
-         {:ok, _user} <- Comeonin.Bcrypt.check_pass(user, auth_params["password"]),
-         true <- Totpex.validate_totp(user.totp_secret, auth_params["totp"]) do
+         {:ok, _user} <- Bcrypt.check_pass(user, auth_params["password"]),
+         true <- Auth.maybe_validate_totp(user.totp_secret, auth_params["totp"]) do
       conn
       |> put_session(:user_id, user.id)
       |> redirect(to: Routes.admin_path(conn, :index))

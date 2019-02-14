@@ -8,6 +8,14 @@ defmodule AkediaWeb.Helpers.Auth do
     !!get_user_id(conn)
   end
 
+  def maybe_validate_totp(secret, totp) when is_nil(secret) do
+    true
+  end
+
+  def maybe_validate_totp(secret, totp) do
+    Totpex.validate_totp(secret, totp)
+  end
+
   def can_register?(conn, _args) do
     case Accounts.count_users() do
       0 -> conn
