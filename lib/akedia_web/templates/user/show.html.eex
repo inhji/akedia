@@ -6,5 +6,5 @@
 <pre><%= totp_url(@user.totp_secret) %></pre>
 
 <div>
-  <%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "button is-primary" %>
+  <%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button is-primary" %>
 </div>

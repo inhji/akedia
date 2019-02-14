@@ -34,7 +34,9 @@ defmodule AkediaWeb.Router do
     resources "/posts", PostController
 
     resources "/tags", TagController, param: "name"
-    resources "/users", UserController, except: [:delete, :create, :new]
+    resources "/user", UserController,
+      except: [:delete, :create, :new],
+      singleton: true
     resources "/photos", ImageController
     resources "/videos", VideoController
 

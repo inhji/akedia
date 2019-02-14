@@ -18,7 +18,7 @@
             <span class="icon"><i class="fas fa-plus"></i></span>
             <span>New</span>
           <% end %>
-          <%= active_link @conn, to: Routes.user_path(@conn, :show, @current_user), class: "navbar-item" do %>
+          <%= active_link @conn, to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
             <span class="icon"><i class="fas fa-user"></i></span>
             <span>User</span>
           <% end %>

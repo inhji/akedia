@@ -24,7 +24,7 @@
   <div class="field">
     <%= label f, :password, class: "label" %>
     <div class="control">
-      <%= password_input f, :encrypted_password, class: "input" %>
+      <%= text_input f, :encrypted_password, class: "input" %>
     </div>
     <%= error_tag f, :encrypted_password %>
   </div>

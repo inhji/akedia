@@ -19,7 +19,7 @@ defmodule AkediaWeb.Plugs.AssignUser do
 
   def get_user(conn, id) do
     case conn.assigns[:current_user] do
-      nil -> Accounts.get_user!(id)
+      nil -> Accounts.get_user!()
       user -> user
     end
   end
