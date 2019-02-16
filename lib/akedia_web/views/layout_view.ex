@@ -72,6 +72,27 @@ defmodule AkediaWeb.LayoutView do
     Enum.random(subtitles)
   end
 
+  def js_view_path(conn, view_template) do
+    IO.inspect(view_name(conn))
+    IO.inspect(template_name(view_template))
+
+    [view_name(conn), template_name(view_template)]
+    |> Enum.join("/")
+  end
+
+  defp view_name(conn) do
+    conn
+    |> view_module
+    |> Phoenix.Naming.resource_name
+    |> String.replace("_view", "")
+  end
+
+  defp template_name(template) do
+    template
+    |> String.split(".")
+    |> Enum.at(0)
+  end
+
   def libravatar(email) do
     id =
       :crypto.hash(:md5, email)

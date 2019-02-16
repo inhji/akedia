@@ -3,7 +3,7 @@
   <head>
     <%= render "head.html", conn: @conn, menus: @menus %>
   </head>
-  <body>
+  <body data-js-view-path="<%= js_view_path(@conn, @view_template) %>">
     <header>
       <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
     </header>

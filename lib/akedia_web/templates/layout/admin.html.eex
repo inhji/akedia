@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="shortcut icon" type="image/x-icon" href="<%= Routes.static_path(@conn, "/favicon.ico") %>" />
   </head>
-  <body>
+  <body data-js-view-path="<%= js_view_path(@conn, @view_template) %>">
     <header>
       <%= render "admin_navbar.html", Map.put(assigns, :conn, @conn) %>
     </header>
