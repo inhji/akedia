@@ -1,0 +1,6 @@
+<article class="post article h-entry">
+  <div class="post-content">
+    <h2 class="p-name title"><%= @post.title %></h2>
+    <div class="content e-content"><%= raw(@post.content_html) %></div>
+  </div>
+</article>

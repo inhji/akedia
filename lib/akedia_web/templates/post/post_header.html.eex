@@ -1,6 +1,6 @@
 <header>
   <strong class="username">
-    <%= link "Jonathan Jenne", to: Routes.post_url(@conn, :index), class: "u-author", rel: "author" %>
+    <%= link "Jonathan Jenne", to: Routes.page_url(@conn, :index), class: "u-author", rel: "author" %>
   </strong>
 
   <%= if is_reply?(@post) do %>

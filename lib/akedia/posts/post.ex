@@ -109,7 +109,11 @@ defmodule Akedia.Posts.Post do
   end
 
   defp render_markdown(markdown) do
-    opts = %Earmark.Options{code_class_prefix: "language-"}
+    opts = %Earmark.Options{
+      gfm: true,
+      breaks: true,
+      code_class_prefix: "language-"
+    }
     Earmark.as_html!(markdown, opts)
   end
 

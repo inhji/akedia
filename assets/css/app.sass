@@ -4,6 +4,7 @@
 
 // User defined
 $redpink: #dd3344
+$family-serif: 'Georgia', serif
 
 // Settings
 $fullhd-enabled: false
@@ -28,6 +29,9 @@ $footer-background-color: hsl(200, 25%, 94%)
 .navbar-brand
   .page-title
     font-weight: bold
+    margin-left: 2rem
+    @media screen and (min-width: $desktop)
+      margin-left: 0
 
 .content-wrapper
   margin: 1rem 0.5rem
@@ -46,8 +50,20 @@ $footer-background-color: hsl(200, 25%, 94%)
 
 // === POST STYLES ===
 
+article.post.article
+  .post-content
+    padding: 0 2rem
+    @media screen and (min-width: $desktop)
+      padding: 0
+  .content
+    font-family: $family-serif
+    text-align: inherit
+
 article.post
   margin-bottom: 2rem
+
+  .post-content
+    padding: 2rem 0
 
   .content
     line-height: 1.7rem

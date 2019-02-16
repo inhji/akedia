@@ -5,7 +5,7 @@
   </head>
   <body data-js-view-path="<%= js_view_path(@conn, @view_template) %>">
     <header>
-      <%= render "navbar.html", Map.put(assigns, :conn, @conn) %>
+      <%= render "navbar.html", conn: @conn %>
     </header>
 
     <%= if get_flash(@conn, :info) != nil do %>

@@ -15,48 +15,55 @@ defmodule AkediaWeb.LayoutView do
         PageController ->
           case action do
             :index -> "Home"
-            :now -> "Now"
             _ -> nil
           end
-
-        PostController ->
-          case action do
-            :index ->
-              "Posts"
-
-            :by_type ->
-              post_type = conn.params["type"]
-              String.capitalize(post_type) <> "s"
-
-            :show ->
-              post_id = conn.params["id"]
-              "Post #{post_id}"
-
-            _ ->
-              nil
-          end
-
-        ImageController ->
-          case action do
-            :index ->
-              "Photos"
-
-            :show ->
-              image_id = conn.params["id"]
-              "Photo #{image_id}"
-
-            _ ->
-              nil
-          end
-
-        _ ->
-          nil
+        PostController -> post_title(conn, action)
+        ImageController -> image_title(conn, action)
+        _ -> nil
       end
 
     if is_nil(title) do
       "Technos & Psyche"
     else
       "#{title} - Technos & Psyche"
+    end
+  end
+
+  def post_title(conn, action) do
+    case action do
+      :index ->
+        "Posts"
+
+      :by_type ->
+        post_type = conn.params["type"]
+        String.capitalize(post_type) <> "s"
+
+      :show ->
+        IO.inspect(conn.assigns.post.type)
+        case conn.assigns.post.type do
+          "article" ->
+            conn.assigns.post.title
+          _ ->
+            post_id = conn.params["id"]
+            "Post #{post_id}"
+        end
+
+      _ ->
+        nil
+    end
+  end
+
+  def image_title(conn, action) do
+    case action do
+      :index ->
+        "Photos"
+
+      :show ->
+        image_id = conn.params["id"]
+        "Photo #{image_id}"
+
+      _ ->
+        nil
     end
   end
 
