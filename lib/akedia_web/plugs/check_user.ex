@@ -1,5 +1,4 @@
 defmodule AkediaWeb.Plugs.CheckUser do
-  import Plug.Conn
   import Phoenix.Controller
 
   alias Akedia.Accounts

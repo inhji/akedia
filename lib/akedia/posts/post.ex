@@ -3,9 +3,12 @@ defmodule Akedia.Posts.Post do
   use Arc.Ecto.Schema
   import Ecto.Changeset
 
+  alias Akedia.Images.Image
   alias Akedia.Posts.PostImage
   alias Akedia.Mentions.Mention
   alias Akedia.Tags.Tag
+
+  @valid_post_types ["note", "like", "bookmark", "reply", "repost", "article"]
 
   schema "posts" do
     field :type, :string
@@ -26,6 +29,7 @@ defmodule Akedia.Posts.Post do
     field :syndicate_to_github, :boolean
 
     has_many :mentions, Mention
+    has_many :images, Image
 
     many_to_many :tags,
                  Tag,
@@ -53,7 +57,7 @@ defmodule Akedia.Posts.Post do
     ])
     |> set_post_type
     |> validate_required(:type)
-    |> validate_inclusion(:type, valid_post_types())
+    |> validate_inclusion(:type, @valid_post_types)
     |> maybe_create_excerpt
     |> maybe_render_markdown
   end
@@ -62,8 +66,6 @@ defmodule Akedia.Posts.Post do
     post
     |> cast_attachments(attrs, [:image])
   end
-
-  defp valid_post_types, do: ["note", "like", "bookmark", "reply", "repost", "article"]
 
   @doc """
   Sets the post type according to certain properties
