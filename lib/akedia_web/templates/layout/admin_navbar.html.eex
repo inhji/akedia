@@ -18,14 +18,6 @@
             <span class="icon"><i class="fas fa-plus"></i></span>
             <span>New</span>
           <% end %>
-          <%= active_link @conn, to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
-            <span class="icon"><i class="fas fa-user"></i></span>
-            <span>User</span>
-          <% end %>
-          <%= active_link @conn, to: Routes.menu_path(@conn, :index), class: "navbar-item" do %>
-            <span class="icon"><i class="fas fa-list-alt"></i></span>
-            <span>Menus</span>
-          <% end %>
         <% end %>
       </div>
 
@@ -35,10 +27,26 @@
             <span class="icon"><i class="fas fa-reply"></i></span>
             <span>Back to site</span>
           <% end %>
-          <%= link to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item has-icon" do %>
-            <span class="icon"><i class="fas fa-power-off"></i></span>
-            <span>Logout</span>
-          <% end %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Settings
+            </a>
+            <div class="navbar-dropdown">
+              <%= active_link @conn, to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
+                <span class="icon"><i class="fas fa-user"></i></span>
+                <span>User</span>
+              <% end %>
+              <%= active_link @conn, to: Routes.menu_path(@conn, :index), class: "navbar-item" do %>
+                <span class="icon"><i class="fas fa-list-alt"></i></span>
+                <span>Menus</span>
+              <% end %>
+              <hr class="navbar-divider">
+              <%= link to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Do you want to logout?"], class: "navbar-item has-icon" do %>
+                <span class="icon"><i class="fas fa-power-off"></i></span>
+                <span>Logout</span>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
